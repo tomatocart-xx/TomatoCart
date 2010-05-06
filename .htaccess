@@ -1,0 +1,61 @@
+# $Id: .htaccess $
+#
+# This is used with Apache WebServers
+#
+# For this to work, you must include the parameter 'Options' to
+# the AllowOverride configuration
+#
+# Example:
+#
+# <Directory "/usr/local/apache/htdocs">
+#   AllowOverride Options
+# </Directory>
+#
+# 'All' with also work. (This configuration is in the
+# apache/conf/httpd.conf file)
+
+# The following makes adjustments to the SSL protocol for Internet
+# Explorer browsers
+
+<IfModule mod_setenvif.c>
+  <IfDefine SSL>
+    SetEnvIf User-Agent ".*MSIE.*" \
+             nokeepalive ssl-unclean-shutdown \
+             downgrade-1.0 force-response-1.0
+  </IfDefine>
+</IfModule>
+
+# Fix certain PHP values
+# (commented out by default to prevent errors occuring on certain
+# servers)
+
+#<IfModule mod_php4.c>
+#  php_value session.use_trans_sid 0
+#  php_value magic_quotes_gpc 0
+#</IfModule>
+
+
+Options +FollowSymLinks
+RewriteEngine On 
+RewriteBase /
+
+RewriteCond %{QUERY_STRING} ^options\=(.*)$
+RewriteRule ^(.*)-c-(.*).html$ index.php?cPath=$2&%{QUERY_STRING}
+RewriteRule ^(.*)-c-(.*).html$ index.php?cPath=$2&%{QUERY_STRING}
+RewriteRule ^(.*)-m-([0-9]+).html$ index.php?manufacturers=$2&%{QUERY_STRING}
+
+RewriteRule ^i-(.*).html$ info.php?$1&%{QUERY_STRING}
+RewriteRule ^(.*)-f-(.*).html$ info.php?faqs&faq_id=$2&%{QUERY_STRING}
+RewriteRule ^(.*)-a-(.*).html$ info.php?articles&articles_id=$2&%{QUERY_STRING}
+RewriteRule ^(.*)-ac-(.*).html$ info.php?articles_categories&articles_categories_id=$2&%{QUERY_STRING}
+
+RewriteRule ^(.*)-p-([0-9]+).html$ products.php?$2&%{QUERY_STRING}
+RewriteRule ^(.*)-pi-([0-9]+).html$ products.php?images&$2&%{QUERY_STRING}
+RewriteRule ^(.*)-pr-([0-9]+).html$ products.php?reviews&$2&%{QUERY_STRING}
+RewriteRule ^(.*)-pt-([0-9]+).html$ products.php?tell_a_friend&$2&%{QUERY_STRING}
+RewriteRule ^(.*)-r-([0-9]+).html$ products.php?reviews=$2&%{QUERY_STRING}
+RewriteRule ^(.*)-rn-([0-9]+).html$ products.php?reviews=new&$2&%{QUERY_STRING}
+
+RewriteRule ^contact.html$ info.php?contact&%{QUERY_STRING}
+RewriteRule ^sitemap.html$ info.php?sitemap&%{QUERY_STRING}
+RewriteRule ^faqs.html$ info.php?faqs&%{QUERY_STRING}

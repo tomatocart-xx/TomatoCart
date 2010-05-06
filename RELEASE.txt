@@ -1,0 +1,64 @@
+2010/3/19 VERSION 1.0 alpha5
+This release adds several new features including:
+  * Account approval
+  * Customer registration IP recorded
+  * Abandoned cart
+  * Quick Create order, customer, product function in Email Module
+  * Vista Sidebar
+  * Order Tracking No.
+  * RSS feed
+  * Popular Search Terms
+  * Products/Customers Import & Export
+  * Order Editor at admin panel
+  * Tree structure in File manager
+  
+2010/01/08 VERSION 1.0 alpha4
+This release adds several new features including:
+  * Who's online
+  * Google Sitemap
+  * Banner Manger
+  * Language Package Upload & Install
+  * SMTP mail server authentication support
+  * Meta information for products and categories
+  * Administration log
+  * File manager
+  * Product comparisons
+  * A brand new layout for store front 
+  * CRM(Email) Module
+  
+2009/11/12 VERSION 1.0 alpha3
+This release adds several new features including:
+  * Downloadable products
+  * Gift vouchers
+  * Virtual & service products
+  * Minimum order quantity per product
+  * Order increment per product
+  * Meta information for products and categories
+  * Coupons
+  * Customer Store Credit
+  * Change product attributes to product variants
+  * Change product extra fields to products attributes
+  * Return merchandise authorization (RMA)
+  * One page checkout
+  * Wishlist
+  * PDF order, invoice, shipping slip, return slip
+
+2009/07/13 VERSION 1.0 alpha2
+This is a bug fix release to solve the problem when TomatoCart is runing under http://localhost, users can 
+not login to administation panel. This is because the domain parameter of PHP setcookie function is "localhost", 
+setcookie can not write value to cookie.  
+According to the ExtJS lisence NU General Public License v3, we are allowed to ExtJS in our release.
+Therefore ExtJS 2.2.1 is included in this release. 
+
+2009/06/15 Tomatocart 1.0 alpha1
+
+After more than a half year of development time and testing it's finally there! 
+This is first release of Tomatocart project.We start the first step to our aim, 
+and it is our milestone.
+
+We are excited to present Tomatocart to you. This is the first time that Ext JS 
+technology is  used in eCommerce. We completely rewrite osCommerce 3 administration 
+panel with ExtJS. Equipped with modern technology AJAX and ExtJS, TomatoCart offer 
+significant usability improvements and make interacting with the web interfaces 
+faster and more efficient.
+

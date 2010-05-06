@@ -1,0 +1,552 @@
+/*
+  $Id: stylesheet.php $
+  TomatoCart Open Source Shopping Cart Solutions
+  http://www.tomatocart.com
+
+  Copyright (c) 2009 Wuxi Elootec Technology Co., Ltd;  Copyright (c) 2006 osCommerce
+
+  This program is free software; you can redistribute it and/or modify
+  it under the terms of the GNU General Public License v2 (1991)
+  as published by the Free Software Foundation.
+*/
+
+/* MARKUP */
+BODY {
+	background: #FFFFFF;
+	margin: 0 auto;
+	padding: 0;
+	font-family: Tahoma, 'Trebuchet MS', Verdana, Arial, sans-serif;
+	font-size: 11px;
+	position: relative;
+}
+
+H1 {
+	color: #333333;
+	font-family: Tahoma, 'Trebuchet MS', Verdana, Arial, sans-serif;
+	font-size: 18px;
+	font-weight: normal;
+	/*white-space: nowrap;*/
+	margin: 5px 0 10px 0;
+}
+
+H2 {
+	color: #8C8C8C;
+	font-family: Tahoma, 'Trebuchet MS', Verdana, Arial, sans-serif;
+	font-size: 14px;
+	font-weight: bold;
+	white-space: nowrap;
+	margin: 5px 0 10px 0;
+}
+
+H6 {
+	color: #000000;
+	font-family: Tahoma, 'Trebuchet MS', Verdana, Arial, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+	white-space: nowrap;
+	margin: 0;
+	padding: 12px 0px 12px 5px;
+}
+
+TD, P {
+	font-family: Tahoma, 'Trebuchet MS', Verdana, Arial, sans-serif;
+	font-size: 11px;
+	line-height: 1.5;
+	margin-top: 10px;
+	margin-bottom: 10px;
+	color: #000000;
+}
+
+IMG {
+	border: 0;
+}
+
+FORM {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+
+FORM OL {
+	margin: 0;
+	padding: 0;
+}
+
+FORM OL LI {
+	list-style: none;
+	margin: 0;
+	clear: left;
+}
+
+FORM LABEL {
+	float: left;
+	width: 160px;
+	margin: 5px;
+}
+
+FORM LABEL.fieldLabel {
+  float: none;
+}
+
+FORM EM {
+  color: #FF0000;
+  font-size: 9px;
+  margin-left: 2px;
+}
+
+UL, OL {
+  padding: 0px;
+  margin: 0px;
+  list-style: none;
+}
+
+/* LAYOUT */
+#pageHeader {
+	width: 960px;
+	margin: 0px auto;
+	height: auto;
+}
+
+#pageWrapper {
+	width: 960px;
+	margin: 0px auto;
+	height: auto;
+}
+
+#pageBlockLeft {
+  float: left;
+  width: 745px;
+  margin: 0px 0 10px 0;
+}
+
+#pageColumnLeft {
+  float: left;
+  width: 208px;
+  margin-right: 7px;
+}
+
+#pageColumnRight {
+  float: left;
+  width: 208px;
+  margin: 0px 0px 10px 7px;
+}
+
+#pageContent {
+	float: left;
+	width: 530px;
+	padding: 0px 0px 0px 5px;
+}
+
+#pageFooter {
+	width:960px;
+	margin:0px auto;
+	clear: both;
+	text-align: center;
+	padding: 5px;
+}
+
+/* DEFINITIONS */
+#siteLogo {
+  float: left;
+  padding: 0px;
+  margin: 0px;
+}
+
+/* navigation */
+#navigationBar {
+  width: 960px;
+  margin: 0px auto;
+  text-align: right;
+  font-weight: bold;
+  height: 30px;
+  line-height: 30px;
+  background: #BBC3D3 url(images/nav_bar_bg.png) repeat-x;
+  border-bottom: 2px solid #afafaf;
+  clear: both;
+}
+
+#navigationLeft{background: transparent url(images/nav_bar_left.png) no-repeat top left; width: 955px; padding-left: 5px;}
+#navigationRight{background: transparent url(images/nav_bar_right.png) no-repeat top right; width: 950px; padding-right: 5px;}
+
+#navigationBar a {color: #FFFFFF;}
+#navigationBar a:hover {color: #FFFFFF;text-decoration: none;}
+
+#navigationBar form {-padding-top: 3px;}
+#keywords {width: 150px;border: 1px solid #333;}
+#navigationBar form input {vertical-align: middle;}
+
+#navigation li {float: left;display: inline-block; background: url(images/nav_separator.png) no-repeat right center;padding: 0 10px;}
+#navigation li.last {background: none;}
+
+/* breadcrumbPath */
+#breadcrumbPath {float: left; padding-left: 5px; width: 955px; margin: 0px auto; height: 20px; line-height: 20px; color: #999; text-align: left; font-size: 10px;}
+#breadcrumbPath a {color: #555555;}
+#breadcrumbPath a:hover {text-decoration: none}
+
+#pageIcon {
+	float: right;
+	margin-right: 10px;
+	height: 40px;
+}
+
+.messageStack {
+  border-width: 1px;
+  border-style: dotted;
+  border-color: #C8AD91;
+  background-color: #FFFCF5;
+  font-family: Tahoma, 'Trebuchet MS', Verdana, Arial, sans-serif;
+  color: #465584;
+  margin: 5px;
+  width:100%;
+  margin:0px auto;
+}
+
+.messageStack ul li {
+  list-style-position: inside;
+  padding: 2px 2px 2px 4px;
+}
+
+/* moduleBox */
+.moduleBox {
+  width: 100%;
+  min-height: 100px;
+  margin-bottom: 5px;
+}
+
+.moduleBox .content {
+  padding: 5px;
+  padding-bottom: 10px;
+  border: 1px solid #cbdddd;
+  background: transparent url(images/content_bg.png) repeat-x;
+  color: #000000;
+}
+
+.moduleBox H6 {
+  padding: 0px;
+  height: 30px;
+  line-height: 30px;
+  text-indent: 10px;
+  background: transparent;
+}
+
+.inputRequirement {
+  font-size: 10px;
+  font-weight: normal;
+  color: #FF0000;
+  margin-top: 10px;
+}
+
+.submitFormButtons {
+  padding: 5px;
+}
+
+.listingPageLinks {
+  padding: 5px;
+}
+
+.moduleRow {
+}
+
+.moduleRowOver {
+  background-color: #D7E9F7;
+}
+
+.moduleRowSelected {
+  background-color: #E9F4FC;
+}
+ 
+.boxText {font-family: Tahoma, 'Trebuchet MS', Verdana, Arial, sans-serif; font-size: 10px;}
+.errorBox {font-family: Tahoma, 'Trebuchet MS', Verdana, Arial, sans-serif; font-size: 10px; background: #ffb3b5; font-weight: bold;}
+.stockWarning {font-family: Tahoma, 'Trebuchet MS', Verdana, Arial, sans-serif; font-size: 10px; color: #cc0033;}
+.productsNotifications {background: #f2fff7;}
+.orderEdit {font-family: Tahoma, 'Trebuchet MS', Verdana, Arial, sans-serif; font-size: 10px; color: #70d250; text-decoration: underline; font-weight: normal;}
+
+a {
+	color: #000000;
+	text-decoration: none;
+}
+
+a:hover {
+	color: #000000;
+	text-decoration: underline;
+}
+
+.infoBox {
+	background: #b6b7cb;
+}
+
+.infoBoxContents {
+	background: #f8f8f9;
+	font-family: Tahoma, 'Trebuchet MS', Verdana, Arial, sans-serif;
+	font-size: 10px;
+}
+
+.infoBoxNotice {
+	background: #FF8E90;
+}
+
+.infoBoxNoticeContents {
+	background: #FFE6E6;
+	font-family: Tahoma, 'Trebuchet MS', Verdana, Arial, sans-serif;
+	font-size: 10px;
+}
+
+TD.infoBoxHeading {
+	font-family: Tahoma, 'Trebuchet MS', Verdana, Arial, sans-serif;
+	font-size: 10px;
+	font-weight: bold;
+	background: #bbc3d3;
+	color: white;
+	vertical-align: top;
+}
+
+TD.infoBox, SPAN.infoBox {
+	font-family: Tahoma, 'Trebuchet MS', Verdana, Arial, sans-serif;
+	font-size: 10px;
+}
+
+TR.accountHistory-odd, TR.addressBook-odd, TR.alsoPurchased-odd, TR.payment-odd, TR.productListing-odd, TR.productReviews-odd, TR.upcomingProducts-odd, TR.shippingOptions-odd {
+	background: #fff;
+}
+
+TR.accountHistory-even, TR.addressBook-even, TR.alsoPurchased-even, TR.payment-even, TR.productListing-even, TR.productReviews-even, TR.upcomingProducts-even, TR.shippingOptions-even {
+	background: #F8F8F8;
+}
+
+TABLE.productListing {
+  border: 1px solid #cbdddd;
+  background: #f8fbfa;
+  width:100%;
+}
+
+.productListing-heading {
+	font-size: 10px;
+	background: url(images/product_list_head_bg.png) repeat-x bottom;
+	height: 26px;
+	color: #000;
+	font-weight: bold;
+	border-bottom: 1px solid #cbdddd;
+}
+
+a.productListing-heading {
+  border: 0;
+}
+
+TD.productListing-data {
+	font-family: Tahoma, 'Trebuchet MS', Verdana, Arial, sans-serif;
+	font-size: 10px;
+}
+
+A.pageResults {
+	color: #0000FF;
+}
+
+A.pageResults:hover {
+	color: #0000FF;
+	background: #FFFF33;
+}
+
+TD.smallText, SPAN.smallText, P.smallText {
+	font-family: Tahoma, 'Trebuchet MS', Verdana, Arial, sans-serif;
+	font-size: 10px;
+}
+
+TD.tableHeading {
+	font-family: Tahoma, 'Trebuchet MS', Verdana, Arial, sans-serif;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+SPAN.greetUser {
+	font-family: Tahoma, 'Trebuchet MS', Verdana, Arial, sans-serif;
+	font-size: 12px;
+	color: #f0a480;
+	font-weight: bold;
+}
+
+SPAN.markProductOutOfStock {
+	font-family: Tahoma, Tahoma, 'Trebuchet MS', Verdana, Arial, sans-serif;
+	font-size: 12px;
+	color: #c76170;
+	font-weight: bold;
+}
+
+SPAN.markProductError {
+  font-family: Tahoma, Tahoma, 'Trebuchet MS', Verdana, Arial, sans-serif;
+  font-size: 10px;
+  color: #c76170;
+  font-weight: bold;
+}
+
+.productSpecialPrice {
+	font-family: Tahoma, 'Trebuchet MS', Verdana, Arial, sans-serif;
+	color: #ff0000;
+	font-weight: bold;
+}
+
+SPAN.errorText {
+	font-family: Tahoma, 'Trebuchet MS', Verdana, Arial, sans-serif;
+	color: #ff0000;
+}
+.boxCheckoutTrail {
+	font-family: Tahoma, 'Trebuchet MS', Verdana, Arial, sans-serif;
+	font-size: 10px;
+	color: #8c8c8c;
+}
+
+.boxCheckoutTrailActive {
+	font-family: Tahoma, 'Trebuchet MS', Verdana, Arial, sans-serif;
+	font-size: 10px;
+	font-weight: bold;
+	color: #FF8400;
+}
+
+/* message box */
+.messageBox {
+	font-family: Tahoma, 'Trebuchet MS', Verdana, Arial, sans-serif;
+	font-size: 10px;
+}
+
+.messageStackError, .messageStackWarning {
+	font-family: Tahoma, 'Trebuchet MS', Verdana, Arial, sans-serif;
+	font-size: 10px;
+	background-color: #ffb3b5;
+}
+
+.messageStackSuccess {
+	font-family: Tahoma, 'Trebuchet MS', Verdana, Arial, sans-serif;
+	font-size: 10px;
+	background-color: #99ff00;
+}
+
+/* CSS Boxes */
+.boxGroup {
+	float: left;
+	border-width: 0px;
+	border-color: #bbc3d3;
+	border-style: solid;
+	width: 208px;
+	height: auto;
+}
+
+.boxNew {
+	width: 208px;
+	background: transparent url(images/box_bottom.png) no-repeat bottom  center;
+	padding-bottom: 5px;
+	margin-bottom: 5px;
+}
+
+.boxTitle {
+	font-family: Tahoma, 'Trebuchet MS', Verdana, Arial, sans-serif;
+	font-size: 11px;
+	font-weight: bold;
+	color: #333;
+	vertical-align: top;
+	padding-left: 10px;
+	padding-right: 5px;
+	height: 30px;
+	line-height: 30px;
+	background: #bbc3d3 url(images/box_title_bg.png);
+}
+
+.boxContents {
+	font-family: Tahoma, 'Trebuchet MS', Verdana, Arial, sans-serif;
+	font-size: 11px;
+	padding: 5px;
+	background: #bbc3d3 url(images/box_center_bg.png);
+}
+
+.boxContents ul li, .boxContents ol li{
+	padding:3px 0;
+}
+
+.boxContents ul, .boxContents ol {
+	padding: 0 5px;
+}
+
+.boxContents ol{
+	padding-left: 25px;
+	list-style: decimal;
+}
+
+.boxCategories ul li {
+	list-style: none;
+	padding: 5px 0;
+	border-bottom: 1px dashed #ccc;
+}
+.boxCategories ul li a {
+	background: url(images/arrow.png) no-repeat left 5px;
+	padding-left: 15px;
+}
+
+/* faqs */
+#faqs .question {
+	cursor: pointer;
+	border-bottom: 1px dashed #ccc;
+	padding: 0px 0px 5px 10px;
+	background: url(images/arrow.png) no-repeat left;
+	margin: 0px;
+}
+
+#faqs .answer {
+	padding: 5px 10px 5px 10px;
+	margin: 0;
+}
+
+/* table quantity discount, table products details */
+.tableDiscount, .tableVariants {
+  border: 1px solid #cbdddd;
+  background: #f8fbfa;
+  width:100%;
+}
+
+.tableDiscount th, .tableVariants th {
+  font-size: 11px;
+  height: 20px;
+  color: #000;
+  font-weight: bold;
+  border-bottom: 1px solid #cbdddd;
+}
+
+.tableDiscount td, .tableVariants td {
+  font-size: 11px;
+  color: #000;
+}
+
+/* contact form */
+.contact label {
+  width: 120px;
+}
+.contact textarea {
+  width: 370px;
+  height: 150px;
+}
+
+TABLE.productInfo {width: 270px; float: right}
+TABLE.productInfo .price {color: #DF0309; font-size: 14px; font-weight: bold;text-align: right; padding-right: 15px}
+TABLE.productInfo td.label {text-align: left; font-weight: bold; width: 50%}
+TABLE.productInfo a {text-decoration: underline;}
+
+#productAttributes label{
+  width: 80px;
+}
+
+#sitemap ul{padding: 3px;}
+#sitemap li{padding-left: 12px;line-height: 18px; background: url(images/arrow.png) no-repeat left 5px;}
+#sitemap ul li ul li{background: none;}
+
+#checkoutForm h3 {
+  background: url(images/checkout_head_bg.png) top center repeat-x; 
+  height: 28px; 
+  line-height: 28px; 
+  padding: 0 20px; 
+  margin: 5px 0; 
+  position: relative; 
+  cursor: pointer; 
+  color: #000000;
+  border: 1px solid #CBDDDD;
+  background-color: #E4F8F8;
+  font-size: 11px;
+}
+#checkoutForm .moduleBox{margin-bottom: 10px; min-height: 20px}
+#checkoutForm h3 a {text-decoration: none; color: #FF8C00} 
+#checkoutForm h3 span {position: absolute; top: 0; right: 25px;  font-size: 0.8em; font-weight: bold;color: #FF8C00}
