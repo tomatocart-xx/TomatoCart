@@ -13,7 +13,7 @@
 
   require_once(realpath(dirname(__FILE__) . '/../../../'). '/includes/classes/email_template.php');
 
-  class osC_Email_Template_admin_create_order_credit_slip extends osC_Email_Template {
+  class toC_Email_Template_admin_create_order_credit_slip extends toC_Email_Template {
 
 /* Private variables */
 
@@ -29,8 +29,8 @@
 
 /* Class constructor */
 
-    function osC_Email_Template_admin_create_order_credit_slip() {
-      parent::osC_Email_Template($this->_template_name);
+    function toC_Email_Template_admin_create_order_credit_slip() {
+      parent::toC_Email_Template($this->_template_name);
     }
 
 

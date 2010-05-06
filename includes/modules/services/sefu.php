@@ -13,10 +13,10 @@
 
   class osC_Services_sefu {
     function start() {
-      global $osC_Sefu;
+      global $toC_Sefu;
 
       include('includes/classes/sefu.php');
-      $osC_Sefu = new osC_Sefu();
+      $toC_Sefu = new toC_Sefu();
 
       if (isset($_SERVER['ORIG_PATH_INFO'])) {
         if (isset($_SERVER['PATH_INFO']) && empty($_SERVER['PATH_INFO'])) {

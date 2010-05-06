@@ -13,7 +13,7 @@
 
   require_once(realpath(dirname(__FILE__) . '/../../../'). '/includes/classes/email_template.php');
 
-  class osC_Email_Template_admin_password_forgotten extends osC_Email_Template {
+  class toC_Email_Template_admin_password_forgotten extends toC_Email_Template {
 
 /* Private variables */
 
@@ -26,8 +26,8 @@
 
 /* Class constructor */
 
-    function osC_Email_Template_admin_password_forgotten() {
-      parent::osC_Email_Template($this->_template_name);
+    function toC_Email_Template_admin_password_forgotten() {
+      parent::toC_Email_Template($this->_template_name);
     }
 
 

@@ -52,7 +52,7 @@
     function setStatus() {
       global $toC_Json, $osC_Language;
         
-      if ( osC_Slide_Images_Admin::setStatus($_REQUEST['image_id'], ( isset($_REQUEST['flag']) ? $_REQUEST['flag'] : null) ) ) {
+      if ( toC_Slide_Images_Admin::setStatus($_REQUEST['image_id'], ( isset($_REQUEST['flag']) ? $_REQUEST['flag'] : null) ) ) {
         $response = array('success' => true, 'feedback' => $osC_Language->get('ms_success_action_performed') );
       } else {
         $response = array('success' => false, 'feedback' => $osC_Language->get('ms_error_action_not_performed'));
@@ -64,7 +64,7 @@
     function deleteSlideImage() {
       global $toC_Json, $osC_Language;
       
-      if ( osC_Slide_Images_Admin::delete($_REQUEST['image_id']) ) {
+      if ( toC_Slide_Images_Admin::delete($_REQUEST['image_id']) ) {
         $response = array('success' => true, 'feedback' => $osC_Language->get('ms_success_action_performed'));
       } else {
         $response = array('success' => false, 'feedback' => $osC_Language->get('ms_error_action_not_performed'));
@@ -80,7 +80,7 @@
       
       $batch = explode(',', $_REQUEST['batch']);
       foreach ($batch as $id) {
-        if (!osC_Slide_Images_Admin::delete($id)) {
+        if (!toC_Slide_Images_Admin::delete($id)) {
           $error = true;
           break;
         }
@@ -98,7 +98,7 @@
     function loadSlideImages() {
       global $toC_Json, $osC_Database;
      
-      $data = osC_Slide_Images_Admin::getData($_REQUEST['image_id']);
+      $data = toC_Slide_Images_Admin::getData($_REQUEST['image_id']);
       
       $Qimage = $osC_Database->query('select * from :table_slide_images where image_id = :image_id');
       $Qimage->bindTable(':table_slide_images', TABLE_SLIDE_IMAGES);
@@ -144,7 +144,7 @@
       }
       
       if ( $error === false ) {
-        if ( osC_Slide_Images_Admin::save( ( isset($_REQUEST['image_id']) ? $_REQUEST['image_id'] : null ), $data) ) {
+        if ( toC_Slide_Images_Admin::save( ( isset($_REQUEST['image_id']) ? $_REQUEST['image_id'] : null ), $data) ) {
           $response = array('success' => true, 'feedback' => $osC_Language->get('ms_success_action_performed'));
         } else {
           $response = array('success' => false, 'feedback' => $osC_Language->get('ms_error_action_not_performed'));

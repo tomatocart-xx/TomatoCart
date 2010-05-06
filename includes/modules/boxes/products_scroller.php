@@ -86,8 +86,7 @@
              '#productsScroller span {display:block;height:' . $image_height . 'px}' . "\n" .
              '</style>' . "\n\n";
 
-      $js = $osC_Template->ouputJavascriptFile('ext/mootools/mootools-1-2.js') . "\n" .
-            $osC_Template->ouputJavascriptFile('ext/noobslide/noobslide.js') . "\n\n";
+      $js = $osC_Template->ouputJavascriptFile('ext/noobslide/noobslide.js') . "\n\n";
 
       $js .= '<script type="text/javascript">
               window.addEvent(\'domready\',function(){

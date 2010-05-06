@@ -42,6 +42,10 @@
     define('DIR_WS_CATALOG', DIR_WS_HTTPS_CATALOG);
   }
 
+  if ( ($request_type == 'NONSSL') && (ENABLE_SSL == true) ) {
+    header('Location: ' . HTTPS_SERVER . DIR_WS_HTTPS_CATALOG . DIR_FS_ADMIN);
+  }
+
 // compatibility work-around logic for PHP4
   require('../includes/functions/compatibility.php');
   require('includes/functions/compatibility.php');

@@ -16,7 +16,7 @@
         $_group = 'configuration',
         $_icon = 'configure.png',
         $_title,
-        $_sort_order = 200;
+        $_sort_order = 300;
 
     function osC_Access_Configuration() {
       global $osC_Database, $osC_Language;

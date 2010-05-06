@@ -12,7 +12,7 @@
 */
   include_once('includes/classes/order.php');
 
-  class osC_ShoppingCart_Adapter extends osC_Order {
+  class toC_ShoppingCart_Adapter extends osC_Order {
 
     function osC_ShoppingCart($order_id) {
       parent::osC_Order($order_id);
@@ -524,11 +524,11 @@
       global $osC_Database;
       
       include_once('../includes/classes/coupon.php');
-      $osC_Coupon = new osC_Coupon($this->getCouponCode());
+      $toC_Coupon = new toC_Coupon($this->getCouponCode());
 
       $Qcoupon = $osC_Database->query('insert into :table_coupons_redeem_history (coupons_id, customers_id, orders_id, redeem_amount, redeem_date, redeem_ip_address) values (:coupons_id, :customers_id, :orders_id, :redeem_amount, now(), :redeem_ip_address)');
       $Qcoupon->bindTable(':table_coupons_redeem_history', TABLE_COUPONS_REDEEM_HISTORY);
-      $Qcoupon->bindInt(':coupons_id', $osC_Coupon->getID());
+      $Qcoupon->bindInt(':coupons_id', $toC_Coupon->getID());
       $Qcoupon->bindInt(':customers_id', $this->_customer['customers_id']);
       $Qcoupon->bindInt(':orders_id', $this->getOrderID());
       $Qcoupon->bindValue(':redeem_amount', $this->_coupon_amount);
@@ -546,11 +546,11 @@
       global $osC_Database;
       
       include_once('../includes/classes/coupon.php');
-      $osC_Coupon = new osC_Coupon($this->_coupon_code);
+      $toC_Coupon = new toC_Coupon($this->_coupon_code);
 
       $Qcoupon = $osC_Database->query('delete from :table_coupons_redeem_history where coupons_id = :coupons_id and orders_id = :orders_id');
       $Qcoupon->bindTable(':table_coupons_redeem_history', TABLE_COUPONS_REDEEM_HISTORY);
-      $Qcoupon->bindInt(':coupons_id', $osC_Coupon->getID());
+      $Qcoupon->bindInt(':coupons_id', $toC_Coupon->getID());
       $Qcoupon->bindInt(':orders_id', $this->_order_id);
       $Qcoupon->execute();
       

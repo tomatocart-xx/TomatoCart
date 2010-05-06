@@ -99,22 +99,12 @@ Ext.extend(Toc.configuration_wizard.ConfigurationWizardDialog, Toc.ux.Wiz.Wizard
   },
   
   onFinish: function() {
-    var data = [];
-    var wizardData = this.getWizardData();
-    var app = this.owner.app;
-    
-    for (var i in wizardData) {
-      for (var j in wizardData[i]) {
-        data.push(j + ":" + wizardData[i][j]);
-      }
-    }
-    
     Ext.Ajax.request({
       url: Toc.CONF.CONN_URL,
       params: {  
         module: 'configuration_wizard',
         action: 'save_wizard',
-        data: data.join(',')
+        data: Ext.encode(this.getWizardData())
       },
       callback: function (options, success, response) {
         var result = Ext.decode(response.responseText);

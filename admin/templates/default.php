@@ -93,16 +93,14 @@
   <script type="text/javascript" src="external/devAnalogClock/swfobject.js"></script>
 
   <script type="text/javascript" src="templates/default/locale/ext-lang-<?php echo $osC_Language->getCode(); ?>-min.js"></script>
-
-  <script type="text/javascript" src="templates/default/desktop/core/all.js"></script>
     
   <script type="text/javascript">
     Ext.namespace("Toc");
     
     Toc.CONF = {
-      CONN_URL: 'json.php',
-      LOAD_URL: 'load.php',
-      PDF_URL: 'pdf.php',
+      CONN_URL: '<?php echo osc_href_link_admin(FILENAME_JSON); ?>',
+      LOAD_URL: '<?php echo osc_href_link_admin(FILENAME_LOAD); ?>',
+      PDF_URL: '<?php echo osc_href_link_admin(FILENAME_PDF); ?>',
     
       GRID_PAGE_SIZE : <?php echo MAX_DISPLAY_SEARCH_RESULTS; ?>,
       GRID_STEPS : <?php echo EXT_GRID_STEPS; ?>,
@@ -123,9 +121,10 @@
     TocLanguage = <?php echo $toC_Json->encode($desktop_translations); ?>;
   </script>
   
+  <script type="text/javascript" src="templates/default/desktop/core/all.js"></script>
   <script type="text/javascript" src="templates/default/desktop/setting/all.js"></script>
   <script type="text/javascript" src="templates/default/extensions/extension-all.js"></script>
-  <script type="text/javascript" src="tocdesktop.php"></script>      
+  <script type="text/javascript" src="<?php echo osc_href_link_admin('tocdesktop.php'); ?>"></script>      
   <script type="text/javascript" src="templates/default/extensions/CategoriesComboBox.js"></script>
 </body>
 </html>

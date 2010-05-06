@@ -63,7 +63,7 @@
       $feedback = array();
 
       if ( empty($_REQUEST['coupons_code']) ) {
-        $_REQUEST['coupons_code'] = osC_Coupons_Admin::createCouponCode();
+        $_REQUEST['coupons_code'] = toC_Coupons_Admin::createCouponCode();
       }
 
       $data = array('coupons_status'           => $_REQUEST['coupons_status'],
@@ -150,7 +150,7 @@
       }
 
       if ($error === false) {
-        if ( osC_Coupons_Admin::save((isset($_REQUEST['coupons_id']) && is_numeric($_REQUEST['coupons_id']) ? $_REQUEST['coupons_id'] : null), $data) ) {
+        if ( toC_Coupons_Admin::save((isset($_REQUEST['coupons_id']) && is_numeric($_REQUEST['coupons_id']) ? $_REQUEST['coupons_id'] : null), $data) ) {
           $response = array('success' => true, 'feedback' => $osC_Language->get('ms_success_action_performed'));
         } else {
           $response = array('success' => false, 'feedback' => $osC_Language->get('ms_error_action_not_performed'));
@@ -168,7 +168,7 @@
       $coupons_id = ( isset($_REQUEST['coupons_id']) && is_numeric($_REQUEST['coupons_id']) ) ? $_REQUEST['coupons_id'] : null;
       
       if ($coupons_id > 0) {
-        $data = osC_Coupons_Admin::getData($coupons_id);            
+        $data = toC_Coupons_Admin::getData($coupons_id);            
         $data['start_date'] = osC_DateTime::getDate($data['start_date']);
         $data['expires_date'] = osC_DateTime::getDate($data['expires_date']);
 
@@ -227,7 +227,7 @@
       global $toC_Json, $osC_Language;
         
       if ( isset($_REQUEST['cID']) && is_numeric($_REQUEST['cID']) ) {
-        if ( osC_Coupons_Admin::setStatus($_REQUEST['cID'], ( isset($_REQUEST['flag']) ? $_REQUEST['flag'] : null) ) ) {
+        if ( toC_Coupons_Admin::setStatus($_REQUEST['cID'], ( isset($_REQUEST['flag']) ? $_REQUEST['flag'] : null) ) ) {
           $response = array('success' => true, 'feedback' => $osC_Language->get('ms_success_action_performed') );
         }
         else
@@ -257,7 +257,7 @@
       }
       
       if ($error === false) {
-        if ( osC_Coupons_Admin::delete($_REQUEST['coupons_id']) ) {
+        if ( toC_Coupons_Admin::delete($_REQUEST['coupons_id']) ) {
           $response = array('success' => true, 'feedback' => $osC_Language->get('ms_success_action_performed'));               
         }else {
           $response = array('success' => false, 'feedback' => $osC_Language->get('ms_error_action_not_performed'));       
@@ -298,7 +298,7 @@
       
       if ($error === false) {
         foreach ($batch as $id) {
-          if (!osC_Coupons_Admin::delete($id)) {
+          if (!toC_Coupons_Admin::delete($id)) {
             $error = true;
             break;        
           }   
@@ -359,7 +359,7 @@
         $customers_lastname = $Qcustomer->value('customers_lastname');
 
         include('../includes/classes/email_template.php');
-        $email_template = osC_Email_Template::getEmailTemplate('send_coupon');
+        $email_template = toC_Email_Template::getEmailTemplate('send_coupon');
         $email_template->setData($Qcustomer->value('customers_gender'), $customers_firstname, $customers_lastname, $Qcoupons->value('coupons_code'), $message, $email);
         $email_template->buildMessage();
         $email_template->sendEmail();

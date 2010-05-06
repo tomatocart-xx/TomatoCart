@@ -11,7 +11,7 @@
   as published by the Free Software Foundation.
 */
 
-  class osC_Articles {
+  class toC_Articles {
 
     function &getEntry($id) {
       global $osC_Database, $osC_Language;

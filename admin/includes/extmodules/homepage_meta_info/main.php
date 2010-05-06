@@ -10,7 +10,7 @@
   it under the terms of the GNU General Public License v2 (1991)
   as published by the Free Software Foundation.
 */
-  echo 'Ext.namespace("Toc.metas");';
+  echo 'Ext.namespace("Toc.homepage_meta_info");';
   include('home_meta_info_dialog.php');
 ?>
 
@@ -20,7 +20,7 @@ Ext.override(TocDesktop.HomepageMetaInfoWindow, {
     var win = desktop.getWindow('homepage_meta_info-win');
     
     if (!win) {
-      win = desktop.createWindow({owner:this}, Toc.metas.HomePageMetaInfoDialog);
+      win = desktop.createWindow({owner:this}, Toc.homepage_meta_info.HomepageMetaInfoDialog);
     }
     
     win.show();

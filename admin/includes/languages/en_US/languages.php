@@ -63,6 +63,8 @@ select_all = Select All
 select_none = Select None
 none = -- None --
 
+button_add_definition = Add Definition
+
 introduction_edit_language = Please make the necessary changes for the selected language.
 
 introduction_import_language = Please select which language to import from the following list.

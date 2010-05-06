@@ -42,12 +42,12 @@
 
       require_once(realpath(dirname(__FILE__) . '/../../') . '/classes/coupon.php');
       
-      $osC_Coupon = new osC_Coupon($coupon_code);
+      $toC_Coupon = new toC_Coupon($coupon_code);
 
       $coupon_amount = 0;
       $coupon_tax = 0;
 
-      if($osC_Coupon->isFreeShippingCoupon()){
+      if($toC_Coupon->isFreeShippingCoupon()){
         $coupon_amount = $osC_ShoppingCart->getShippingMethod('cost');
         $osC_ShoppingCart->addToTotal($coupon_amount * (-1));
 
@@ -75,10 +75,10 @@
         $tax_groups = array();
         $products = array();
 
-        $has_restrict_products = $osC_Coupon->containRestrictProducts();
+        $has_restrict_products = $toC_Coupon->containRestrictProducts();
 
         if($has_restrict_products)
-          $products = $osC_Coupon->getRestrictProducts();
+          $products = $toC_Coupon->getRestrictProducts();
 
         foreach($osC_ShoppingCart->getProducts() as $product){
           if( (in_array($product['id'], $products) && ($has_restrict_products === true)) || ($has_restrict_products === false) ){
@@ -92,13 +92,13 @@
               $tax_groups[$products_tax_description] += $osC_Tax->calculate($product['final_price'], $products_tax) * $product['quantity'];
             else
               $tax_groups[$products_tax_description] = $osC_Tax->calculate($product['final_price'], $products_tax) * $product['quantity'];
-            if ($osC_Coupon->isIncludeTax() == true) {
+            if ($toC_Coupon->isIncludeTax() == true) {
               $valid_order_total += $osC_Tax->calculate($product['final_price'], $products_tax) * $product['quantity'];
             }
           }
         }
 
-        if ($osC_Coupon->isIncludeShipping() == true){
+        if ($toC_Coupon->isIncludeShipping() == true){
           $valid_order_total += $osC_ShoppingCart->getShippingMethod('cost');
 
           if ($osC_ShoppingCart->getShippingMethod('tax_class_id') > 0) {
@@ -114,21 +114,21 @@
             $valid_tax += $shipping_tax;
             $tax_groups[$products_tax_description] += $shipping_tax;
 
-            if ($osC_Coupon->isIncludeTax() == true) {
+            if ($toC_Coupon->isIncludeTax() == true) {
               $valid_order_total += $shipping_tax;
             }
           }
         }
 
-        if($osC_Coupon->isAmountCoupon()){
-          $coupon_amount = min( $valid_order_total, $osC_Coupon->getCouponAmount() );
-        }else if($osC_Coupon->isPercentageCoupon()){
-          $coupon_amount = round( $osC_Coupon->getCouponAmount() * $valid_order_total / 100,2 );
+        if($toC_Coupon->isAmountCoupon()){
+          $coupon_amount = min( $valid_order_total, $toC_Coupon->getCouponAmount() );
+        }else if($toC_Coupon->isPercentageCoupon()){
+          $coupon_amount = round( $toC_Coupon->getCouponAmount() * $valid_order_total / 100,2 );
         }
 
         $osC_ShoppingCart->addToTotal($coupon_amount * (-1));
 
-        if($osC_Coupon->isIncludeTax() == true){
+        if($toC_Coupon->isIncludeTax() == true){
           $ratio = $coupon_amount / $valid_order_total;
 
           foreach ($osC_ShoppingCart->_tax_groups as $key=>$value) {
@@ -142,7 +142,7 @@
             if (DISPLAY_PRICE_WITH_TAX == '1')
               $coupon_amount += $coupon_tax;
           }
-        }else if($osC_Coupon->isIncludeTax() == false){
+        }else if($toC_Coupon->isIncludeTax() == false){
           $ratio = $coupon_amount / $valid_order_total;
           foreach ($osC_ShoppingCart->_tax_groups as $key=>$value) {
             if(isset($tax_groups[$key])){

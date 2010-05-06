@@ -635,37 +635,37 @@
       $osC_Language->load('checkout');
       
       include('includes/classes/coupon.php');
-      $osC_Coupon = new osC_Coupon($_POST['coupon_redeem_code']);
+      $toC_Coupon = new toC_Coupon($_POST['coupon_redeem_code']);
 
       $errors = array();
 
-      if(!$osC_Coupon->isExist()){
+      if(!$toC_Coupon->isExist()){
         $errors[] = $osC_Language->get('error_coupon_not_exist');
       }
 
-      if(!$osC_Coupon->isValid()){
+      if(!$toC_Coupon->isValid()){
         $errors[] = $osC_Language->get('error_coupon_not_valid');
       }
 
-      if(!$osC_Coupon->isDateValid()){
+      if(!$toC_Coupon->isDateValid()){
         $errors[] = $osC_Language->get('error_coupon_invalid_date');
       }
 
-      if(!$osC_Coupon->isUsesPerCouponValid()){
+      if(!$toC_Coupon->isUsesPerCouponValid()){
         $errors[] = $osC_Language->get('error_coupon_exceed_uses_per_coupon');
       }
 
-      if(!$osC_Coupon->isUsesPerCustomerValid()){
+      if(!$toC_Coupon->isUsesPerCustomerValid()){
         $errors[] = $osC_Language->get('error_coupon_exceed_uses_per_customer');
       }
 
-      if($osC_Coupon->hasRestrictCategories() || $osC_Coupon->hasRestrictProducts()){
-        if(!$osC_Coupon->containRestrictProducts()){
+      if($toC_Coupon->hasRestrictCategories() || $toC_Coupon->hasRestrictProducts()){
+        if(!$toC_Coupon->containRestrictProducts()){
           $errors[] = $osC_Language->get('error_coupon_no_match_products');
         }
       }
 
-      if(!$osC_Coupon->checkMinimumOrderQuantity()){
+      if(!$toC_Coupon->checkMinimumOrderQuantity()){
         $errors[] = $osC_Language->get('error_coupon_minimum_order_quantity');
       }
 

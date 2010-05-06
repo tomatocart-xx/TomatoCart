@@ -48,13 +48,17 @@ Toc.languages.TranslationAddDialog = function(config) {
 
 Ext.extend(Toc.languages.TranslationAddDialog, Ext.Window, {
   
-  show: function (languagesId) {
+  show: function (languagesId, group) {
     this.languagesId = languagesId || null;
-    
+
     if (this.languagesId > 0) {
       this.frmLanguage.baseParams['languages_id'] = this.languagesId;
     
       this.dsGroups.baseParams['languages_id'] = this.languagesId;
+      this.dsGroups.on('load', function(){
+        this.cboGroups.setValue(group);
+      }, this);
+      
       this.dsGroups.load();
     }
     
@@ -81,9 +85,9 @@ Ext.extend(Toc.languages.TranslationAddDialog, Ext.Window, {
         action: 'add_translation'
       }, 
       border: false,
-      layout: 'form',
+      style: 'padding: 8px',
       layoutConfig: {
-        labelSeparator: ''
+        labelSeparator: ' '
       },
       labelWidth: 120,
       defaults: {
@@ -91,20 +95,17 @@ Ext.extend(Toc.languages.TranslationAddDialog, Ext.Window, {
         allowBlank: false
       },
       items: [ 
-        {
-          xtype: 'combo', 
+        this.cboGroups = new Ext.form.ComboBox({
           fieldLabel: '<?php echo $osC_Language->get('field_group_selection'); ?>', 
           id: 'languages',
-          width: 300,
           name: 'languages',
-          mode: 'remote', 
           store: this.dsGroups,
           displayField: 'text',
           valueField: 'id',
           triggerAction: 'all',
           hiddenName: 'definition_group',
           readOnly: true
-        },
+        }),
         {
           xtype: 'textfield', 
           fieldLabel: '<?php echo $osC_Language->get('field_definition_key'); ?>', 

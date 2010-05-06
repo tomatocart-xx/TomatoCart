@@ -441,7 +441,7 @@ Ext.extend(Ext.app.App, Ext.util.Observable, {
 		});
 		*/
 		Ext.Ajax.request({
-			url: 'load.php',
+			url: Toc.CONF.LOAD_URL,
 			params: {
         module: moduleId
 			},

@@ -99,8 +99,8 @@
     }
 
     if(isset($osC_Services) && $osC_Services->isStarted('sefu')){
-      global $osC_Sefu;
-      $link = $osC_Sefu->generateURL($link, $page, $parameters);
+      global $toC_Sefu;
+      $link = $toC_Sefu->generateURL($link, $page, $parameters);
     }
 
     return $link;

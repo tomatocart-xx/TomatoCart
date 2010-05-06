@@ -1,6 +1,6 @@
 <?php
 /*
-  $Id: last_visits.php $
+  $Id: orders_statistics.php $
   TomatoCart Open Source Shopping Cart Solutions
   http://www.tomatocart.com
 
@@ -11,12 +11,12 @@
   as published by the Free Software Foundation.
 */
 
-class osC_Portlet_Orders_Statistics extends osC_Portlet {
+class toC_Portlet_Orders_Statistics extends toC_Portlet {
 
   var $_title,
       $_code = 'orders_statistics';
 
-  function osC_Portlet_Orders_Statistics() {
+  function toC_Portlet_Orders_Statistics() {
     global $osC_Language;
     
     $this->_title = $osC_Language->get('portlet_orders_statistics_title');

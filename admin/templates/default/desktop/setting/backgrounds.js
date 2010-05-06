@@ -35,7 +35,7 @@ Toc.settings.BackgroundPanel = function(app) {
     fields: ['code', 'name', 'thumbnail', 'path'],
     id: 'code',
     root: 'wallpapers',
-    url: 'json.php',
+    url: Toc.CONF.CONN_URL,
     autoLoad: true
   });
   

@@ -17,7 +17,7 @@
     function createGoogleSitemap() {
     	global $toC_Json, $osC_Language;
 
-    	$google_sitemap = new osC_Google_Sitemap( $_REQUEST['products_frequency'], 
+    	$google_sitemap = new toC_Google_Sitemap( $_REQUEST['products_frequency'], 
                                             	  $_REQUEST['products_priority'], 
                                             	  $_REQUEST['categories_frequency'],
                                             	  $_REQUEST['categories_priority'],

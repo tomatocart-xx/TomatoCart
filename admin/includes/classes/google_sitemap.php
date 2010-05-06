@@ -4,7 +4,7 @@
   TomatoCart Open Source Shopping Cart Solutions
   http://www.tomatocart.com
 
-  Copyright (c) 2009 Wuxi Elootec Technology Co., Ltd;  Copyright (c) 2006 osCommerce
+  Copyright (c) 2009 Wuxi Elootec Technology Co., Ltd
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License v2 (1991)
@@ -15,7 +15,7 @@
   require_once('../includes/classes/sefu.php');
   require_once('../includes/classes/category_tree.php');
 
-  class osC_Google_Sitemap {
+  class toC_Google_Sitemap {
 
     var $_file_name = '',
         $_save_path = '',
@@ -32,7 +32,7 @@
         $_articles_priority = '',
         $_sefu = null;
 
-    function osC_Google_Sitemap($products_change_freq = 'weekly', $products_priority = 0.5, $categories_change_freq = 'weekly', $categories_priority = 0.5, $articles_change_freq = 'weekly', $articles_priority = 0.25){
+    function toC_Google_Sitemap($products_change_freq = 'weekly', $products_priority = 0.5, $categories_change_freq = 'weekly', $categories_priority = 0.5, $articles_change_freq = 'weekly', $articles_priority = 0.25){
       global $osC_CategoryTree;
 
       $this->_file_name = "sitemaps";
@@ -40,7 +40,7 @@
       $this->_base_url = HTTP_SERVER . DIR_WS_HTTP_CATALOG;
       $this->_max_file_size = 10 * 1024 * 1024;
       $this->_max_entries = 50000;
-      $this->_sefu = new osC_Sefu();
+      $this->_sefu = new toC_Sefu();
       
       $this->_products_change_freq = $products_change_freq;
       $this->_products_priority = $products_priority;

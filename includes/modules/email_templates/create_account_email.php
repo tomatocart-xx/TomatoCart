@@ -13,7 +13,7 @@
 
   require_once(realpath(dirname(__FILE__) . '/../../../'). '/includes/classes/email_template.php');
 
-  class osC_Email_Template_create_account_email extends osC_Email_Template{
+  class toC_Email_Template_create_account_email extends toC_Email_Template{
 
 /* Private variables */
   
@@ -27,8 +27,8 @@
                             '%%store_owner_email_address%%');
 
 // class constructor
-    function osC_Email_Template_Create_Account_Email() {
-      parent::osC_Email_Template($this->_template_name);
+    function toC_Email_Template_Create_Account_Email() {
+      parent::toC_Email_Template($this->_template_name);
     }
 
 // class methods

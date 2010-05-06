@@ -38,7 +38,7 @@
     <table id="productInfo" border="0" cellspacing="0" cellpadding="2" style="float: right; width: 270px">
     
       <tr>
-        <td colspan="2" class="productPrice"><?php echo $osC_Product->getPriceFormated(true) . '&nbsp;' . $osC_Language->get('including_tax'); ?></td>
+        <td colspan="2" class="productPrice"><?php echo $osC_Product->getPriceFormated(true) . '&nbsp;' . ( (DISPLAY_PRICE_WITH_TAX == '1') ? $osC_Language->get('including_tax') : ''); ?></td>
       </tr>
       
   <?php

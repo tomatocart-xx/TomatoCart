@@ -84,7 +84,7 @@
         $osC_NavigationHistory->removeCurrentPage();
 
         include('email_template.php');
-        $email = osC_Email_Template::getEmailTemplate('create_account_email');
+        $email = toC_Email_Template::getEmailTemplate('create_account_email');
         $email->setData($osC_Customer, $data['password']);
         $email->buildMessage();
         $email->sendEmail();

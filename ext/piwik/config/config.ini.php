@@ -1,23 +1,21 @@
 ; <?php exit; ?> DO NOT REMOVE THIS LINE
 ; file automatically generated or modified by Piwik; you can manually override the default values in global.ini.php by redefining them in this file.
+
 [superuser]
-login = "admin"
-password = "21232f297a57a5a743894a0e4a801fc3"
-email = "info@tomatocart.com"
-salt = "260a12d444714991a676e50df81a9ace"
+login = ""
+password = ""
+email = ""
+salt = ""
 
 [database]
-host = "localhost"
-username = "root"
+host = ""
+username = ""
 password = ""
-dbname = "test"
-tables_prefix = "to11c_piwik_"
-adapter = "PDO_MYSQL"
+dbname = ""
+tables_prefix = "toc_piwik_"
+adapter = "MYSQLI"
 port = 3306
-
-[General]
-default_day = today
-
+charset = "utf8"
 
 [PluginsInstalled]
 PluginsInstalled[] = Login
@@ -29,7 +27,6 @@ PluginsInstalled[] = CorePluginsAdmin
 PluginsInstalled[] = CoreHome
 PluginsInstalled[] = API
 PluginsInstalled[] = Widgetize
-PluginsInstalled[] = LanguagesManager
 PluginsInstalled[] = Actions
 PluginsInstalled[] = Dashboard
 PluginsInstalled[] = MultiSites
@@ -40,11 +37,30 @@ PluginsInstalled[] = VisitsSummary
 PluginsInstalled[] = VisitFrequency
 PluginsInstalled[] = VisitTime
 PluginsInstalled[] = VisitorInterest
-PluginsInstalled[] = ExampleAPI
-PluginsInstalled[] = ExamplePlugin
-PluginsInstalled[] = ExampleRssWidget
-PluginsInstalled[] = ExampleFeedburner
 PluginsInstalled[] = Provider
 PluginsInstalled[] = Feedback
 PluginsInstalled[] = CoreUpdater
 
+[Plugins]
+Plugins[] = CorePluginsAdmin
+Plugins[] = CoreAdminHome
+Plugins[] = CoreHome
+Plugins[] = API
+Plugins[] = Widgetize
+Plugins[] = Actions
+Plugins[] = Dashboard
+Plugins[] = MultiSites
+Plugins[] = Referers
+Plugins[] = UserSettings
+Plugins[] = UserCountry
+Plugins[] = VisitsSummary
+Plugins[] = VisitFrequency
+Plugins[] = VisitTime
+Plugins[] = VisitorInterest
+Plugins[] = Provider
+Plugins[] = Feedback
+Plugins[] = Login
+Plugins[] = UsersManager
+Plugins[] = SitesManager
+Plugins[] = Installation
+Plugins[] = CoreUpdater

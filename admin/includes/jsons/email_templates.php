@@ -43,7 +43,7 @@
     function setStatus() {
       global $toC_Json, $osC_Language;
         
-      if ( osC_Email_templates_Admin::setStatus($_REQUEST['email_templates_id'], ( isset($_REQUEST['flag']) ? $_REQUEST['flag'] : null) ) ) {
+      if ( toC_Email_Templates_Admin::setStatus($_REQUEST['email_templates_id'], ( isset($_REQUEST['flag']) ? $_REQUEST['flag'] : null) ) ) {
         $response = array('success' => true, 'feedback' => $osC_Language->get('ms_success_action_performed') );
       } else {
         $response = array('success' => false, 'feedback' => $osC_Language->get('ms_error_action_not_performed'));
@@ -57,7 +57,7 @@
      
       $email_templates_id = ( isset($_REQUEST['email_templates_id']) && is_numeric($_REQUEST['email_templates_id']) ) ? $_REQUEST['email_templates_id'] : null;
       
-      $data = osC_Email_Templates_Admin::getData($email_templates_id);
+      $data = toC_Email_Templates_Admin::getData($email_templates_id);
       
       $Qtemplate = $osC_Database->query('select * from :table_email_templates_description where email_templates_id= :email_templates_id');
       $Qtemplate->bindTable(':table_email_templates_description', TABLE_EMAIL_TEMPLATES_DESCRIPTION);
@@ -77,7 +77,7 @@
     function getVariables() {
       global $toC_Json;
 
-      $keywords = osC_Email_Templates_Admin:: getKeywords($_REQUEST['email_templates_name']);
+      $keywords = toC_Email_Templates_Admin:: getKeywords($_REQUEST['email_templates_name']);
       
       $records = array();
       foreach ($keywords as $key => $value) {
@@ -116,7 +116,7 @@
      }
      
      if ( $error === false ) {
-       if ( osC_Email_templates_Admin::save($email_templates_id, $data) ) {
+       if ( toC_Email_Templates_Admin::save($email_templates_id, $data) ) {
          $response = array('success' => true, 'feedback' => $osC_Language->get('ms_success_action_performed'));
        } else {
          $response = array('success' => false, 'feedback' => $osC_Language->get('ms_error_action_not_performed'));

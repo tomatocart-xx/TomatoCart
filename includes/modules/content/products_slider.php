@@ -95,8 +95,7 @@
              '#productsSlider span {display:block; float:left;width:' . $image_width . 'px}' . "\n" .
              '</style>' . "\n\n";
 
-      $js = $osC_Template->ouputJavascriptFile('ext/mootools/mootools-1-2.js') . "\n" .
-            $osC_Template->ouputJavascriptFile('ext/noobslide/noobslide.js') . "\n\n";
+      $js = $osC_Template->ouputJavascriptFile('ext/noobslide/noobslide.js') . "\n\n";
 
       $js .= '<script type="text/javascript">
               window.addEvent(\'domready\',function(){

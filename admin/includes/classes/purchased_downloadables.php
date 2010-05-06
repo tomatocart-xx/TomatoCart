@@ -43,7 +43,7 @@ class toC_PurchasedDownloadables_Admin {
     if ( !$osC_Database->isError() ) {
       if ($flag == '1') {
         require_once('../includes/classes/email_template.php');
-        $email = osC_Email_Template::getEmailTemplate('active_downloadable_product');
+        $email = toC_Email_Template::getEmailTemplate('active_downloadable_product');
         
         $data = self::getData($id);
         

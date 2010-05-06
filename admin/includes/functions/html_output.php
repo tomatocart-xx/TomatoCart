@@ -26,17 +26,7 @@
       $link = HTTP_SERVER . DIR_WS_HTTP_CATALOG . DIR_FS_ADMIN;
     }
 
-    $link .= $page;
-
-    if (empty($parameters) && !osc_empty(SID)) {
-      $link .= '?' . SID;
-    } else {
-      $link .= '?' . $parameters;
-
-      if (!osc_empty(SID)) {
-        $link .= '&' . SID;
-      }
-    }
+    $link .= $page . '?' . $parameters;
 
     while ( (substr($link, -1) == '&') || (substr($link, -1) == '?') ) {
       $link = substr($link, 0, -1);

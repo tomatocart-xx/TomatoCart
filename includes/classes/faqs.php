@@ -11,7 +11,7 @@
   as published by the Free Software Foundation.
 */
 
-  class osC_Faqs {
+  class toC_Faqs {
 
     function &getListing() {
       global $osC_Database, $osC_Language;

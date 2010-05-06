@@ -13,7 +13,7 @@
 
   require_once('includes/classes/customers.php');
 
-  class osC_Abandoned_Cart_Admin {
+  class toC_Abandoned_Cart_Admin {
 
     function getData($customers_id){
       $data = osC_Customers_Admin::getData($customers_id);
@@ -58,7 +58,7 @@
       $Qcustomer->execute();
 
       include_once('../includes/classes/email_template.php');
-      $email = osC_Email_Template::getEmailTemplate('abandoned_cart_inquiry');
+      $email = toC_Email_Template::getEmailTemplate('abandoned_cart_inquiry');
       $email->setData($Qcustomer->value('customers_gender'), $Qcustomer->value('customers_firstname'), $Qcustomer->value('customers_lastname'), $contents, $addtional_message, $Qcustomer->value('customers_email_address'));
       $email->buildMessage();
       $email->sendEmail();

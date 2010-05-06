@@ -54,7 +54,7 @@ Toc.settings.ThemePanel = function(app) {
     fields: ['code', 'name', 'thumbnail', 'path'],
     id: 'code',
     root: 'themes',
-    url: 'json.php',
+    url: Toc.CONF.CONN_URL,
     autoLoad: true
   });
       

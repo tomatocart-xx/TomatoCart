@@ -93,7 +93,7 @@
       if ($messageStack->size('tell_a_friend') < 1) {
 
         include('includes/classes/email_template.php');
-        $email_template = osC_Email_Template::getEmailTemplate('tell_a_friend');
+        $email_template = toC_Email_Template::getEmailTemplate('tell_a_friend');
         $email_template->setData($_POST['from_name'], $_POST['from_email_address'], $_POST['to_name'], $_POST['to_email_address'], $_POST['message'], $osC_Product->getTitle(), osc_href_link(FILENAME_PRODUCTS, $osC_Product->getID(), 'NONSSL', false, true, true));
         $email_template->buildMessage();
         $email_template->sendEmail();

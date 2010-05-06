@@ -100,7 +100,7 @@
     function setStatus() {
       global $toC_Json, $osC_Language;
       
-      if ( isset($_REQUEST['gift_certificates_id']) && osC_GiftCertificates_Admin::setStatus($_REQUEST['gift_certificates_id'], (isset($_REQUEST['flag']) ? $_REQUEST['flag'] : null)) ) {
+      if ( isset($_REQUEST['gift_certificates_id']) && toC_GiftCertificates_Admin::setStatus($_REQUEST['gift_certificates_id'], (isset($_REQUEST['flag']) ? $_REQUEST['flag'] : null)) ) {
         $response = array('success' => true, 'feedback' => $osC_Language->get('ms_success_action_performed'));
       } else {
         $response = array('success' => false, 'feedback' => $osC_Language->get('ms_error_action_not_performed'));

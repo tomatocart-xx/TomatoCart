@@ -11,7 +11,7 @@
   as published by the Free Software Foundation.
 */
 
-  class osC_Feature_Products_Manager_Admin {
+  class toC_Feature_Products_Manager_Admin {
   
     function delete($id) {
       global $osC_Database;

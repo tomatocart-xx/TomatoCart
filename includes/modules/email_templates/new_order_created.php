@@ -13,7 +13,7 @@
 
   require_once(realpath(dirname(__FILE__) . '/../../../'). '/includes/classes/email_template.php');
 
-  class osC_Email_Template_new_order_created extends osC_Email_Template {
+  class toC_Email_Template_new_order_created extends toC_Email_Template {
 
 /* Private variables */
 
@@ -31,8 +31,8 @@
 
 /* Class constructor */
 
-    function osC_Email_Template_new_order_created() {
-      parent::osC_Email_Template($this->_template_name);
+    function toC_Email_Template_new_order_created() {
+      parent::toC_Email_Template($this->_template_name);
     }
 
 

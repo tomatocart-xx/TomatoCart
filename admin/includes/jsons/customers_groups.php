@@ -52,7 +52,7 @@
     function loadCustomersGroups() {
       global $toC_Json, $osC_Database;
      
-      $data = osC_Customers_Groups_Admin::getData($_REQUEST['groups_id']);
+      $data = toC_Customers_Groups_Admin::getData($_REQUEST['groups_id']);
       
       $Qcgd = $osC_Database->query('select language_id, customers_groups_name from :table_customers_groups_description where customers_groups_id = :customers_groups_id');
       $Qcgd->bindTable(':table_customers_groups_description', TABLE_CUSTOMERS_GROUPS_DESCRIPTION);
@@ -76,7 +76,7 @@
                     'customers_groups_name' => $_REQUEST['customers_groups_name'],
                     'is_default' => (isset($_REQUEST['is_default']) ? $_REQUEST['is_default'] : ''));
       
-      if ( osC_Customers_Groups_Admin::save((isset($_REQUEST['groups_id']) && is_numeric($_REQUEST['groups_id'] ) ? $_REQUEST['groups_id'] : null), $data) ) {
+      if ( toC_Customers_Groups_Admin::save((isset($_REQUEST['groups_id']) && is_numeric($_REQUEST['groups_id'] ) ? $_REQUEST['groups_id'] : null), $data) ) {
         $response = array('success' => true , 'feedback' => $osC_Language->get('ms_success_action_performed'));
       } else {
         $response = array('success' => false , 'feedback' => $osC_Language->get('ms_error_action_not_performed'));
@@ -90,7 +90,7 @@
       
       $error = false;
       
-      $osC_ObjectInfo = new osC_ObjectInfo(osC_Customers_Groups_Admin::getData($_REQUEST['customer_groups_id']));
+      $osC_ObjectInfo = new osC_ObjectInfo(toC_Customers_Groups_Admin::getData($_REQUEST['customer_groups_id']));
       
       $Qcheck = $osC_Database->query('select count(*) as total from :table_customers where customers_groups_id = :customers_groups_id');
       $Qcheck->bindTable(':table_customers', TABLE_CUSTOMERS);
@@ -109,7 +109,7 @@
       }
       
       if ($error === false) {
-        if ( !osC_Customers_Groups_Admin::delete($_REQUEST['customer_groups_id']) ) {
+        if ( !toC_Customers_Groups_Admin::delete($_REQUEST['customer_groups_id']) ) {
           $response = array('success' => false, 'feedback' => $osC_Language->get('ms_error_action_not_performed'));
         } else {
           $response = array('success' => true, 'feedback' => $osC_Language->get('ms_success_action_performed'));
@@ -157,7 +157,7 @@
 
       if ($error === false) {
         foreach ($batch as $id) {
-          if (!osC_Customers_Groups_Admin::delete($id)) {
+          if (!toC_Customers_Groups_Admin::delete($id)) {
             $error = true;
             break;
           }

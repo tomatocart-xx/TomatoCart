@@ -49,7 +49,7 @@
       
       $data = array('quantity_discount_groups_name' => $_REQUEST['quantity_discount_groups_name']);
       
-      if (osC_Quantity_Discount_Groups_Admin::save((isset($_REQUEST['quantity_discount_groups_id']) && is_numeric($_REQUEST['quantity_discount_groups_id']) ? $_REQUEST['quantity_discount_groups_id'] : null), $data) ) {
+      if (toC_Quantity_Discount_Groups_Admin::save((isset($_REQUEST['quantity_discount_groups_id']) && is_numeric($_REQUEST['quantity_discount_groups_id']) ? $_REQUEST['quantity_discount_groups_id'] : null), $data) ) {
         $response = array('success' => true ,'feedback' => $osC_Language->get('ms_success_action_performed'));
       } else {
         $response = array('success' => false, 'feedback' => $osC_Language->get('ms_error_action_not_performed'));    
@@ -86,7 +86,7 @@
     function loadQuantityDiscountGroup() {
       global $toC_Json;
       
-      $data = osC_Quantity_Discount_Groups_Admin::getData($_REQUEST['quantity_discount_groups_id']);
+      $data = toC_Quantity_Discount_Groups_Admin::getData($_REQUEST['quantity_discount_groups_id']);
       
       $response = array('success' => true, 'data' => $data);
       
@@ -96,7 +96,7 @@
     function loadQuantityDiscountGroupsValue(){
       global $toC_Json;
 
-      $data = osC_Quantity_Discount_Groups_Admin::getEntryData($_REQUEST['quantity_discount_groups_values_id'], $_REQUEST['quantity_discount_groups_id']);
+      $data = toC_Quantity_Discount_Groups_Admin::getEntryData($_REQUEST['quantity_discount_groups_values_id'], $_REQUEST['quantity_discount_groups_id']);
     
       $response = array('success' => true, 'data' => $data);
       
@@ -112,7 +112,7 @@
                     'quantity' => $_REQUEST['quantity'],
                     'discount' => $_REQUEST['discount']);   
                      
-      if (osC_Quantity_Discount_Groups_Admin::saveEntry((isset($_REQUEST['quantity_discount_groups_values_id']) && is_numeric($_REQUEST['quantity_discount_groups_values_id']) ? $_REQUEST['quantity_discount_groups_values_id'] : null), $data) ) {
+      if (toC_Quantity_Discount_Groups_Admin::saveEntry((isset($_REQUEST['quantity_discount_groups_values_id']) && is_numeric($_REQUEST['quantity_discount_groups_values_id']) ? $_REQUEST['quantity_discount_groups_values_id'] : null), $data) ) {
         $response = array('success' => true ,'feedback' => $osC_Language->get('ms_success_action_performed'));
       } else {
         $response = array('success' => false, 'feedback' => $osC_Language->get('ms_error_action_not_performed'));    
@@ -150,14 +150,14 @@
       $error = false;
       $feedback = array();
       
-      $osC_ObjectInfo = new osC_ObjectInfo(osC_Quantity_Discount_Groups_Admin::getData($_REQUEST['quantity_discount_groups_id']));
+      $osC_ObjectInfo = new osC_ObjectInfo(toC_Quantity_Discount_Groups_Admin::getData($_REQUEST['quantity_discount_groups_id']));
       if ( $osC_ObjectInfo->get('total_products') > 0 ) {
         $error = true;
         $feedback[] = sprintf($osC_Language->get('delete_error_quantity_discount_group_in_use'), $osC_ObjectInfo->get('total_products'));
       }
       
       if ($error === false) {    
-        if (osC_Quantity_Discount_Groups_Admin::delete($_REQUEST['quantity_discount_groups_id']) ) {
+        if (toC_Quantity_Discount_Groups_Admin::delete($_REQUEST['quantity_discount_groups_id']) ) {
           $response = array('success' => true ,'feedback' => $osC_Language->get('ms_success_action_performed'));
         } else {
           $response = array('success' => false, 'feedback' => $osC_Language->get('ms_error_action_not_performed'));    
@@ -172,7 +172,7 @@
     function deleteQuantityDiscountGroupsValue(){
       global $osC_Language, $toC_Json;
       
-      if ( osC_Quantity_Discount_Groups_Admin::deleteEntry($_REQUEST['quantity_discount_groups_values_id'], $_REQUEST['quantity_discount_groups_id']) ) {
+      if ( toC_Quantity_Discount_Groups_Admin::deleteEntry($_REQUEST['quantity_discount_groups_values_id'], $_REQUEST['quantity_discount_groups_id']) ) {
         $response = array('success' => true ,'feedback' => $osC_Language->get('ms_success_action_performed'));
       } else {
         $response = array('success' => false, 'feedback' => $osC_Language->get('ms_error_action_not_performed'));    
@@ -188,7 +188,7 @@
       $batch = explode(',', $_REQUEST['batch']);
       
       foreach ( $batch as $id ) {
-        if ( !osC_Quantity_Discount_Groups_Admin::deleteEntry($id, $_REQUEST['quantity_discount_groups_id']) ) {
+        if ( !toC_Quantity_Discount_Groups_Admin::deleteEntry($id, $_REQUEST['quantity_discount_groups_id']) ) {
           $error = true;
           break;
         }

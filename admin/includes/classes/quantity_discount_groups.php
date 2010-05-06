@@ -11,7 +11,7 @@
   as published by the Free Software Foundation.
 */
 
-  class osC_Quantity_Discount_Groups_Admin {
+  class toC_Quantity_Discount_Groups_Admin {
 
     function getData($id) {
       global $osC_Database;

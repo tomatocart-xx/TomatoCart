@@ -149,7 +149,7 @@
         $osC_Currencies = new osC_Currencies_Admin();
         
         include('../includes/classes/email_template.php');
-        $email_template = osC_Email_Template::getEmailTemplate('admin_create_order_credit_slip');
+        $email_template = toC_Email_Template::getEmailTemplate('admin_create_order_credit_slip');
         $email_template->setData($customers_name, $customers_email_address, implode('<br />', $products), $data['orders_id'], $credit_slips_id, $osC_Currencies->format($data['sub_total'] + $data['shipping_fee'] + $data['handling']));
         $email_template->buildMessage();
         $email_template->sendEmail();        
@@ -326,7 +326,7 @@
         $osC_Currencies = new osC_Currencies_Admin();
         
         include('../includes/classes/email_template.php');
-        $email_template = osC_Email_Template::getEmailTemplate('admin_create_order_store_credit');
+        $email_template = toC_Email_Template::getEmailTemplate('admin_create_order_store_credit');
         $email_template->setData($customers_name, $customers_email_address, implode('<br />', $products), $data['orders_id'], $osC_Currencies->format($data['sub_total'] + $data['shipping_fee'] + $data['handling']));
         $email_template->buildMessage();
         $email_template->sendEmail();   

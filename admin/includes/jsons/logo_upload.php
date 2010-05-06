@@ -17,8 +17,8 @@
     function saveLogo() {
       global $toC_Json, $osC_Language;
       
-      if ( osC_Logo_Upload::upload() ) {
-        $image = osC_Logo_Upload::getOriginalLogo();
+      if ( toC_Logo_Upload::upload() ) {
+        $image = toC_Logo_Upload::getOriginalLogo();
         
         list($orig_width, $orig_height) = getimagesize($image);
         $width = intval(120 * $orig_width / $orig_height);
@@ -36,7 +36,7 @@
     function getLogo() {
       global $toC_Json;
 
-      $image = osC_Logo_Upload::getOriginalLogo();
+      $image = toC_Logo_Upload::getOriginalLogo();
       
       if (!empty($image)) {
         list($orig_width, $orig_height) = getimagesize($image);

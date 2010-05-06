@@ -19,6 +19,6 @@
   
   $_SERVER['SCRIPT_FILENAME'] = __FILE__;
 
-  $toC_Json = new toC_Jsons();
+  $toC_Json = new toC_Json();
   $toC_Json->parse();
 ?>

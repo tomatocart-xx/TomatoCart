@@ -60,7 +60,7 @@
     function Header() {
     
       //Logo
-      $logo = osC_Logo_Upload::getOriginalLogo();
+      $logo = toC_Logo_Upload::getOriginalLogo();
       $logo = ($logo === false) ? (DIR_FS_CATALOG . DIR_WS_IMAGES . 'store_logo.jpg') : $logo;
       $this->Image($logo, TOC_PDF_LOGO_UPPER_LEFT_CORNER_X, TOC_PDF_LOGO_UPPER_LEFT_CORNER_Y, TOC_PDF_LOGO_WIDTH, TOC_PDF_LOGO_HEIGHT);
       

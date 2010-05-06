@@ -35,7 +35,7 @@
         $action[] = array('class' => 'icon-send-email-record', 'qtip' => $osC_Language->get('icon_email_send'));
         $action[] = array('class' => 'icon-delete-record', 'qtip' => $osC_Language->get('icon_trash'));
         
-        $cart_contents = osC_Abandoned_Cart_Admin::getCartContents($Qcustomers->valueInt('customers_id'));
+        $cart_contents = toC_Abandoned_Cart_Admin::getCartContents($Qcustomers->valueInt('customers_id'));
         $total = 0;
         $products = array();
         foreach($cart_contents as $product){
@@ -66,7 +66,7 @@
       
       $customers_id = ( isset($_REQUEST['customers_id']) && is_numeric($_REQUEST['customers_id']) ) ? $_REQUEST['customers_id'] : null;
       
-      if ( osC_Abandoned_Cart_Admin::sendEmail($customers_id, $_REQUEST['message']) ) {
+      if ( toC_Abandoned_Cart_Admin::sendEmail($customers_id, $_REQUEST['message']) ) {
         osC_Customers_Admin::setAbandonedCartLastContactDate($customers_id);
         
         $response = array('success' => true, 'feedback' => $osC_Language->get('ms_success_action_performed'));    
@@ -82,7 +82,7 @@
       
       $customers_id = ( isset($_REQUEST['customers_id']) && is_numeric($_REQUEST['customers_id']) ) ? $_REQUEST['customers_id'] : null;
       
-      if ( osC_Abandoned_Cart_Admin::delete($customers_id) ) {
+      if ( toC_Abandoned_Cart_Admin::delete($customers_id) ) {
         $response = array('success' => true, 'feedback' => $osC_Language->get('ms_success_action_performed'));      
       }else {
         $response = array('success' => false , 'feedback' => $osC_Language->get('ms_error_action_not_performed'));     
@@ -99,7 +99,7 @@
 
       $batch = explode(',', $_REQUEST['batch']);
       foreach ($batch as $id) {
-        if ( !osC_Abandoned_Cart_Admin::delete($id) ) {
+        if ( !toC_Abandoned_Cart_Admin::delete($id) ) {
           $error = true;
           break;
         }

@@ -64,8 +64,7 @@
             '#imageMenu ul li.imageMenu0 a {width:' . $opened_width . 'px;}' . "\n" .
           '</style>' . "\n\n";
 
-        $this->_content .= $osC_Template->ouputJavascriptFile('ext/mootools/mootools-1-2.js') . "\n" .
-                           $osC_Template->ouputJavascriptFile('ext/image_menu/imageMenu.js') . "\n\n";
+        $this->_content .= $osC_Template->ouputJavascriptFile('ext/image_menu/imageMenu.js') . "\n\n";
         $this->_content .=
             '<script type="text/javascript">' . "\n" .
               'var myMenu = new ImageMenu($$(\'#imageMenu a\'),{openWidth:' . $opened_width . ', closeWidth:' . $cosed_width . ', interval:' . $interval . ', border:' . $border_width . ', duration:' . $duration . '});' . "\n" .

@@ -38,6 +38,10 @@ var tocCurrenciesFormatter = Ext.util.Format.CurrencyFactory(parseInt('<?php ech
  * Desktop configuration
  */
 TocDesktop = new Ext.app.App({
+  loader: '<?php echo osc_href_link_admin(FILENAME_LOAD); ?>',
+  
+  json: '<?php echo osc_href_link_admin(FILENAME_JSON); ?>',
+  
   init :function(){
     Ext.QuickTips.init();
   },
@@ -61,7 +65,7 @@ TocDesktop = new Ext.app.App({
               result = Ext.decode(response.responseText);
               
               if (result.success == true) {
-                window.location = "index.php";
+                window.location = "<?php echo osc_href_link_admin(FILENAME_DEFAULT); ?>";
               }
             }
           });

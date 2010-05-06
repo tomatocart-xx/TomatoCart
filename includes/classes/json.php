@@ -12,11 +12,11 @@
 */
  require("ext/json/json.php");
 
-  class toC_Jsons {
+  class toC_Json {
   
     var $json = null;
     
-    function toC_Jsons() {
+    function toC_Json() {
       $this->json = new Services_JSON();
     }
 

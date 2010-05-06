@@ -122,6 +122,6 @@ Ext.extend(Toc.languages.LanguagesExportDialog, Ext.Window, {
     var data = this.chkIncludeData.getRawValue();
     var params = "height=600px, width=640px, top= 50px, left=165px, staus=yes, toolbar=no, menubar=no, location=no, scrollbars=yes";
     
-    window.open('<?php echo HTTP_SERVER . DIR_WS_HTTP_CATALOG. DIR_FS_ADMIN; ?>' + Toc.CONF.CONN_URL + '?module=languages&action=export&languages_id=' + languagesId + '&export=' + groups + '&include_data=' + data, '<?php echo $osC_Language->get('button_export') ?>', params);
+    window.open('<?php echo osc_href_link_admin(FILENAME_JSON); ?>' + '?module=languages&action=export&languages_id=' + languagesId + '&export=' + groups + '&include_data=' + data, '<?php echo $osC_Language->get('button_export') ?>', params);
   }
 });

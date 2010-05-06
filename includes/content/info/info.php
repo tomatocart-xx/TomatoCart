@@ -27,7 +27,7 @@
       global $osC_Language, $osC_Database, $content, $breadcrumb, $osC_Services, $Qarticle;
 
       if (isset($_GET['articles_id']) && !empty($_GET['articles_id'])) {
-        $Qarticle = osC_Articles::getEntry($_GET['articles_id']);
+        $Qarticle = toC_Articles::getEntry($_GET['articles_id']);
 
         if($Qarticle->numberofRows() > 0){
           $this->_page_title = $Qarticle->value('articles_name');

@@ -13,7 +13,7 @@
 
   require_once(realpath(dirname(__FILE__) . '/../../../'). '/includes/classes/email_template.php');
 
-  class osC_Email_Template_admin_create_purchase_order extends osC_Email_Template{
+  class toC_Email_Template_admin_create_purchase_order extends toC_Email_Template{
     var $_template_name = 'admin_create_purchase_order',
         $_keywords = array( '%%vendors_name%%',
                             '%%purchase_order_products%%',
@@ -23,8 +23,8 @@
                             '%%store_ower_email_address%%');
 
 // class constructor
-    function osC_Email_Template_admin_create_purchase_order() {
-      parent::osC_Email_Template($this->_template_name);
+    function toC_Email_Template_admin_create_purchase_order() {
+      parent::toC_Email_Template($this->_template_name);
     }
 
 // class methods

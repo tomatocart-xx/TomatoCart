@@ -52,7 +52,7 @@
     function loadFaq() {
       global $osC_Database, $toC_Json;
       
-      $data = osC_Faqs_Admin::getData($_REQUEST['faqs_id']);
+      $data = toC_Faqs_Admin::getData($_REQUEST['faqs_id']);
   
       $Qad = $osC_Database->query('select faqs_question, faqs_answer, language_id from :table_faqs_description where faqs_id = :faqs_id');
       $Qad->bindTable(':table_faqs_description', TABLE_FAQS_DESCRIPTION);
@@ -77,7 +77,7 @@
                     'faqs_order' => $_REQUEST['faqs_order'],
                     'faqs_status' => $_REQUEST['faqs_status']);
 
-      if ( osC_Faqs_Admin::save((isset($_REQUEST['faqs_id']) && is_numeric($_REQUEST['faqs_id']) ? $_REQUEST['faqs_id'] : null), $data) ) {
+      if ( toC_Faqs_Admin::save((isset($_REQUEST['faqs_id']) && is_numeric($_REQUEST['faqs_id']) ? $_REQUEST['faqs_id'] : null), $data) ) {
         $response = array('success' => true, 'feedback' => $osC_Language->get('ms_success_action_performed'));
       } else {
         $response = array('success' => false, 'feedback' => $osC_Language->get('ms_error_action_not_performed'));
@@ -89,7 +89,7 @@
     function deleteFaq() {
       global $toC_Json, $osC_Language;
       
-      if ( osC_Faqs_Admin::delete($_REQUEST['faqs_id']) ) {
+      if ( toC_Faqs_Admin::delete($_REQUEST['faqs_id']) ) {
         $response = array('success' => true, 'feedback' => $osC_Language->get('ms_success_action_performed'));
       } else {
         $response = array('success' => false, 'feedback' => $osC_Language->get('ms_error_action_not_performed'));
@@ -105,7 +105,7 @@
       
       $batch = explode(',', $_REQUEST['batch']);
       foreach ($batch as $id) {
-        if ( !osC_Faqs_Admin::delete($id) ) {
+        if ( !toC_Faqs_Admin::delete($id) ) {
           $error = true;
           break;
         }
@@ -123,7 +123,7 @@
     function setStatus() {
       global $toC_Json, $osC_Language;
     
-      if ( isset($_REQUEST['faqs_id']) && osC_Faqs_Admin::setStatus($_REQUEST['faqs_id'], (isset($_REQUEST['flag']) ? $_REQUEST['flag'] : null)) ) {
+      if ( isset($_REQUEST['faqs_id']) && toC_Faqs_Admin::setStatus($_REQUEST['faqs_id'], (isset($_REQUEST['flag']) ? $_REQUEST['flag'] : null)) ) {
         $response = array('success' => true, 'feedback' => $osC_Language->get('ms_success_action_performed') );
       } else {
         $response = array('success' => false, 'feedback' => $osC_Language->get('ms_error_action_not_performed'));

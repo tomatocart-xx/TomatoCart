@@ -11,7 +11,7 @@
     as published by the Free Software Foundation.
   */
   
-  class osC_Portlet {
+  class toC_Portlet {
     
     var $_code,
         $_title,
@@ -50,8 +50,8 @@
         
         $osC_Language->loadIniFile('modules/portlets/' . $file['name']);
         
-        if ( class_exists('osC_Portlet_' . $class ) ) {
-          $module_class = 'osC_Portlet_' . $class;
+        if ( class_exists('toC_Portlet_' . $class ) ) {
+          $module_class = 'toC_Portlet_' . $class;
           $module = new $module_class();
         
           $portlets[] = array('code' => $module->getCode(),

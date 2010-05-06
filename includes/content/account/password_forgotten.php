@@ -57,7 +57,7 @@
         if (osC_Account::savePassword($password, $Qcheck->valueInt('customers_id'))) {
 
           include('includes/classes/email_template.php');
-          $email_template = osC_Email_Template::getEmailTemplate('password_forgotten');
+          $email_template = toC_Email_Template::getEmailTemplate('password_forgotten');
           $email_template->setData($Qcheck->valueProtected('customers_firstname'), $Qcheck->valueProtected('customers_lastname'), getenv('REMOTE_ADDR'), $password, $Qcheck->valueProtected('customers_gender'), $Qcheck->valueProtected('customers_email_address'));
           $email_template->buildMessage();
           $email_template->sendEmail();

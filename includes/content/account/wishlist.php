@@ -98,7 +98,7 @@
         
         $wishlist_url = osc_href_link(FILENAME_ACCOUNT, 'wishlist=display_wishlist&token=' . $toC_Wishlist->getToken(), 'NONSSL', true, true, true);
 
-        $email = osC_Email_Template::getEmailTemplate('share_wishlist');
+        $email = toC_Email_Template::getEmailTemplate('share_wishlist');
         $email->setData($data['wishlist_customer'], $data['wishlist_from_email'], $data['wishlist_emails'], $data['wishlist_message'], $wishlist_url);
         $email->buildMessage();
         $email->sendEmail();

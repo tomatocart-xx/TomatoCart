@@ -176,7 +176,7 @@ Ext.extend(Toc.file_manager.DirectoryListGrid,Ext.grid.GridPanel, {
     fileName = record.get('file_name');
     params = "height=300px,width=340px,top=50px,left=165px,status=yes,toolbar=no,menubar=no,location=no,scrollbars=yes";
     
-    url = '<?php echo HTTP_SERVER . DIR_WS_HTTP_CATALOG. DIR_FS_ADMIN; ?>' + Toc.CONF.CONN_URL + '?module=file_manager&directory=' + this.mainPanel.getDirectoryTreePanel().getCurrentPath() + '&action=download&file_name=' + fileName;
+    url = '<?php echo osc_href_link_admin(FILENAME_JSON); ?>' + '?module=file_manager&directory=' + this.mainPanel.getDirectoryTreePanel().getCurrentPath() + '&action=download&file_name=' + fileName;
     window.open(url, "", params); 
   },
   

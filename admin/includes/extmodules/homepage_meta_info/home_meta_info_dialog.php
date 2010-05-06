@@ -1,6 +1,6 @@
 <?php
 /*
-  $Id: specials_grid.php $
+  $Id: home_meta_info_dialog.php $
   TomatoCart Open Source Shopping Cart Solutions
   http://www.tomatocart.com
 
@@ -12,13 +12,13 @@
 */
   
 ?>
-Toc.metas.HomePageMetaInfoDialog = function (config) {
+Toc.homepage_meta_info.HomepageMetaInfoDialog = function (config) {
   config = config || {};
   
   config.id = "homepage_meta_info-win";
   config.title = '<?php echo $osC_Language->get('heading_title'); ?>';
   config.layout = 'fit';
-  config.width = 450;
+  config.width = 500;
   config.modal = true;
   config.height = 300;
   config.iconCls = 'icon-homepage_meta_info-win';
@@ -41,24 +41,24 @@ Toc.metas.HomePageMetaInfoDialog = function (config) {
     }
   ];
   
-  Toc.metas.HomePageMetaInfoDialog.superclass.constructor.call(this, config);
+  Toc.homepage_meta_info.HomepageMetaInfoDialog.superclass.constructor.call(this, config);
 };
 
-Ext.extend(Toc.metas.HomePageMetaInfoDialog, Ext.Window, {
+Ext.extend(Toc.homepage_meta_info.HomepageMetaInfoDialog, Ext.Window, {
   show: function() {
-    this.frmMetas.load({
+    this.frmMetaInfo.load({
       url: Toc.CONF.CONN_URL,
       params: {
-        module: 'home_meta',
+        module: 'homepage_meta_info',
         action: 'load_meta_info'
       },
       scope: this
     }, this);
-    Toc.metas.HomePageMetaInfoDialog.superclass.show.call(this);
+    Toc.homepage_meta_info.HomepageMetaInfoDialog.superclass.show.call(this);
   },
   
   buildForm: function () {
-    tabMetas = new Ext.TabPanel({
+    tabMetaInfo = new Ext.TabPanel({
       activeTab: 0,
       border: false,
       deferredRender: false
@@ -81,25 +81,25 @@ Ext.extend(Toc.metas.HomePageMetaInfoDialog, Ext.Window, {
             ]
         });
         
-        tabMetas.add(lang' . $l['code'] . ');
+        tabMetaInfo.add(lang' . $l['code'] . ');
         ';
       }
     ?>
-    this.frmMetas = new Ext.form.FormPanel({
+    this.frmMetaInfo = new Ext.form.FormPanel({
       border: false,
       url: Toc.CONF.CONN_URL,
       layout: 'fit',
       baseParams: {  
-        module: 'home_meta',
+        module: 'homepage_meta_info',
         action : 'save_meta_info'
       }, 
-      items: tabMetas
+      items: tabMetaInfo
     });
-    return this.frmMetas;
+    return this.frmMetaInfo;
   },
   
   submitForm: function() {
-    this.frmMetas.form.submit({
+    this.frmMetaInfo.form.submit({
       waitMsg: TocLanguage.formSubmitWaitMsg,
       success: function(form, action) {
         this.owner.app.showNotification({title: TocLanguage.msgSuccessTitle, html: action.result.feedback});

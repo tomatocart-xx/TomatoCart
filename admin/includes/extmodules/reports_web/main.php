@@ -56,7 +56,7 @@ Ext.override(TocDesktop.ReportsWebWindow, {
       win = desktop.createWindow({
         id: this.id,
         title: this.title,
-        autoWidth: true,
+        width: pnl.width,
         autoHeight: true,
         iconCls: this.iconCls,
         layout: 'fit',

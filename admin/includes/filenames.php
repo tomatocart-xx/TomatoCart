@@ -14,6 +14,9 @@
 // define the filenames used in the project
   define('FILENAME_CATALOG_ACCOUNT_HISTORY_INFO', 'account_history_info.php');
   define('FILENAME_DEFAULT', 'index.php');
+  define('FILENAME_JSON', 'json.php');
+  define('FILENAME_LOAD', 'load.php');
+  define('FILENAME_PDF', 'pdf.php');
   define('FILENAME_ACCOUNT', 'account.php');
   define('FILENAME_CHECKOUT', 'checkout.php');
   define('FILENAME_DOWNLOAD', 'download.php');

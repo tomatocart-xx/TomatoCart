@@ -326,7 +326,7 @@
         $Qadmin->execute();
       
         include('../includes/classes/email_template.php');
-        $email_template = osC_Email_Template::getEmailTemplate('admin_password_forgotten');
+        $email_template = toC_Email_Template::getEmailTemplate('admin_password_forgotten');
         $email_template->setData($Qadmin->value('user_name'), osc_get_ip_address(), $password, $email);
         $email_template->buildMessage();
         $email_template->sendEmail();    

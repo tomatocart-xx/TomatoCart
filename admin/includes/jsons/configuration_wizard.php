@@ -52,25 +52,21 @@
       
       $error = false;
       
-      $configurations = explode(',',  $_REQUEST['data']);
+      $configurations = $toC_Json->decode($_REQUEST['data']);
       
-      $data = array();
-      foreach($configurations as $configuration){
-        list($key, $value) = explode(':', $configuration);
-        $data[$key] = $value;
-      }
-       
-      foreach ($data as $key => $value) {
-        $Qupdate = $osC_Database->query('update :table_configuration set configuration_value = :configuration_value, last_modified = now() where configuration_key = :configuration_key');
-        $Qupdate->bindTable(':table_configuration', TABLE_CONFIGURATION);
-        $Qupdate->bindValue(':configuration_value', $value);
-        $Qupdate->bindValue(':configuration_key', $key);
-        $Qupdate->execute();
-      
-        if ($osC_Database->isError()) {
-          $error = true;
-          
-          break;
+      foreach($configurations as $index => $configurations){
+        $configuration =  get_object_vars($configurations);
+        foreach($configuration as $key => $value){
+          $Qupdate = $osC_Database->query('update :table_configuration set configuration_value = :configuration_value, last_modified = now() where configuration_key = :configuration_key');
+          $Qupdate->bindTable(':table_configuration', TABLE_CONFIGURATION);
+          $Qupdate->bindValue(':configuration_value', $value);
+          $Qupdate->bindValue(':configuration_key', $key);
+          $Qupdate->execute();
+          if ($osC_Database->isError()) {
+            $error = true;
+           
+            break;
+          }
         }
       }
   

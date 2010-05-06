@@ -250,30 +250,30 @@
       require_once('../includes/classes/customer.php');
       $osC_Customer = new osC_Customer();
       $osC_Customer->setID($Qorder->value('customers_id '));
-      $osC_ShoppingCart = new osC_ShoppingCart_Adapter($_REQUEST['orders_id']);
+      $osC_ShoppingCart = new toC_ShoppingCart_Adapter($_REQUEST['orders_id']);
       
       if ( isset($_REQUEST['coupon_code']) && !empty($_REQUEST['coupon_code']) && (count($osC_ShoppingCart->getProducts()) != 0) ) {
       
         require_once('../includes/classes/coupon.php');
-        $osC_Coupon = new osC_Coupon($_REQUEST['coupon_code']);
+        $toC_Coupon = new toC_Coupon($_REQUEST['coupon_code']);
   
         $errors = array();
   
-        if(!$osC_Coupon->isExist()){
+        if(!$toC_Coupon->isExist()){
           $errors[] = $osC_Language->get('error_coupon_not_exist');
-        } else if(!$osC_Coupon->isValid()){
+        } else if(!$toC_Coupon->isValid()){
           $errors[] = $osC_Language->get('error_coupon_not_valid');
-        } else if(!$osC_Coupon->isDateValid()){
+        } else if(!$toC_Coupon->isDateValid()){
           $errors[] = $osC_Language->get('error_coupon_invalid_date');
-        } else if(!$osC_Coupon->isUsesPerCouponValid()){
+        } else if(!$toC_Coupon->isUsesPerCouponValid()){
           $errors[] = $osC_Language->get('error_coupon_exceed_uses_per_coupon');
-        } else if(!$osC_Coupon->isUsesPerCustomerValid()){
+        } else if(!$toC_Coupon->isUsesPerCustomerValid()){
           $errors[] = $osC_Language->get('error_coupon_exceed_uses_per_customer');
-        } else if($osC_Coupon->hasRestrictCategories() || $osC_Coupon->hasRestrictProducts()){
-          if(!$osC_Coupon->containRestrictProducts()){
+        } else if($toC_Coupon->hasRestrictCategories() || $toC_Coupon->hasRestrictProducts()){
+          if(!$toC_Coupon->containRestrictProducts()){
             $errors[] = $osC_Language->get('error_coupon_no_match_products');
           }
-        } else if(!$osC_Coupon->checkMinimumOrderQuantity()){
+        } else if(!$toC_Coupon->checkMinimumOrderQuantity()){
           $errors[] = $osC_Language->get('error_coupon_minimum_order_quantity');
         } else if($osC_ShoppingCart->isTotalZero()){
           $errors[] = $osC_Language->get('error_shopping_cart_total_zero');
@@ -300,7 +300,7 @@
       $osC_Weight = new osC_Weight();
       $osC_Currencies = new osC_Currencies();
       
-      $osC_ShoppingCart = new osC_ShoppingCart_Adapter($_REQUEST['orders_id']);
+      $osC_ShoppingCart = new toC_ShoppingCart_Adapter($_REQUEST['orders_id']);
       $osC_ShoppingCart->deleteCoupon();
       $osC_ShoppingCart->updateOrderTotal();
       
@@ -316,7 +316,7 @@
       $osC_Weight = new osC_Weight();
       $osC_Currencies = new osC_Currencies();
       $osC_Language->load('checkout');
-      $osC_ShoppingCart = new osC_ShoppingCart_Adapter($_REQUEST['orders_id']);
+      $osC_ShoppingCart = new toC_ShoppingCart_Adapter($_REQUEST['orders_id']);
       $errors = array();
       
       if ($osC_ShoppingCart->isTotalZero()) {
@@ -349,7 +349,7 @@
       $osC_Weight = new osC_Weight();
       $osC_Currencies = new osC_Currencies();
       
-      $osC_ShoppingCart = new osC_ShoppingCart_Adapter($_REQUEST['orders_id']);
+      $osC_ShoppingCart = new toC_ShoppingCart_Adapter($_REQUEST['orders_id']);
       $osC_ShoppingCart->deleteGiftCertificate($_REQUEST['gift_certificate_code']);
       $osC_ShoppingCart->updateOrderTotal();
       
@@ -450,7 +450,7 @@
       }
 
       if (osC_Order::updateCurrency($_REQUEST['orders_id'], $_REQUEST['currency'], $currency_value)) {
-        $osC_ShoppingCart = new osC_ShoppingCart_Adapter($_REQUEST['orders_id']);
+        $osC_ShoppingCart = new toC_ShoppingCart_Adapter($_REQUEST['orders_id']);
         $osC_ShoppingCart->_calculate();
         $osC_ShoppingCart->updateOrderTotal();
       
@@ -659,7 +659,7 @@
           $Qorder->execute();
       
           require_once('../includes/classes/email_template.php');
-          $email_template = osC_Email_Template::getEmailTemplate('admin_order_status_updated');
+          $email_template = toC_Email_Template::getEmailTemplate('admin_order_status_updated');
           $email_template->setData($id, osc_href_link(FILENAME_CATALOG_ACCOUNT_HISTORY_INFO, 'order_id=' . $id, 'SSL', false, false, true), osC_DateTime::getLong($Qorder->value('date_purchased')), $data['append_comment'], $data['comment'], $Qorder->value('orders_status_name'), $Qorder->value('customers_name'), $Qorder->value('customers_email_address'));
           $email_template->buildMessage();
           $email_template->sendEmail();
@@ -748,7 +748,7 @@
       $error = false;
       $feedback = array();
       
-      $osC_ShoppingCart = new osC_ShoppingCart_Adapter($_REQUEST['orders_id']);
+      $osC_ShoppingCart = new toC_ShoppingCart_Adapter($_REQUEST['orders_id']);
       $osC_Tax = new osC_Tax_Admin();
       $osC_Weight = new osC_Weight();
       $osC_Currencies = new osC_Currencies();
@@ -768,7 +768,7 @@
       $error = false;
       $feedback = array();
       
-      $osC_ShoppingCart = new osC_ShoppingCart_Adapter($_REQUEST['orders_id']);
+      $osC_ShoppingCart = new toC_ShoppingCart_Adapter($_REQUEST['orders_id']);
       $osC_Tax = new osC_Tax_Admin();
       $osC_Weight = new osC_Weight();
       $osC_Currencies = new osC_Currencies();
@@ -947,7 +947,7 @@
       $osC_Tax = new osC_Tax_Admin();
       $osC_Weight = new osC_Weight();
       $osC_Currencies = new osC_Currencies();
-      $osC_ShoppingCart = new osC_ShoppingCart_Adapter($_REQUEST['orders_id']);
+      $osC_ShoppingCart = new toC_ShoppingCart_Adapter($_REQUEST['orders_id']);
 
       $data['orders_id'] = $_REQUEST['orders_id'];
       
@@ -1137,7 +1137,7 @@
       $error = false;
       $feedback = array();
       
-      $osC_ShoppingCart = new osC_ShoppingCart_Adapter($_REQUEST['orders_id']);
+      $osC_ShoppingCart = new toC_ShoppingCart_Adapter($_REQUEST['orders_id']);
       $osC_Tax = new osC_Tax_Admin();
       $osC_Weight = new osC_Weight();
       $osC_Currencies = new osC_Currencies();
@@ -1222,7 +1222,7 @@
       $osC_Tax = new osC_Tax_Admin();
       $osC_Weight = new osC_Weight();
       $osC_Currencies = new osC_Currencies();
-      $osC_ShoppingCart = new osC_ShoppingCart_Adapter($_REQUEST['orders_id']);
+      $osC_ShoppingCart = new toC_ShoppingCart_Adapter($_REQUEST['orders_id']);
       
       $is_del_coupon = false;
       if( isset($_REQUEST['orders_products_id']) && !empty($_REQUEST['orders_products_id']) && $osC_ShoppingCart->deleteProduct($_REQUEST['orders_products_id'], $_REQUEST['products_id']) === true ) {
@@ -1248,7 +1248,7 @@
       $osC_Tax = new osC_Tax_Admin();
       $osC_Weight = new osC_Weight();
 
-      $osC_ShoppingCart = new osC_ShoppingCart_Adapter($_REQUEST['orders_id']);
+      $osC_ShoppingCart = new toC_ShoppingCart_Adapter($_REQUEST['orders_id']);
       $osC_ShoppingCart->_calculate();
 
       unset($_SESSION['osC_ShoppingCart_data']['shipping_quotes']);
@@ -1293,7 +1293,7 @@
     function saveShippingMethod() {
       global $toC_Json, $osC_Language, $osC_Shipping, $osC_ShoppingCart, $osC_Weight, $osC_Tax, $osC_Currencies;  
     
-      $osC_ShoppingCart = new osC_ShoppingCart_Adapter($_REQUEST['orders_id']);
+      $osC_ShoppingCart = new toC_ShoppingCart_Adapter($_REQUEST['orders_id']);
       $osC_Shipping = new osC_Shipping();
       $osC_Tax = new osC_Tax_Admin();
       $osC_Weight = new osC_Weight();
@@ -1509,7 +1509,7 @@
     function updatePaymentMethod() {
       global $toC_Json, $osC_Language, $osC_Shipping, $osC_ShoppingCart, $osC_Weight, $osC_Tax, $osC_Currencies, $osC_Customer;  
     
-      $osC_ShoppingCart = new osC_ShoppingCart_Adapter($_REQUEST['orders_id']);
+      $osC_ShoppingCart = new toC_ShoppingCart_Adapter($_REQUEST['orders_id']);
       $osC_Shipping = new osC_Shipping();
       $osC_Tax = new osC_Tax_Admin();
       $osC_Weight = new osC_Weight();

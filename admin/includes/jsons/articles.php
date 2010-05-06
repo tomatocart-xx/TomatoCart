@@ -61,7 +61,7 @@
     function getArticlesCategories() {
       global $toC_Json, $osC_Language;
       
-      $article_categories = osC_Articles_Categories_Admin::getArticlesCategories();
+      $article_categories = toC_Articles_Categories_Admin::getArticlesCategories();
       
       $records = array();
       if (isset($_REQUEST['top']) && ($_REQUEST['top'] == '1')) {
@@ -83,7 +83,7 @@
     function loadArticle() {
       global $osC_Database, $toC_Json;
       
-      $data = osC_Articles_Admin::getData($_REQUEST['articles_id']);
+      $data = toC_Articles_Admin::getData($_REQUEST['articles_id']);
       
       $Qad = $osC_Database->query('select articles_name, articles_description,articles_head_desc_tag, articles_head_keywords_tag, language_id from :table_articles_description where articles_id = :articles_id');
       $Qad->bindTable(':table_articles_description', TABLE_ARTICLES_DESCRIPTION);
@@ -116,7 +116,7 @@
                     'delimage' => (isset($_REQUEST['delimage']) && ($_REQUEST['delimage'] == 'on') ? '1' : '0'),
                     'articles_categories' => (isset($_REQUEST['articles_categories_id'])? $_REQUEST['articles_categories_id']:'0'));
                     
-      if ( osC_Articles_Admin::save((isset($_REQUEST['articles_id']) && ($_REQUEST['articles_id'] != -1) ? $_REQUEST['articles_id'] : null), $data) ) {
+      if ( toC_Articles_Admin::save((isset($_REQUEST['articles_id']) && ($_REQUEST['articles_id'] != -1) ? $_REQUEST['articles_id'] : null), $data) ) {
         $response = array('success' => true, 'feedback' => $osC_Language->get('ms_success_action_performed'));
       } else {
         $response = array('success' => false, 'feedback' => $osC_Language->get('ms_error_action_not_performed'));
@@ -131,7 +131,7 @@
       
       $osC_Image = new osC_Image_Admin();
       
-      if (osC_Articles_Admin::delete($_REQUEST['articles_id'])) {
+      if (toC_Articles_Admin::delete($_REQUEST['articles_id'])) {
         $response = array('success' => true, 'feedback' => $osC_Language->get('ms_success_action_performed'));
       } else {
         $response = array('success' => false, 'feedback' => $osC_Language->get('ms_error_action_not_performed'));
@@ -149,7 +149,7 @@
       
       $batch = explode(',', $_REQUEST['batch']);
       foreach($batch as $articles_id) {
-        if (!osC_Articles_Admin::delete($articles_id)) {
+        if (!toC_Articles_Admin::delete($articles_id)) {
           $error = true;
           break;
         }
@@ -167,7 +167,7 @@
     function setStatus() {
       global $toC_Json, $osC_Language;
       
-      if ( isset($_REQUEST['articles_id']) && osC_Articles_Admin::setStatus($_REQUEST['articles_id'], (isset($_REQUEST['flag']) ? $_REQUEST['flag'] : null)) ) {
+      if ( isset($_REQUEST['articles_id']) && toC_Articles_Admin::setStatus($_REQUEST['articles_id'], (isset($_REQUEST['flag']) ? $_REQUEST['flag'] : null)) ) {
         $response = array('success' => true, 'feedback' => $osC_Language->get('ms_success_action_performed'));
       } else {
         $response = array('success' => false, 'feedback' => $osC_Language->get('ms_error_action_not_performed'));

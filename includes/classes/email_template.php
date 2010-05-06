@@ -11,7 +11,7 @@
   as published by the Free Software Foundation.
 */
 
-  class osC_Email_Template{
+  class toC_Email_Template {
     var $_keywords = array(),
         $_template_name = '',
         $_status,
@@ -22,7 +22,7 @@
         $_recipients = array();
 
 // class constructor
-    function osC_Email_Template($template_name) {
+    function toC_Email_Template($template_name) {
       global $osC_Database, $osC_Language;
 
       $Qtemplate = $osC_Database->query('select et.email_templates_status, etd.email_title, etd.email_content from :table_email_templates et, :table_email_templates_description etd where et.email_templates_id = etd.email_templates_id and et.email_templates_name = :email_templates_name and etd.language_id = :language_id');
@@ -43,7 +43,7 @@
       if(file_exists($file_path)){
         include_once($file_path);
 
-        $email_template_class = 'osC_Email_Template_' . $template_name;
+        $email_template_class = 'toC_Email_Template_' . $template_name;
         return new $email_template_class();
       }else{
         return null;

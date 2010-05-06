@@ -20,6 +20,7 @@
       
       $osC_DirectoryListing = new osC_DirectoryListing(DIR_FS_BACKUP);
       $osC_DirectoryListing->setIncludeDirectories(false);
+      $osC_DirectoryListing->setExcludeEntries('.htaccess');
       
       $response = array();
       foreach ( $osC_DirectoryListing->getFiles() as $file ) {

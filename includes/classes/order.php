@@ -360,11 +360,11 @@
     
       if($osC_ShoppingCart->hasCoupon()){
         include_once('includes/classes/coupon.php');
-        $osC_Coupon = new osC_Coupon($osC_ShoppingCart->getCouponCode());
+        $toC_Coupon = new toC_Coupon($osC_ShoppingCart->getCouponCode());
 
         $Qcoupon = $osC_Database->query('insert into :table_coupons_redeem_history (coupons_id, customers_id, orders_id, redeem_amount, redeem_date, redeem_ip_address) values (:coupons_id, :customers_id, :orders_id, :redeem_amount, now(), :redeem_ip_address)');
         $Qcoupon->bindTable(':table_coupons_redeem_history', TABLE_COUPONS_REDEEM_HISTORY);
-        $Qcoupon->bindInt(':coupons_id', $osC_Coupon->getID());
+        $Qcoupon->bindInt(':coupons_id', $toC_Coupon->getID());
         $Qcoupon->bindInt(':customers_id', $osC_Customer->getID());
         $Qcoupon->bindInt(':orders_id', $insert_id);
         $Qcoupon->bindValue(':redeem_amount', $osC_ShoppingCart->getCouponAmount());
@@ -402,7 +402,7 @@
       
       //create email template object
       require_once('includes/classes/email_template.php');
-      $email = osC_Email_Template::getEmailTemplate('active_downloadable_product');
+      $email = toC_Email_Template::getEmailTemplate('active_downloadable_product');
       
       //retrieve order information
       $Qorder = $osC_Database->query('select * from :table_orders where orders_id = :orders_id');
@@ -443,7 +443,7 @@
       
       //create email template object
       require_once('includes/classes/email_template.php');
-      $email = osC_Email_Template::getEmailTemplate('active_gift_certificate');
+      $email = toC_Email_Template::getEmailTemplate('active_gift_certificate');
       
       //retrieve gift certifcates
       $Qcertificates = $osC_Database->query('select * from :table_gift_certificates where orders_id = :orders_id');
@@ -534,7 +534,7 @@
     function sendEmail($id) {
 
       require_once('email_template.php');
-      $email_template = osC_Email_Template::getEmailTemplate('new_order_created');
+      $email_template = toC_Email_Template::getEmailTemplate('new_order_created');
       $email_template->setData($id);
       if (SEND_EXTRA_ORDER_EMAILS_TO != '') {
         $email_template->addRecipient('', SEND_EXTRA_ORDER_EMAILS_TO);

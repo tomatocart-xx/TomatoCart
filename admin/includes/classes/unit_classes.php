@@ -11,7 +11,7 @@
   as published by the Free Software Foundation.
 */
 
-  class osC_Unit_Class_Admin {
+  class toC_Unit_Class_Admin {
 
     function save($id = null, $data, $default = false) {
       global $osC_Database, $osC_Language;

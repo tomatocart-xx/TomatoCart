@@ -11,7 +11,7 @@
   as published by the Free Software Foundation.
 */
   
-  class osC_GiftCertificates_Admin {
+  class toC_GiftCertificates_Admin {
   
     function getData($id) {
       global $osC_Database, $osC_Language;
@@ -46,7 +46,7 @@
           $osC_Currencies = new osC_Currencies_Admin();
           
           require_once('../includes/classes/email_template.php');
-          $email = osC_Email_Template::getEmailTemplate('active_gift_certificate');
+          $email = toC_Email_Template::getEmailTemplate('active_gift_certificate');
           
           $email->setData($data['senders_name'], $data['senders_email'], $data['recipients_name'], $data['recipients_email'], $osC_Currencies->format($data['amount']), $data['gift_certificates_code'], $data['messages']);
           $email->buildMessage();

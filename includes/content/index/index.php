@@ -94,13 +94,14 @@
         }
       } else {
         $code = strtoupper($osC_Language->getCode());
+        
         if (defined('HOME_META_KEYWORD_' . $code) && defined('HOME_META_DESCRIPTION_' . $code)) {
-          $meta_key = constant('HOME_META_KEYWORD_' . $code);
+          $meta_keywords = constant('HOME_META_KEYWORD_' . $code);
           $meta_description = constant('HOME_META_DESCRIPTION_' . $code); 
         }
 
-        if (!empty($meta_key) && !empty($meta_description)) {
-          $this->addPageTags('keywords', $meta_key);
+        if (!empty($meta_keywords) && !empty($meta_description)) {
+          $this->addPageTags('keywords', $meta_keywords);
           $this->addPageTags('description', $meta_description);
         }
       }

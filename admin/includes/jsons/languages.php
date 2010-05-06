@@ -392,7 +392,7 @@
     function updateTranslation() {
       global $toC_Json, $osC_Language;
 
-      $value = stripslashes(rtrim($_REQUEST['definition_value']));
+      $value = rtrim($_REQUEST['definition_value']);
       
       if ( osC_Language_Admin::saveDefinition($_REQUEST['languages_id'], $_REQUEST['group'], $_REQUEST['definition_key'] , $value) ) {
         $response = array('success' => true, 'feedback' => $osC_Language->get('ms_success_action_performed'));
@@ -423,7 +423,7 @@
       $data = array('languages_id' => $_REQUEST['languages_id'],
                     'definition_group' => $_REQUEST['definition_group'],
                     'definition_key' => $_REQUEST['definition_key'],
-                    'definition_value' => stripslashes(rtrim($_REQUEST['definition_value'])));
+                    'definition_value' => rtrim($_REQUEST['definition_value']));
       
       if ( osC_Language_Admin::addDefinition($data) ) {
         $response = array('success' => true, 'feedback' => $osC_Language->get('ms_success_action_performed'));

@@ -98,7 +98,7 @@ Ext.extend(Toc.settings.SettingsDialog, Ext.Window, {
     var c = app.launchers;
     
     Ext.Ajax.request({
-      url: 'json.php',
+      url: Toc.CONF.CONN_URL,
       params: {
         module: 'desktop_settings',
         action: 'save_settings',

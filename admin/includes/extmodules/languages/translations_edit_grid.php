@@ -22,7 +22,6 @@ Toc.languages.TranslationsEditGrid = function(config) {
   config.region = 'center';
   config.clicksToEdit = 1;
   config.loadMask = true;
-  config.viewConfig = {forceFit: true};
   this.owner = config.owner;
   
   config.group = 'general';
@@ -59,17 +58,17 @@ Toc.languages.TranslationsEditGrid = function(config) {
   config.plugins = rowActions;
   
   config.cm = new Ext.grid.ColumnModel([
-    {id: 'definition_key', header: '<?php echo $osC_Language->get('table_heading_definition_key'); ?>', dataIndex: 'definition_key', sortable: true},
-    {header: '<?php echo $osC_Language->get('table_heading_definition_value'); ?>', dataIndex: 'definition_value', editor: new Ext.form.TextArea({height: 200})},
+    {header: '<?php echo $osC_Language->get('table_heading_definition_key'); ?>', dataIndex: 'definition_key', sortable: true, width: 200},
+    {id: 'language_translation', header: '<?php echo $osC_Language->get('table_heading_definition_value'); ?>', dataIndex: 'definition_value', editor: new Ext.form.TextArea({height: 200})},
     rowActions
   ]);
-  config.autoExpandColumn = 'definition_key';
+  config.autoExpandColumn = 'language_translation';
   
   config.tbar = [
     {
-      text: TocLanguage.btnAdd,
+      text: '<?php echo $osC_Language->get('button_add_definition'); ?>',
       iconCls: 'add',
-      handler: function() {this.onAdd(config.languagesId)},
+      handler: function() {this.onAddDefinition(config.languagesId)},
       scope: this
     }
   ];
@@ -91,14 +90,14 @@ Ext.extend(Toc.languages.TranslationsEditGrid, Ext.grid.EditorGridPanel, {
     this.getStore().reload();
   },
   
-  onAdd: function(languagesId) {
+  onAddDefinition: function(languagesId) {
     var dlg = this.owner.createTranslationAddDialog();
     
     dlg.on('saveSuccess', function(){
       this.getStore().reload();
     }, this);
     
-    dlg.show(languagesId);
+    dlg.show(languagesId, this.group);
   },
 
   onAfterEdit: function(e) {

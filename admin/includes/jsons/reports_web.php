@@ -32,7 +32,7 @@
       //Visits
       $visits_data = $toC_Piwik->getData('visits', $start_date, $end_date, $period);
       $sum_visits = array_sum(array_values($visits_data));
-      
+
       //sparkline
       $value[0] = array_values($visits_data);
       $sparkling->lineChart($value, 100, 15, array('blue'), array('line'));
@@ -101,7 +101,7 @@
       $file = DIR_FS_CACHE_ADMIN . '/sparkline_' . $_SESSION['admin']['id'] . '_bounce_rate.png';
       $sparkling->output($file);
             
-      $src = 'json.php?module=reports_web&action=draw_visits_summary_sparkline&start_date=' . $start_date . '&end_date=' . $end_date . '&period=' . $period;
+      $src = osc_href_link_admin(FILENAME_JSON, 'module=reports_web&action=draw_visits_summary_sparkline&start_date=' . $start_date . '&end_date=' . $end_date . '&period=' . $period);
       
       $data['visits_panel'] = '<p class="sparkline"><img src="' . $src . '&type=visits" />&nbsp;&nbsp;<span>' . $sum_visits . '</span>&nbsp;' . $osC_Language->get('sparkline_label_visits') . '</p>';
       $data['unique_visits_panel'] = '<p class="sparkline"><img  src="' . $src . '&type=unique_visitors"/>&nbsp;&nbsp;<span>' . $num_unique_visitors . '</span>&nbsp;' . $osC_Language->get('sparkline_label_unique_visitors') . '</p>';
@@ -211,7 +211,7 @@
       $file = DIR_FS_CACHE_ADMIN . '/sparkline_' . $_SESSION['admin']['id'] . '_referer_type_search_engines.png';
       $sparkling->output($file);
       
-      $src = 'json.php?module=reports_web&action=draw_traffic_source_summary_sparkline&start_date=' . $start_date . '&end_date=' . $end_date . '&period=' . $period;
+      $src = osc_href_link_admin(FILENAME_JSON, 'module=reports_web&action=draw_traffic_source_summary_sparkline&start_date=' . $start_date . '&end_date=' . $end_date . '&period=' . $period);
       
       $data['referer_type_direct_panel'] = '<p class="sparkline"><img src="' . $src . '&type=referer_type_direct" />&nbsp;&nbsp;<span>' . $num_direct . '</span>&nbsp;' . $osC_Language->get('sparkline_label_referer_type_direct') . '</p>';
       $data['referer_type_websites_panel'] = '<p class="sparkline"><img  src="' . $src . '&type=referer_type_websites"/>&nbsp;&nbsp;<span>' . $num_websites . '</span>&nbsp;' . $osC_Language->get('sparkline_label_referer_type_websites') . '</p>';
@@ -423,6 +423,7 @@
       $chart = new toC_Flash_Pie();
       $chart->setData($data);
       $chart->render();
+//      var_dump($data);
     }    
 
     function getCountryData() { 

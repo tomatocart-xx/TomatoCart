@@ -11,12 +11,12 @@
   as published by the Free Software Foundation.
 */
 
-  class osC_Coupon {
+  class toC_Coupon {
     var $_data = array();
     var $_categories = array();
     var $_products = array();
 
-    function osC_Coupon($coupon_code) {
+    function toC_Coupon($coupon_code) {
       global $osC_Database, $osC_Language, $osC_CategoryTree;
 
       if (!empty($coupon_code)) {

@@ -4,14 +4,14 @@
   TomatoCart Open Source Shopping Cart Solutions
   http://www.tomatocart.com
 
-  Copyright (c) 2009 Wuxi Elootec Technology Co., Ltd;  Copyright (c) 2004 osCommerce
+  Copyright (c) 2009 Wuxi Elootec Technology Co., Ltd
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License v2 (1991)
   as published by the Free Software Foundation.
 */
 
-class osC_Sefu{
+class toC_Sefu {
 
   var $_process_methods = array(),
       $_anchors = array(),
@@ -22,7 +22,7 @@ class osC_Sefu{
       $_manufacturers_cache = array(),
       $_faqs_cache = array();
 
-  function osC_Sefu(){
+  function toC_Sefu(){
     $this->_reg_anchors = array('products_id' => '-p-',
                                 'cPath' => '-c-',
                                 'articles_id' => '-a-',

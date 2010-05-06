@@ -75,7 +75,7 @@
       
       $data = array('unit_class_title' => $_REQUEST['unit_class_title']);
       
-      if ( osC_Unit_Class_Admin::save( (isset( $_REQUEST['unit_class_id'] ) && is_numeric($_REQUEST['unit_class_id'] ) ? $_REQUEST['unit_class_id'] : null), $data, ( isset($_REQUEST['default']) && ( $_REQUEST['default'] == 'on' ) ? true : false ) ) ) {
+      if ( toC_Unit_Class_Admin::save( (isset( $_REQUEST['unit_class_id'] ) && is_numeric($_REQUEST['unit_class_id'] ) ? $_REQUEST['unit_class_id'] : null), $data, ( isset($_REQUEST['default']) && ( $_REQUEST['default'] == 'on' ) ? true : false ) ) ) {
         $response = array('success' => true, 'feedback' => $osC_Language->get('ms_success_action_performed'));
       } else {
         $response = array('success' => false, 'feedback' => $osC_Language->get('ms_error_action_not_performed'));
@@ -106,7 +106,7 @@
       }
       
       if  ($error == false ) {
-        if (osC_Unit_Class_Admin::delete($_REQUEST['unit_class_id'])) {
+        if (toC_Unit_Class_Admin::delete($_REQUEST['unit_class_id'])) {
           $response = array('success' => true ,'feedback' => $osC_Language->get('ms_success_action_performed'));
         } else {
           $response = array('success' => false, 'feedback' => $osC_Language->get('ms_error_action_not_performed'));
@@ -146,7 +146,7 @@
       if ($error === false) {
         foreach ($batch as $id) {
 
-          if ( !osC_Unit_Class_Admin::delete($id) ) {
+          if ( !toC_Unit_Class_Admin::delete($id) ) {
             $error = true;
             break;
           }

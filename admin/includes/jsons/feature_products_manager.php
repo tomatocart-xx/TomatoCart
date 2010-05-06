@@ -56,7 +56,7 @@
     function deleteProduct() {
       global $toC_Json, $osC_Language;
       
-      if (osC_Feature_Products_Manager_Admin::delete($_REQUEST['products_id'])) {
+      if (toC_Feature_Products_Manager_Admin::delete($_REQUEST['products_id'])) {
         $response = array('success' => true, 'feedback' => $osC_Language->get('ms_success_action_performed'));
       } else {
         $response = array('success' => false, 'feedback' => $osC_Language->get('ms_error_action_not_performed'));
@@ -72,7 +72,7 @@
       
       $batch = explode(',', $_REQUEST['batch']);
       foreach ($batch as $id) {
-        if ( !osC_Feature_Products_Manager_Admin::delete($id) ) {
+        if ( !toC_Feature_Products_Manager_Admin::delete($id) ) {
           $error = true;
           break;
         }
@@ -90,7 +90,7 @@
     function updateSortOrder() {
       global $toC_Json, $osC_Language;
       
-      if (osC_Feature_Products_Manager_Admin::save($_REQUEST['products_id'], $_REQUEST['sort_value'])) {
+      if (toC_Feature_Products_Manager_Admin::save($_REQUEST['products_id'], $_REQUEST['sort_value'])) {
         $response = array('success' => true, 'feedback' => $osC_Language->get('ms_success_action_performed'));
       } else {
         $response = array('success' => false, 'feedback' => $osC_Language->get('ms_error_action_not_performed'));

@@ -1,6 +1,6 @@
 <?php
 /*
-  $Id: browsers.php $
+  $Id: countries.php $
   TomatoCart Open Source Shopping Cart Solutions
   http://www.tomatocart.com
 
@@ -11,12 +11,12 @@
   as published by the Free Software Foundation.
 */
 
-class osC_Portlet_Countries extends osC_Portlet {
+class toC_Portlet_Countries extends toC_Portlet {
 
   var $_title,
       $_code = 'countries';
 
-  function osC_Portlet_Countries() {
+  function toC_Portlet_Countries() {
     global $osC_Language;
     
     $this->_title = $osC_Language->get('portlet_countries_title');
@@ -28,8 +28,8 @@ class osC_Portlet_Countries extends osC_Portlet {
       'code' => '"' . $this->_code . '"', 
       'height' => 200,
       'layout' => '"fit"',
-      'swf' => '"' . HTTP_SERVER . DIR_WS_HTTP_CATALOG . DIR_FS_ADMIN. 'external/open-flash-chart/open-flash-chart.swf"', 
-      'flashvars' => array('data' => '"' . HTTP_SERVER . DIR_WS_HTTP_CATALOG . DIR_FS_ADMIN. 'json.php?module=dashboard&action=render_data&portlet=' . $this->_code . '"'),
+      'swf' => '"' . osc_href_link_admin('external/open-flash-chart/open-flash-chart.swf') . '"', 
+      'flashvars' => array('data' => '"' . osc_href_link_admin(FILENAME_JSON, 'module=dashboard&action=render_data&portlet=' . $this->_code) . '"'),
       'plugins' => 'new Ext.ux.PortletFlashPlugin()');
     
     $response = array('success' => true, 'view' => $config);

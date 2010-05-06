@@ -11,12 +11,12 @@
   as published by the Free Software Foundation.
 */
 
-class osC_Portlet_Browsers extends osC_Portlet {
+class toC_Portlet_Browsers extends toC_Portlet {
 
   var $_title,
       $_code = 'browsers';
 
-  function osC_Portlet_Browsers() {
+  function toC_Portlet_Browsers() {
     global $osC_Language;
     
     $this->_title = $osC_Language->get('portlet_browsers_title');
@@ -28,8 +28,8 @@ class osC_Portlet_Browsers extends osC_Portlet {
       'code' => '"' . $this->_code . '"', 
       'height' => 200,
       'layout' => '"fit"',
-      'swf' => '"' . HTTP_SERVER . DIR_WS_HTTP_CATALOG . DIR_FS_ADMIN. 'external/open-flash-chart/open-flash-chart.swf"', 
-      'flashvars' => array('data' => '"' . HTTP_SERVER . DIR_WS_HTTP_CATALOG . DIR_FS_ADMIN. 'json.php?module=dashboard&action=render_data&portlet=' . $this->_code . '"'),
+      'swf' => '"' . osc_href_link_admin('external/open-flash-chart/open-flash-chart.swf') . '"', 
+      'flashvars' => array('data' => '"' . osc_href_link_admin(FILENAME_JSON, 'module=dashboard&action=render_data&portlet=' . $this->_code) . '"'),
       'plugins' => 'new Ext.ux.PortletFlashPlugin()');
     
     $response = array('success' => true, 'view' => $config);
@@ -47,7 +47,7 @@ class osC_Portlet_Browsers extends osC_Portlet {
 
     $toC_Piwik = new toC_Piwik();
     $data = $toC_Piwik->getBrowser($start_date, $end_date, 'day');
-       
+
     $pie_chart = new toC_Flash_Pie('', '80', '');
     $pie_chart->setData($data);
     

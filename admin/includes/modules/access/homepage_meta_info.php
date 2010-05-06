@@ -1,6 +1,6 @@
 <?php
 /*
-  $Id: home_meta.php $
+  $Id: homepage_meta_info.php $
   TomatoCart Open Source Shopping Cart Solutions
   http://www.tomatocart.com
 
@@ -16,12 +16,12 @@
         $_group = 'configuration',
         $_icon = 'articles.png',
         $_title,
-        $_sort_order = 300;
+        $_sort_order = 200;
 
     function osC_Access_Homepage_meta_info() {
       global $osC_Language;
 
-      $this->_title = $osC_Language->get('access_home_meta_title');
+      $this->_title = $osC_Language->get('access_homepage_meta_info_title');
     }
   }
 ?>

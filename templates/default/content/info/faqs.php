@@ -15,7 +15,7 @@
 
 <div id="faqs" class="moduleBox">
   <?php
-  $Qfaqs = osC_Faqs::getListing();
+  $Qfaqs = toC_Faqs::getListing();
 
   while ($Qfaqs->next()) {
   ?>

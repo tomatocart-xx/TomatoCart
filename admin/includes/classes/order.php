@@ -673,7 +673,7 @@
       
       //create email template object
       require_once('../includes/classes/email_template.php');
-      $email = osC_Email_Template::getEmailTemplate('active_downloadable_product');
+      $email = toC_Email_Template::getEmailTemplate('active_downloadable_product');
       
       //retrieve order information
       $Qorder = $osC_Database->query('select * from :table_orders where orders_id = :orders_id');
@@ -717,7 +717,7 @@
 
       //create email template object
       require_once('../includes/classes/email_template.php');
-      $email = osC_Email_Template::getEmailTemplate('active_gift_certificate');
+      $email = toC_Email_Template::getEmailTemplate('active_gift_certificate');
       
       //retrieve gift certifcates
       $Qcertificates = $osC_Database->query('select * from :table_gift_certificates where orders_id = :orders_id');

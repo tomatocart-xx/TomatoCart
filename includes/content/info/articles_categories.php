@@ -28,7 +28,7 @@
       global $osC_Language;
 
       if ( isset($_GET['articles_categories_id']) && !empty($_GET['articles_categories_id']) ) {
-        $this->_page_title = osC_Articles::getArticleCategoriesName($_GET['articles_categories_id']);
+        $this->_page_title = toC_Articles::getArticleCategoriesName($_GET['articles_categories_id']);
       } else {
         $this->_page_title = $osC_Language->get('info_article_categories_heading');
       }

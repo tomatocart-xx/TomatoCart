@@ -11,7 +11,7 @@
   as published by the Free Software Foundation.
 */
 
-class osC_Logo_Upload {
+class toC_Logo_Upload {
 
   function upload(){
     $logo_image = new upload('logo_image');

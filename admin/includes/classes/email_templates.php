@@ -4,7 +4,7 @@
   TomatoCart Open Source Shopping Cart Solutions
   http://www.tomatocart.com
 
-  Copyright (c) 2009 Wuxi Elootec Technology Co., Ltd;  Copyright (c) 2006 osCommerce
+  Copyright (c) 2009 Wuxi Elootec Technology Co., Ltd
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License v2 (1991)
@@ -12,7 +12,7 @@
 */
 
 
-  class osC_Email_Templates_Admin {
+  class toC_Email_Templates_Admin {
 
     function getData($id) {
       global $osC_Database, $osC_Language;
@@ -91,7 +91,7 @@
     function getKeywords($email_templates_name) {
       include('../includes/modules/email_templates/' . $email_templates_name.'.php');
 
-      $module = 'osC_Email_Template_' . $email_templates_name;
+      $module = 'toC_Email_Template_' . $email_templates_name;
       $module = new $module();
 
       $keywords = $module->getKeywords();

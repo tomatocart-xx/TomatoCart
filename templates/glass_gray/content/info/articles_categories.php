@@ -11,7 +11,7 @@
   as published by the Free Software Foundation.
 */
 
-  $Qarticles = osC_Articles::getListing($_GET['articles_categories_id']);
+  $Qarticles = toC_Articles::getListing($_GET['articles_categories_id']);
 ?>
 
 <h1><?php echo $osC_Template->getPageTitle(); ?></h1>

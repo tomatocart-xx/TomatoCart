@@ -18,7 +18,7 @@
     function getPortletNodes() {
       global $toC_Json;
       
-      $portlets = osC_Portlet::getPortlets();
+      $portlets = toC_Portlet::getPortlets();
       
       $nodes = array();
       foreach($portlets as $portlet) {
@@ -41,8 +41,8 @@
         include($class_path);
         $osC_Language->loadIniFile('modules/portlets/' . $portlet . '.php');
         
-        if ( class_exists('osC_Portlet_' . $portlet ) ) {
-          $module_class = 'osC_Portlet_' . $portlet;
+        if ( class_exists('toC_Portlet_' . $portlet ) ) {
+          $module_class = 'toC_Portlet_' . $portlet;
           $module = new $module_class();
 
           echo $module->renderView();
@@ -66,8 +66,8 @@
         include($class_path);
         $osC_Language->loadIniFile('modules/portlets/' . $portlet . '.php');
         
-        if ( class_exists('osC_Portlet_' . $portlet) ) {
-          $module_class = 'osC_Portlet_' . $portlet;
+        if ( class_exists('toC_Portlet_' . $portlet) ) {
+          $module_class = 'toC_Portlet_' . $portlet;
           $module = new $module_class();
           
           echo $module->renderData();

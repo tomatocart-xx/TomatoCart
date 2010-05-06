@@ -93,8 +93,7 @@
             $info_css .
             '</style>' . "\n\n";
 
-        $this->_content .= $osC_Template->ouputJavascriptFile('ext/mootools/mootools-1-2.js') . "\n" .
-                           $osC_Template->ouputJavascriptFile('ext/noobslide/noobslide.js') . "\n\n";
+        $this->_content .= $osC_Template->ouputJavascriptFile('ext/noobslide/noobslide.js') . "\n\n";
 
         $size = (MODULE_CONTENT_SLIDE_SHOW_MODE == 'horizontal') ? MODULE_CONTENT_SLIDE_SHOW_WIDTH : MODULE_CONTENT_SLIDE_SHOW_HEIGHT;
         $this->_content .=

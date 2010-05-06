@@ -4,7 +4,7 @@
   TomatoCart Open Source Shopping Cart Solutions
   http://www.tomatocart.com
 
-  Copyright (c) 2009 Wuxi Elootec Technology Co., Ltd
+  Copyright (c) 2009 Wuxi Elootec Technology Co., Ltd;  Copyright (c) 2007 osCommerce
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License v2 (1991)
@@ -124,7 +124,7 @@
         if ( $send_email === true ) {
           if ( empty($id) ) {
             include('../includes/classes/email_template.php');
-            $email_template = osC_Email_Template::getEmailTemplate('admin_create_account_email');
+            $email_template = toC_Email_Template::getEmailTemplate('admin_create_account_email');
             $email_template->setData($data['firstname'], $data['lastname'], $data['email_address'], trim($data['password']), $data['gender']);
             $email_template->buildMessage();
             $email_template->sendEmail();
@@ -174,7 +174,7 @@
             include('../includes/classes/email_template.php');
             $data = osC_Customers_Admin::getData($data['customers_id']);
             
-            $emailTemplate = osC_Email_Template::getEmailTemplate('admin_customer_credits_change_notification');
+            $emailTemplate = toC_Email_Template::getEmailTemplate('admin_customer_credits_change_notification');
             $emailTemplate->setData($data['customers_firstname'], $data['customers_lastname'], $data['customers_email_address'], $data['customers_gender'], $data['customers_credits']);
             $emailTemplate->buildMessage();
             $emailTemplate->sendEmail();
