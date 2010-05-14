@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<language>
+  <definitions>
+    <definition>
+      <key>shipping_usps_title</key>
+      <value><![CDATA[联合邮政UPS]]></value>
+      <group>modules-shipping</group>
+    </definition>
+    <definition>
+      <key>shipping_usps_description</key>
+      <value><![CDATA[美国邮政服务(USPS)<br /><br />使用之前，您首先需要在USPS网站上(http://www.uspsprioritymail.com/et_regcert.html)注册一个账号。<br /><br />使用USPS，最好以磅为重量单位]]></value>
+      <group>modules-shipping</group>
+    </definition>
+    <definition>
+      <key>shipping_usps_error</key>
+      <value><![CDATA[USPS在计算运费时出错。<br />如若您确实需要使用USPS作为运输方式，请联系店主。]]></value>
+      <group>modules-shipping</group>
+    </definition>
+  </definitions>
+</language>
