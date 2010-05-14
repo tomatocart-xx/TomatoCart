@@ -787,7 +787,7 @@
     }
       
     function _getOrderConfirmationForm() {
-      global $osC_Language, $osC_ShoppingCart, $osC_Payment, $osC_Currencies;
+      global $osC_Language, $osC_ShoppingCart, $osC_Payment, $osC_Currencies, $osC_ShoppingCart, $osC_Tax;
       
       $osC_Language->load('account');
       $osC_Language->load('checkout');

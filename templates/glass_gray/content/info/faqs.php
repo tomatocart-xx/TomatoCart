@@ -66,7 +66,7 @@ window.addEvent('domready',function(){
     ?>
       if(question.getParent().id == 'faq<?php echo $_GET['faqs_id']; ?>')
         question.getNext().setStyle('display', '');
-    <?
+    <?php
       }
     ?>
   });

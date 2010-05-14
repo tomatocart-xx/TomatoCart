@@ -8,7 +8,7 @@
 # it under the terms of the GNU General Public License v2 (1991)
 # as published by the Free Software Foundation.
 
-heading_title = Quantity Unit Classes
+heading_title = Product Quantity Units
 
 action_heading_new_quantity_unit_class = New Quantity Unit Class
 action_heading_batch_delete_unit_classes = Batch Delete Quantity Unit Classes

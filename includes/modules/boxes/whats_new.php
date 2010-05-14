@@ -25,7 +25,7 @@
     }
 
     function initialize() {
-      global $osC_Cache, $osC_Database, $osC_Services, $osC_Currencies, $osC_Specials, $osC_Language, $osC_Image;
+      global $osC_Cache, $osC_Database, $osC_Services, $osC_Currencies, $osC_Specials, $osC_Language, $osC_Image, $osC_Product;
 
       $this->_title_link = osc_href_link(FILENAME_PRODUCTS, 'new');
 
@@ -45,14 +45,16 @@
 
         if ($Qnew->numberOfRows()) {
           $data = $Qnew->toArray();
-
+          
+          $osC_Product = new osC_Product($Qnew->valueInt('products_id'));
+          
           $products_price = $osC_Currencies->displayPrice($Qnew->valueDecimal('products_price'), $Qnew->valueInt('products_tax_class_id'));
 
           if ($osC_Services->isStarted('specials') && $osC_Specials->isActive($Qnew->valueInt('products_id'))) {
             $products_price = '<s>' . $products_price . '</s>&nbsp;<span class="productSpecialPrice">' . $osC_Currencies->displayPrice($osC_Specials->getPrice($Qnew->valueInt('products_id')), $Qnew->valueInt('products_tax_class_id')) . '</span>';
           }
 
-          $data['products_price'] = $products_price;
+          $data['products_price'] = $osC_Product->getPriceFormated(true);
         }
 
         $osC_Cache->writeBuffer($data);

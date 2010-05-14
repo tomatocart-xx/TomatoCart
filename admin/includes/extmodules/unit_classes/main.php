@@ -38,12 +38,12 @@ Ext.override(TocDesktop.UnitClassesWindow, {
      win.show();
   },
   
-  createUnitClassesDialog: function() {
+  createUnitClassesDialog: function(title) {
     var desktop = this.app.getDesktop();
     var dlg = desktop.getWindow('unit_classes-dialog-win');
     
     if (!dlg) {
-      dlg = desktop.createWindow(null, Toc.unit_classes.UnitClassesDialog);
+      dlg = desktop.createWindow({title:title}, Toc.unit_classes.UnitClassesDialog);
       
       dlg.on('saveSuccess', function(feedback) {
         this.app.showNotification({title: TocLanguage.msgSuccessTitle, html: feedback});

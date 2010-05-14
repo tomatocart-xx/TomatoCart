@@ -97,9 +97,9 @@ Ext.extend(Toc.file_manager.FileEditDialog, Ext.Window, {
         labelSeparator: ''
       },
       items: [
-        this.txtFilename = new Ext.form.TextField({fieldLabel: '<?echo $osC_Language->get('field_file_name');?>'}),
-        this.stxDirectory = new Ext.ux.form.StaticTextField({fieldLabel: '<?echo $osC_Language->get('field_directory');?>'}),
-        {xtype:'textarea', fieldLabel:'<?echo $osC_Language->get('field_file_contents');?>', name:'content', height: 300}
+        this.txtFilename = new Ext.form.TextField({fieldLabel: '<?php echo $osC_Language->get('field_file_name');?>'}),
+        this.stxDirectory = new Ext.ux.form.StaticTextField({fieldLabel: '<?php echo $osC_Language->get('field_directory');?>'}),
+        {xtype:'textarea', fieldLabel:'<?php echo $osC_Language->get('field_file_contents');?>', name:'content', height: 300}
       ]
     });
     

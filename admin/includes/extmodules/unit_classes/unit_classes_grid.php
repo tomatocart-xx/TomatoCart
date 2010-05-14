@@ -122,7 +122,7 @@ Toc.unit_classes.UnitClassesGrid = function(config) {
 Ext.extend(Toc.unit_classes.UnitClassesGrid, Ext.grid.GridPanel, {
    		 
   onAdd: function() {
-    var dlg = this.owner.createUnitClassesDialog();
+    var dlg = this.owner.createUnitClassesDialog('<?php echo $osC_Language->get("action_heading_new_quantity_unit_class"); ?>');
     
     dlg.on('saveSuccess', function() {
       this.onRefresh();
@@ -132,7 +132,7 @@ Ext.extend(Toc.unit_classes.UnitClassesGrid, Ext.grid.GridPanel, {
   },
   
   onEdit: function (record) {
-    var dlg = this.owner.createUnitClassesDialog();
+    var dlg = this.owner.createUnitClassesDialog(record.get('unit_class_title'));
     
     dlg.on('saveSuccess', function() {
     this.onRefresh();

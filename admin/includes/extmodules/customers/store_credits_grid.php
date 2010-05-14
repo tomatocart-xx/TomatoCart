@@ -57,7 +57,7 @@ Toc.customers.StoreCreditsGrid = function(config) {
       
   config.tbar = [
     {
-      text: '<? echo $osC_Language->get('button_update_balance'); ?>',
+      text: '<?php echo $osC_Language->get('button_update_balance'); ?>',
       iconCls: 'add',
       handler: this.onUpdateBalance,
       scope: this

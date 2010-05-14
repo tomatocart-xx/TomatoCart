@@ -63,9 +63,9 @@ Ext.extend(Toc.customers.UpdateBalanceDialog, Ext.Window, {
       },
       labelWidth: 145,
       items: [
-        {xtype: 'textfield', name: 'amount', fieldLabel: '<?echo $osC_Language->get('field_amount'); ?>'},
-        {xtype: 'textarea', name: 'comments', fieldLabel: '<?echo $osC_Language->get('field_comments'); ?>'},
-        {xtype: 'checkbox', name: 'notify', fieldLabel: '<?echo $osC_Language->get('field_notify_customer_by_email'); ?>'}
+        {xtype: 'textfield', name: 'amount', fieldLabel: '<?php echo $osC_Language->get('field_amount'); ?>'},
+        {xtype: 'textarea', name: 'comments', fieldLabel: '<?php echo $osC_Language->get('field_comments'); ?>'},
+        {xtype: 'checkbox', name: 'notify', fieldLabel: '<?php echo $osC_Language->get('field_notify_customer_by_email'); ?>'}
       ]
     });
     

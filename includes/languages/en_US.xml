@@ -1574,6 +1574,11 @@ Note: If you did not request this action via our password forgotten page, please
       <group>general</group>
     </definition>
     <definition>
+      <key>error_gift_certificate_quantity_must_be_one</key>
+      <value><![CDATA[Error: The gift certificate quantity should be no larger than one.]]></value>
+      <group>general</group>
+    </definition>
+    <definition>
       <key>error_order_increment</key>
       <value><![CDATA[The order increment of %s is %s.]]></value>
       <group>general</group>
@@ -2963,6 +2968,16 @@ Your friend, %s, thought that you would be interested in %s from %s.]]></value>
       <group>general</group>
     </definition>
     <definition>
+      <key>field_customer_group</key>
+      <value><![CDATA[Customer Group:]]></value>
+      <group>general</group>
+    </definition>
+    <definition>
+      <key>field_customer_store_credit</key>
+      <value><![CDATA[Store Credit:]]></value>
+      <group>general</group>
+    </definition>
+    <definition>
       <key>field_customer_email_address_error</key>
       <value><![CDATA[Your E-Mail Address must contain a minimum of %s characters.]]></value>
       <group>general</group>
@@ -3204,12 +3219,12 @@ Your friend, %s, thought that you would be interested in %s from %s.]]></value>
       <definition>
         <key>1</key>
         <email_title><![CDATA[Welcome to %%store_name%%]]></email_title>
-        <email_content><![CDATA[<p>%%greeting_text%%</p><br /><br /><p>We welcome you to %%store_name%%!</p><br /><br /><p>You can now take part in the various services we have offer for you. Some of these services include:</p><br /><br /><ul><br /><li>Permanent Cart - Any products added to your online cart remain there until you remove them, or check them out.<br /><li>Address Book - We can now deliver your products to another address other than yours! This is perfect to send birthday gifts direct to the birthday-person themselves.<br /><li>Order History - View your history of purchases that you have made with us.<br /><li>Products Reviews - Share your opinions on products with our other customers.<br /></ul><br /><p>For help with any of our online services, please email the store-owner: %%store_ower_email_address%%.</p><br /><br />Note: This email address was given to us by one of our customers. If you did not signup to be a member, please send an email to the store owner.]]></email_content>
+        <email_content><![CDATA[<p>%%greeting_text%%</p><br /><br /><p>We welcome you to %%store_name%%!</p><br /><br /><p>You can now take part in the various services we have offer for you. Some of these services include:</p><br /><br /><ul><br /><li>Permanent Cart - Any products added to your online cart remain there until you remove them, or check them out.<br /><li>Address Book - We can now deliver your products to another address other than yours! This is perfect to send birthday gifts direct to the birthday-person themselves.<br /><li>Order History - View your history of purchases that you have made with us.<br /><li>Products Reviews - Share your opinions on products with our other customers.<br /></ul><br /><p>For help with any of our online services, please email the store-owner: %%store_owner_email_address%%.</p><br /><br />Note: This email address was given to us by one of our customers. If you did not signup to be a member, please send an email to the store owner.]]></email_content>
       </definition>
       <definition>
         <key>2</key>
         <email_title><![CDATA[Password Reminder to TomatoCart]]></email_title>
-        <email_content><![CDATA[A new password was requested from %%customer_ip_address%%.<br /><br />Your new password to %%store_name%% is:<br /><br />%%customer_password%%<br /><br />For help with any of our online services, please email the store-owner: %%store_ower_email_address%%.<br /><br />Note: If you did not request this action via our password forgotten page, please notify the store owner as soon as possible.]]></email_content>
+        <email_content><![CDATA[A new password was requested from %%customer_ip_address%%.<br /><br />Your new password to %%store_name%% is:<br /><br />%%customer_password%%<br /><br />For help with any of our online services, please email the store-owner: %%store_owner_email_address%%.<br /><br />Note: If you did not request this action via our password forgotten page, please notify the store owner as soon as possible.]]></email_content>
       </definition>
       <definition>
         <key>3</key>
@@ -3229,7 +3244,7 @@ Your friend, %s, thought that you would be interested in %s from %s.]]></value>
       <definition>
         <key>6</key>
         <email_title><![CDATA[Welcome to %%store_name%%]]></email_title>
-        <email_content><![CDATA[%%greeting_text%%<br /><br />We welcome you to %%store_name%%.<br /><br />You can now take part in the various services we have to offer you. Some of these services include:<br /><br />* Permanent Shopping Cart - Any products added to your online shopping cart remain there until you purchase or remove them<br />* Address Book - Products can be delivered to any addresses you define in your address book! This is perfect to send gifts directly to the customers.<br />* Order History - The previous orders you have made can be viewed online.<br />* Product Reviews -  Share opinions about products with other customers.<br /><br />For help with any of our online services please email us at: %%store_ower_email_address%%<br />Please note: This account has been created for you by the store owner. <br /><br />Please use your e-mail address with the following password as your login account: %%password%%]]></email_content>
+        <email_content><![CDATA[%%greeting_text%%<br /><br />We welcome you to %%store_name%%.<br /><br />You can now take part in the various services we have to offer you. Some of these services include:<br /><br />* Permanent Shopping Cart - Any products added to your online shopping cart remain there until you purchase or remove them<br />* Address Book - Products can be delivered to any addresses you define in your address book! This is perfect to send gifts directly to the customers.<br />* Order History - The previous orders you have made can be viewed online.<br />* Product Reviews -  Share opinions about products with other customers.<br /><br />For help with any of our online services please email us at: %%store_owner_email_address%%<br />Please note: This account has been created for you by the store owner. <br /><br />Please use your e-mail address with the following password as your login account: %%password%%]]></email_content>
       </definition>
       <definition>
         <key>7</key>
@@ -3270,6 +3285,11 @@ Your friend, %s, thought that you would be interested in %s from %s.]]></value>
         <key>14</key>
         <email_title><![CDATA[New store credit is created for returned products]]></email_title>
         <email_content><![CDATA[Dear %%customer_name%%,<br /><br />New store credit is created for following returned products:<br /><br /> %%returned_products%% <br /><br />from order %%order_number%%. The total amount is %%total_amount%% and the store credit is made to your billing account so that it can be used for future purchases. <br /><br />Regards,<br /><br />%%store_name%% <br />%%store_owner_email_address%%]]></email_content>
+      </definition>
+      <definition>
+        <key>15</key>
+        <email_title><![CDATA[Administrator Password Reminder to TomatoCart]]></email_title>
+        <email_content><![CDATA[A new password was requested from %%admin_ip_address%%.<br /><br />Your new password is:<br /><br />%%admin_password%%<br /><br />Regards,<br /><br />%%store_name%% <br />%%store_owner_email_address%%]]></email_content>
       </definition>
     </table>
     <table>

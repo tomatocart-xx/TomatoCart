@@ -608,6 +608,10 @@ A {
   margin: 0px 0px 10px 0px;
 }
 
+#productAttributes label{
+  width: 80px;
+}
+
 /* sitemap */
 #sitemap ul{padding: 3px 0px 3px 12px;}
 #sitemap li{padding-left: 12px;line-height: 18px; background: url(images/arrow_gray.png) no-repeat left 5px;}
@@ -771,6 +775,10 @@ A {
   color: #177CBF;
 }
 
+#password, #email_address{
+  width: 150px;
+}
+
 #checkoutForm #email_address, #checkoutForm #password {
   border: 1px solid #b6b6b6;
   width: 222px;
@@ -845,4 +853,9 @@ SPAN.markProductError {
 /* administrator logout */
 #admin_logout a{
   color: #FF0000;
+}
+
+.boxReview a {
+  display: block;
+  height: 45px;
 }

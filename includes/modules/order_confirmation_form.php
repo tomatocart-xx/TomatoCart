@@ -17,20 +17,19 @@
     <table border="0" width="100%" cellspacing="0" cellpadding="2">
       <tr>
         <td width="50%" valign="top">
+          <p><?php echo '<b>' . $osC_Language->get('order_delivery_address_title') . '</b> '; ?></p>
 
 <?php
   if ($osC_ShoppingCart->hasShippingAddress()) {
 ?>
-          <p><?php echo '<b>' . $osC_Language->get('order_delivery_address_title') . '</b> '; ?></p>
           <p><?php echo osC_Address::format($osC_ShoppingCart->getShippingAddress(), '<br />'); ?></p>
+          
+          <p><?php echo '<b>' . $osC_Language->get('order_shipping_method_title') . '</b> '; ?></p>
 
 <?php
     if ($osC_ShoppingCart->hasShippingMethod()) {
 ?>
-
-          <p><?php echo '<b>' . $osC_Language->get('order_shipping_method_title') . '</b> '; ?></p>
           <p><?php echo $osC_ShoppingCart->getShippingMethod('title'); ?></p>
-
 <?php
     }
   }
@@ -104,7 +103,7 @@
     echo '</td>' . "\n";
 
     if ($osC_ShoppingCart->numberOfTaxGroups() > 1) {
-      //echo '                <td valign="top" align="right">' . osC_Tax::displayTaxRateValue($products['tax']) . '</td>' . "\n";
+      echo '                <td valign="top" align="right">' . osC_Tax::displayTaxRateValue($osC_Tax->getTaxRate($products['tax_class_id'], $osC_ShoppingCart->getTaxingAddress('country_id'), $osC_ShoppingCart->getTaxingAddress('zone_id'))) . '</td>' . "\n";
     }
 
     echo '                <td align="right" valign="top">' . $osC_Currencies->displayPrice($products['final_price'], $products['tax_class_id'], $products['quantity']) . '</td>' . "\n" .

@@ -49,7 +49,7 @@
       ?>
         if(question.getParent().id == 'faq<?php echo $_GET['faqs_id']; ?>')
           faqs_answer.toggle();
-      <?
+      <?php
         }
       ?>
     });

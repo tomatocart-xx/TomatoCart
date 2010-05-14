@@ -68,7 +68,7 @@ Ext.extend(Toc.file_manager.NewDirectoryDialog, Ext.Window, {
         labelSeparator: ''
       },
       items: [
-        {xtype: 'textfield', fieldLabel: '<?echo $osC_Language->get('field_directory_name');?>', name:'directory_name', width: 300},
+        {xtype: 'textfield', fieldLabel: '<?php echo $osC_Language->get('field_directory_name');?>', name:'directory_name', width: 300},
       ]
     });
     

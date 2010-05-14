@@ -20,7 +20,7 @@
       $start = empty($_REQUEST['start']) ? 0 : $_REQUEST['start']; 
       $limit = empty($_REQUEST['limit']) ? MAX_DISPLAY_SEARCH_RESULTS : $_REQUEST['limit'];      
       
-      $Qgroups = $osC_Database->query('select c.customers_groups_id, cg.language_id, cg.customers_groups_name,  c.customers_groups_discount, c.is_default from :table_customers_groups c, :table_customers_groups_description cg where c.customers_groups_id = cg.customers_groups_id and cg.language_id = :language_id');
+      $Qgroups = $osC_Database->query('select c.customers_groups_id, cg.language_id, cg.customers_groups_name,  c.customers_groups_discount, c.is_default from :table_customers_groups c, :table_customers_groups_description cg where c.customers_groups_id = cg.customers_groups_id and cg.language_id = :language_id order by cg.customers_groups_name');
       $Qgroups->bindTable(':table_customers_groups', TABLE_CUSTOMERS_GROUPS);
       $Qgroups->bindTable(':table_customers_groups_description', TABLE_CUSTOMERS_GROUPS_DESCRIPTION);
       $Qgroups->bindInt(':language_id', $osC_Language->getID());

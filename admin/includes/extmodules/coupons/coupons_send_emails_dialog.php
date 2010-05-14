@@ -17,11 +17,11 @@ Toc.coupons.SendEmailsDialog = function(config) {
   config = config || null;
   
   config.id = 'coupons-send-emails-dialog-win';
-  config.title = '<?php echo $osC_Language->get('heading_title'); ?>';
   config.width = 600;
   config.height = 300;
   config.layout = 'fit';
   config.modal = true;
+  config.iconCls = 'icon-coupons-win';
   config.items = this.buildForm();
   
   config.buttons = [

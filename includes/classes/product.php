@@ -355,6 +355,10 @@
       }
     }
     
+    function hasSKU() {
+      return (isset($this->_data['sku']) && !empty($this->_data['sku']));
+    }
+    
     function getSKU($variants = null) {
       if ($variants == null || empty($variants)) {
         return $this->_data['sku'];

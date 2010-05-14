@@ -71,7 +71,7 @@ Toc.email_templates.EmailTemplatesGrid = function(config) {
 Ext.extend(Toc.email_templates.EmailTemplatesGrid, Ext.grid.GridPanel, {
 
   showEmailTemplatesDialog: function(record) {
-    var dlg = this.owner.createEmailTemplatesDialog();
+    var dlg = this.owner.createEmailTemplatesDialog(record.get('email_templates_name'));
     
     dlg.on('saveSuccess', function() {
       this.onRefresh();

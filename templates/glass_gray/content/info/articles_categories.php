@@ -32,7 +32,7 @@
       }
   ?>
   
-    <p><?php echo substr($Qarticles->value('articles_description'), 0, 300) . ((strlen($Qarticles->valueProtected('articles_description')) >= 100) ? '..' : ''); ?></p>
+    <p style="height:0px"><?php echo substr($Qarticles->value('articles_description'), 0, 300) . ((strlen($Qarticles->valueProtected('articles_description')) >= 100) ? '..' : ''); ?></p>
 
       <div style="clear: both;"></div>
     </div>

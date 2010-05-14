@@ -12,7 +12,11 @@
 */
 
 // Set the level of error reporting
-  error_reporting(E_ALL & ~E_NOTICE);
+  if (version_compare(PHP_VERSION, '5.3.0') >= 0) {
+    error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED);
+  } else {
+    error_reporting(E_ALL & ~E_NOTICE);
+  }
 
   define('DEFAULT_LANGUAGE', 'en_US');
   define('HTTP_COOKIE_PATH', '');

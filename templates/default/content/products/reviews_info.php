@@ -16,7 +16,7 @@
 
 <h1 style="float: right;"><?php echo $osC_Product->getPriceFormated(true); ?></h1>
 
-<h1><?php echo $osC_Template->getPageTitle() . ($osC_Product->hasModel() ? '<br /><span class="smallText">' . $osC_Product->getModel() . '</span>' : ''); ?></h1>
+<h1><?php echo $osC_Template->getPageTitle() . ($osC_Product->hasSKU() ? '<br /><span class="smallText">' . $osC_Product->getSKU() . '</span>' : ''); ?></h1>
 
 <?php
   if ($messageStack->size('reviews') > 0) {

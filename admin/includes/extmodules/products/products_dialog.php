@@ -54,6 +54,7 @@ Ext.extend(Toc.products.ProductDialog, Ext.Window, {
     this.pnlXsellProducts = new Toc.products.XsellProductsGrid({productsId: productsId});
     this.pnlAttributes = new Toc.products.AttributesPanel({productsId: productsId});
     
+    this.pnlData.on('producttypechange', this.pnlVariants.onProductTypeChange, this.pnlVariants);
     this.pnlVariants.on('variantschange', this.pnlData.onVariantsChange, this.pnlData);
     
     tabProduct = new Ext.TabPanel({
@@ -101,8 +102,10 @@ Ext.extend(Toc.products.ProductDialog, Ext.Window, {
         },
         success: function(form, action) {
           this.pnlData.onPriceNetChange(); 
+          this.pnlData.updateCboTaxClass(action.result.data.products_type);
           this.pnlData.loadExtraOptionTab(action.result.data);   
           this.pnlCategories.setCategories(action.result.data);
+          this.pnlVariants.onProductTypeChange(action.result.data.products_type);
           this.pnlAttributes.setAttributesGroupsId(action.result.data.products_attributes_groups_id);
           
           Toc.products.ProductDialog.superclass.show.call(this);

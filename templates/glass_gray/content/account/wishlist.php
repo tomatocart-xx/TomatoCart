@@ -56,7 +56,7 @@
       </table>
       
       <div class="submitFormButtons" style="text-align: right;">
-        <?php echo osc_draw_image_submit_button('button_update.gif') . '&nbsp;' . osc_link_object(osc_href_link('javascript:window.history.go(-1);'), osc_draw_image_button('button_back.gif', $osC_Language->get('button_back'))); ?>
+        <?php echo osc_draw_image_submit_button('button_update.gif') . '&nbsp;' . osc_link_object('javascript:window.history.go(-1);', osc_draw_image_button('button_back.gif', $osC_Language->get('button_back'))); ?>
       </div>
             
      </form>
@@ -68,7 +68,7 @@
     </div>
       
     <div class="submitFormButtons" style="text-align: right;">
-      <?php echo osc_link_object(osc_href_link('javascript:window.history.go(-1);'), osc_draw_image_button('button_back.gif', $osC_Language->get('button_back'))); ?>
+      <?php echo osc_link_object('javascript:window.history.go(-1);', osc_draw_image_button('button_back.gif', $osC_Language->get('button_back'))); ?>
     </div>
     
   <?php
@@ -100,7 +100,7 @@
       
       </form>
     </div>
-<? 
+<?php 
   }
 ?>    
 </div>

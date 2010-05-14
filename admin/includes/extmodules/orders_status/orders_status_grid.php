@@ -65,8 +65,8 @@ Toc.orders_status.OrdersStatusGrid = function(config) {
     { id:'orders_status_name', header: '<?php echo $osC_Language->get('table_heading_order_statuses'); ?>', dataIndex: 'orders_status_name'},
     { header: '<?php echo $osC_Language->get('table_heading_public_flag'); ?>', dataIndex: 'public_flag', width: 100, align: 'center', renderer: renderStatus},
     { header: '<?php echo $osC_Language->get('table_heading_downloads_flag'); ?>', dataIndex: 'downloads_flag', width: 120, align: 'center', renderer: renderStatus},
-    { header: '<?php echo $osC_Language->get('table_heading_returns_flag'); ?>', dataIndex: 'returns_flag', width: 100, align: 'center', renderer: renderStatus},
     { header: '<?php echo $osC_Language->get('table_heading_gift_certificates_flag'); ?>', dataIndex: 'gift_certificates_flag', width: 140, align: 'center', renderer: renderStatus},
+    { header: '<?php echo $osC_Language->get('table_heading_returns_flag'); ?>', dataIndex: 'returns_flag', width: 100, align: 'center', renderer: renderStatus},
     config.rowActions
   ]);
   config.autoExpandColumn = 'orders_status_name';

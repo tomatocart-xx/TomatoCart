@@ -22,7 +22,8 @@
                        '/images/products/product_info', '/images/products/thumbnails', '/images/categories',
                        '/images/manufacturers', '/includes/work', '/templates',
                        '/ext/piwik/', '/ext/piwik/config', '/ext/piwik/tmp',
-                       '/ext/piwik/tmp/cache', '/ext/piwik/tmp/templates_c');
+                       '/ext/piwik/tmp/cache', '/ext/piwik/tmp/templates_c',
+                       '/admin/includes/languages', '/includes/languages', '/install/includes/languages', '/install/templates/main_page/languages');
   
   $root_dir = osc_realpath(dirname(__FILE__) . '/../../../');
 ?>

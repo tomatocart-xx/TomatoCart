@@ -28,7 +28,7 @@
       global $osC_Database,$osC_Language;
       $this->_title_link = osc_href_link(FILENAME_INFO,'articles_categories');
 
-      $Qac = $osC_Database->query('select cd.articles_categories_id, cd.articles_categories_name from :table_articles_categories c, :table_articles_categories_description cd where c.articles_categories_id = cd.articles_categories_id and cd.language_id = :language_id and c.articles_categories_status = 1 order by c.articles_categories_order limit :max_display_articles_categories');
+      $Qac = $osC_Database->query('select cd.articles_categories_id, cd.articles_categories_name from :table_articles_categories c, :table_articles_categories_description cd where c.articles_categories_id = cd.articles_categories_id and cd.language_id = :language_id and c.articles_categories_status = 1 order by c.articles_categories_order, cd.articles_categories_name limit :max_display_articles_categories');
       $Qac->bindTable(':table_articles_categories', TABLE_ARTICLES_CATEGORIES);
       $Qac->bindTable(':table_articles_categories_description', TABLE_ARTICLES_CATEGORIES_DESCRIPTION);
       $Qac->bindInt(':language_id', $osC_Language->getID());

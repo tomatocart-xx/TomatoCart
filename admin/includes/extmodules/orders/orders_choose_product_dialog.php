@@ -88,7 +88,7 @@ Ext.extend(Toc.orders.OrdersChooseProductDialog, Ext.Window, {
               '<td>{products_sku}</td>',
               '<td>{products_price}</td>',
               '<td align="center">{products_quantity}</td>',
-              '<td align="center"><input type="text" value="{new_qty}" <tpl if="products_type == <?echo PRODUCT_TYPE_GIFT_CERTIFICATE; ?>">disabled="disabled"</tpl> id="{products_id}_qty" size="5" class="x-form-text x-form-field" style="width: 40px" /></td>',
+              '<td align="center"><input type="text" value="{new_qty}" <tpl if="products_type == <?php echo PRODUCT_TYPE_GIFT_CERTIFICATE; ?>">disabled="disabled"</tpl> id="{products_id}_qty" size="5" class="x-form-text x-form-field" style="width: 40px" /></td>',
               '<td><a href = "#"><img border="0" title="<?php echo $osC_Language->get('button_add_product'); ?>" alt="<?php echo $osC_Language->get('button_add_product'); ?>" src="templates/default/images/icons/16x16/add.png" /></a></td>',
             '</tpl>',
           '</tr>',

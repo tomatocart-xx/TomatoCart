@@ -1533,9 +1533,9 @@ INSERT INTO toc_configuration (configuration_title, configuration_key, configura
 INSERT INTO toc_configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, use_function, set_function, date_added) VALUES ('Allow Guest To Tell A Friend', 'ALLOW_GUEST_TO_TELL_A_FRIEND', '-1', 'Allow guests to tell a friend about a product', '1', '15', 'osc_cfg_use_get_boolean_value', 'osc_cfg_set_boolean_value(array(1, -1))', now());
 INSERT INTO toc_configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) VALUES ('Store Address and Phone', 'STORE_NAME_ADDRESS', 'Store Name\nAddress\nCountry\nPhone', 'This is the Store Name, Address and Phone used on printable documents and displayed online', '1', '18', 'osc_cfg_set_textarea_field', now());
 INSERT INTO toc_configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) VALUES ('Tax Decimal Places', 'TAX_DECIMAL_PLACES', '0', 'Pad the tax value this amount of decimal places', '1', '20', now());
-INSERT INTO toc_configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, use_function, set_function, date_added) VALUES ('Display Prices with Tax', 'DISPLAY_PRICE_WITH_TAX', '-1', 'Display prices with tax included (true) or add the tax at the end (false)', '1', '21', 'osc_cfg_use_get_boolean_value', 'osc_cfg_set_boolean_value(array(1, -1))', now());
+INSERT INTO toc_configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, use_function, set_function, date_added) VALUES ('Display Prices with Tax', 'DISPLAY_PRICE_WITH_TAX', '1', 'Display prices with tax included (true) or add the tax at the end (false)', '1', '21', 'osc_cfg_use_get_boolean_value', 'osc_cfg_set_boolean_value(array(1, -1))', now());
 INSERT INTO toc_configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) VALUES ('Invoice Start Number', 'INVOICE_START_NUMBER', '10000', 'Invoices would be numbered according to the starting number + increment value per Step 1.', '1', '22', now());
-INSERT INTO toc_configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) VALUES ('Maintenance mode', 'MAINTENANCE_MODE', '0', 'Maintenance Mode', '1', '23', 'osc_cfg_set_boolean_value(array(''True'', ''False''))', now());
+INSERT INTO toc_configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, use_function, set_function, date_added) VALUES ('Maintenance mode', 'MAINTENANCE_MODE', '-1', 'Maintenance Mode', '1', '23', 'osc_cfg_use_get_boolean_value', 'osc_cfg_set_boolean_value(array(1, -1))', now());
 
 INSERT INTO toc_configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) VALUES ('Credit Card Owner Name', 'CC_OWNER_MIN_LENGTH', '3', 'Minimum length of credit card owner name', '2', '12', now());
 INSERT INTO toc_configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) VALUES ('Credit Card Number', 'CC_NUMBER_MIN_LENGTH', '10', 'Minimum length of credit card number', '2', '13', now());
@@ -1591,7 +1591,7 @@ INSERT INTO toc_configuration (configuration_title, configuration_key, configura
 INSERT INTO toc_configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) VALUES ('Display Product Quantity', 'PRODUCT_LIST_QUANTITY', '0', 'Do you want to display the Product Quantity?', '8', '6', now());
 INSERT INTO toc_configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) VALUES ('Display Product Weight', 'PRODUCT_LIST_WEIGHT', '0', 'Do you want to display the Product Weight?', '8', '7', now());
 INSERT INTO toc_configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) VALUES ('Display Buy Now column', 'PRODUCT_LIST_BUY_NOW', '4', 'Do you want to display the Buy Now column?', '8', '8', now());
-INSERT INTO toc_configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) VALUES ('Display Category/Manufacturer Filter (0=disable; 1=enable)', 'PRODUCT_LIST_FILTER', '1', 'Do you want to display the Category/Manufacturer Filter?', '8', '9', now());
+INSERT INTO toc_configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, use_function, set_function, date_added) VALUES ('Display Category/Manufacturer Filter', 'PRODUCT_LIST_FILTER', '1', 'Do you want to display the Category/Manufacturer Filter?', '8', '9', 'osc_cfg_use_get_boolean_value', 'osc_cfg_set_boolean_value(array(1, -1))', now());
 INSERT INTO toc_configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) VALUES ('Location of Prev/Next Navigation Bar (1-top, 2-bottom, 3-both)', 'PREV_NEXT_BAR_LOCATION', '2', 'Sets the location of the Prev/Next Navigation Bar (1-top, 2-bottom, 3-both)', '8', '10', now());
 
 INSERT INTO toc_configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, use_function, set_function, date_added) VALUES ('Check stock level', 'STOCK_CHECK', '1', 'Check to see if sufficent stock is available', '9', '1', 'osc_cfg_use_get_boolean_value', 'osc_cfg_set_boolean_value(array(1, -1))', now());
@@ -1600,13 +1600,13 @@ INSERT INTO toc_configuration (configuration_title, configuration_key, configura
 INSERT INTO toc_configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) VALUES ('Mark product out of stock', 'STOCK_MARK_PRODUCT_OUT_OF_STOCK', '***', 'Display something on screen so customer can see which product has insufficient stock', '9', '4', now());
 INSERT INTO toc_configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) VALUES ('Stock Re-order level', 'STOCK_REORDER_LEVEL', '5', 'Define when stock needs to be re-ordered', '9', '5', now());
 
-INSERT INTO toc_configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) VALUES ('Display Product Quantity', 'PRODUCT_INFO_QUANTITY', '1', 'Do you want to display the Product Quantity?', '10', '1', now());
-INSERT INTO toc_configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) VALUES ('Display Product Minimum Order Quantity','PRODUCT_INFO_MOQ', '0', 'Do you want to display the Product Minimum Order Quantity?', '10', '2', now());
-INSERT INTO toc_configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) VALUES ('Display Product Order Increment', 'PRODUCT_INFO_ORDER_INCREMENT', '0', 'Do you want to display the Order Increment?', '10', '3', now());
+INSERT INTO toc_configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, use_function, set_function, date_added) VALUES ('Display Product Quantity', 'PRODUCT_INFO_QUANTITY', '1', 'Do you want to display the Product Quantity?', '10', '1', 'osc_cfg_use_get_boolean_value', 'osc_cfg_set_boolean_value(array(1, -1))', now());
+INSERT INTO toc_configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, use_function, set_function, date_added) VALUES ('Display Product Minimum Order Quantity','PRODUCT_INFO_MOQ', '-1', 'Do you want to display the Product Minimum Order Quantity?', '10', '2', 'osc_cfg_use_get_boolean_value', 'osc_cfg_set_boolean_value(array(1, -1))', now());
+INSERT INTO toc_configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, use_function, set_function, date_added) VALUES ('Display Product Order Increment', 'PRODUCT_INFO_ORDER_INCREMENT', '-1', 'Do you want to display the Order Increment?', '10', '3', 'osc_cfg_use_get_boolean_value', 'osc_cfg_set_boolean_value(array(1, -1))', now());
 
-INSERT INTO toc_configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) VALUES ('Allow gift certificate return', 'ALLOW_GIFT_CERTIFICATE_RETURN', '0', 'Do you want to allow customer return gift certificates?', '11', '3', now());
-INSERT INTO toc_configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) VALUES ('Allow downloadable return', 'ALLOW_DOWNLOADABLE_RETURN', '0', 'Do you want to allow customer return downloadable products?', '11', '4', now());
-INSERT INTO toc_configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, date_added) VALUES ('Allow return request', 'ALLOW_RETURN_REQUEST', '1', 'Do you want to allow customer return product?', '11', '5', now());
+INSERT INTO toc_configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, use_function, set_function, date_added) VALUES ('Allow gift certificate return', 'ALLOW_GIFT_CERTIFICATE_RETURN', '-1', 'Do you want to allow customer return gift certificates?', '11', '3', 'osc_cfg_use_get_boolean_value', 'osc_cfg_set_boolean_value(array(1, -1))', now());
+INSERT INTO toc_configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, use_function, set_function, date_added) VALUES ('Allow downloadable return', 'ALLOW_DOWNLOADABLE_RETURN', '-1', 'Do you want to allow customer return downloadable products?', '11', '4', 'osc_cfg_use_get_boolean_value', 'osc_cfg_set_boolean_value(array(1, -1))', now());
+INSERT INTO toc_configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, use_function, set_function, date_added) VALUES ('Allow return request', 'ALLOW_RETURN_REQUEST', '1', 'Do you want to allow customer return product?', '11', '5', 'osc_cfg_use_get_boolean_value', 'osc_cfg_set_boolean_value(array(1, -1))', now());
 INSERT INTO toc_configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, use_function, set_function, date_added) VALUES ('Download by redirect', 'DOWNLOAD_BY_REDIRECT', '-1', 'Use browser redirection for download. Disable on non-Unix systems.', '11', '1', 'osc_cfg_use_get_boolean_value', 'osc_cfg_set_boolean_value(array(1, -1))', now());
 
 INSERT INTO toc_configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, set_function, date_added) VALUES ('E-Mail Transport Method', 'EMAIL_TRANSPORT', 'sendmail', 'Defines if this server uses a local connection to sendmail or uses an SMTP connection via TCP/IP. Servers running on Windows and MacOS should change this setting to SMTP.', '12', '1', 'osc_cfg_set_boolean_value(array(\'sendmail\', \'smtp\'))', now());
@@ -6638,7 +6638,7 @@ INSERT INTO toc_quantity_unit_classes (quantity_unit_class_id, language_id, quan
 # USA/Florida
 INSERT INTO toc_tax_rates VALUES (1, 1, 1, 1, 7.0, 'FL TAX 7.0%', now(), now());
 INSERT INTO toc_geo_zones (geo_zone_id,geo_zone_name,geo_zone_description,date_added) VALUES (1,"Florida","Florida local sales tax zone",now());
-INSERT INTO toc_zones_to_geo_zones (association_id,zone_country_id,zone_id,geo_zone_id,date_added) VALUES (1,223,176,1,now());
+INSERT INTO toc_zones_to_geo_zones (association_id,zone_country_id,zone_id,geo_zone_id,date_added) VALUES (1,223,4031,1,now());
 
 # Templates
 
@@ -6763,8 +6763,7 @@ INSERT INTO toc_email_templates_description (email_templates_id, language_id, em
 (12, 1, 'The download link for %%downloadable_products%% is actived', 'Dear %%customer_name%%,<br /><br />The download link for the products you purchased from store %%store_name%%: <br /><br />%%downloadable_products%%<br /><br />is actived.<br /><br />Please go to the orders area of "My Account" and download the products.<br /><br />%%download_link%%<br /><br />Regards,<br /><br />%%store_name%% <br />%%store_owner_email_address%%'),
 (13, 1, 'A new credit slip is created for returned products', 'Dear %%customer_name%%,<br /><br />A new credit slip is created for following returned products:<br /><br /> %%returned_products%% <br /><br />from order %%order_number%%. The slip number is %%slip_number%% and the total amount is %%total_amount%%. You can print out the credit slip in the "My Acount" area. <br /><br />Regards,<br /><br />%%store_name%% <br />%%store_owner_email_address%%'),
 (14, 1, 'New store credit is created for returned products', 'Dear %%customer_name%%,<br /><br />New store credit is created for following returned products:<br /><br /> %%returned_products%% <br /><br />from order %%order_number%%. The total amount is %%total_amount%% and the store credit is made to your billing account so that it can be used for future purchases. <br /><br />Regards,<br /><br />%%store_name%% <br />%%store_owner_email_address%%'),
-(15, 1, 'A new purchase order is created', 'Dear %%vendors_name%%,<br /><br />A new purchase order is created for following  products:<br /><br /> %%purchase_order_products%% <br /><br />from order %%order_number%%. The total amount is %%total_amount%%. <br /><br />Regards,<br /><br />%%store_name%% <br />%%store_owner_email_address%%'),
-(16, 1, 'Administrator Password Reminder to TomatoCart', 'A new password was requested from %%admin_ip_address%%.<br /><br />Your new password is:<br /><br />%%admin_password%%<br /><br />Regards,<br /><br />%%store_name%% <br />%%store_owner_email_address%%');
+(15, 1, 'Administrator Password Reminder to TomatoCart', 'A new password was requested from %%admin_ip_address%%.<br /><br />Your new password is:<br /><br />%%admin_password%%<br /><br />Regards,<br /><br />%%store_name%% <br />%%store_owner_email_address%%');
 
 # Articles Categories
 INSERT INTO toc_articles_categories (articles_categories_id, articles_categories_status, articles_categories_order) VALUES (1, 1, 1);
@@ -6822,3 +6821,79 @@ INSERT INTO toc_piwik_option (option_name, option_value, autoload) VALUES
 INSERT INTO toc_piwik_user (login, password, alias, email, token_auth, date_registered) VALUES
 ('anonymous', '', 'anonymous', 'anonymous@example.org', 'anonymous', now());
 
+#language_chinese
+
+INSERT INTO toc_currencies VALUES (4,'China Yuan','CNY','￥','','2','6.82730000', now());
+
+INSERT INTO toc_languages VALUES (2, 'Chinese Simplified', 'zh_CN', 'zh_CN.UTF-8,zh_CN,simplified chinese', 'utf-8', '%Y-%m-%d', '%Y年%B月%d日%A', '%H:%M:%S', 'ltr', 1, '.', ',', 0, 2);
+
+INSERT INTO toc_orders_status VALUES ( '1', '2', '未处理', '1', '0', '0', '0');
+INSERT INTO toc_orders_status VALUES ( '2', '2', '处理中', '1', '0', '0', '0');
+INSERT INTO toc_orders_status VALUES ( '3', '2', '准备货物', '1', '0', '0', '0');
+INSERT INTO toc_orders_status VALUES ( '4', '2', '部分支付', '1', '0', '0', '0');
+INSERT INTO toc_orders_status VALUES ( '5', '2', '已付款', '1', '1', '0', '1');
+INSERT INTO toc_orders_status VALUES ( '6', '2', '部分发货', '1', '1', '1', '1');
+INSERT INTO toc_orders_status VALUES ( '7', '2', '已发货', '1', '1', '1', '1');
+INSERT INTO toc_orders_status VALUES ( '8', '2', '取消', '1', '0', '0', '0');
+
+#Orders Returns Status
+INSERT INTO toc_orders_returns_status (orders_returns_status_id, languages_id, orders_returns_status_name) VALUES
+(1, 2, '未处理'),
+(2, 2, '确认'),
+(3, 2, '已接收'),
+(4, 2, '已被授权'),
+(5, 2, '已返回退款（信用记录）'),
+(6, 2, '已返回退款（信用积分）'),
+(7, 2, '已被驳回');
+
+INSERT INTO toc_orders_transactions_status VALUES ( '1', '2', '授权');
+INSERT INTO toc_orders_transactions_status VALUES ( '2', '2', '取消');
+INSERT INTO toc_orders_transactions_status VALUES ( '3', '2', '批准');
+INSERT INTO toc_orders_transactions_status VALUES ( '4', '2', '调查中');
+
+INSERT INTO toc_products_images_groups values (1, 2, '实物', 'originals', 0, 0, 0);
+INSERT INTO toc_products_images_groups values (2, 2, '略缩图', 'thumbnails', 100, 80, 0);
+INSERT INTO toc_products_images_groups values (3, 2, '产品信息页', 'product_info', 188, 150, 0);
+INSERT INTO toc_products_images_groups values (4, 2, '大图', 'large', 375, 300, 0);
+INSERT INTO toc_products_images_groups values (5, 2, '袖珍图', 'mini', 50, 40, 0);
+
+#Quantity Unit Classes
+INSERT INTO toc_quantity_unit_classes (quantity_unit_class_id, language_id, quantity_unit_class_title) VALUES
+(1, 2, '片'),
+(2, 2, '千克'),
+(3, 2, '升'),
+(4, 2, '打');
+
+# Weight Classes
+INSERT INTO toc_weight_classes VALUES (1, 'g', 2, '克');
+INSERT INTO toc_weight_classes VALUES (2, 'kg', 2, '千克');
+INSERT INTO toc_weight_classes VALUES (3, 'oz', 2, '盎司');
+INSERT INTO toc_weight_classes VALUES (4, 'lb', 2, '磅');
+
+#email templates description
+INSERT INTO toc_email_templates_description (email_templates_id, language_id, email_title, email_content) VALUES
+(1, 6, '欢迎来到 %%store_name%%', '<p>%%greeting_text%%</p><br /><br /><p>欢迎您来到 %%store_name%%!</p><br /><br /><p>您现在可以参加我们为您提供的部分服务。这些服务包括：</p><br /><br /><ul><br /><li>永久购物车 - 您添加到购物车中的所有产品都将被保存，直到您删除它或提交该订单为止。<br /><li>地址簿 - 我们能将您的产品信息发送给除了您的客户之外的地址！ 发送这些信息给那些在当天生日的人来说，这是一份完美的生日礼物。<br /><li>订单记录 - 展示您在我们系统中的定制的采购历史记录。<br /><li>产品评论 - 和其他客户一起分享您对产品的评论和意见。<br /></ul><br /><p>如果您需要对于我们提供的任何在线服务的帮助信息， 请发送电子邮件给店主：  %%store_owner_email_address%% 。</p><br /><br />注意：该电子邮件地址是通过我们的客户给我们的。如果您没有注册成为会员，请发送电子邮件给店主。'),
+(2, 6, 'TomatoCart 密码提示', '一个新的密码请求从%%customer_ip_address%%.<br /><br />您的 %%store_name%% 账号的新密码是:<br /><br />%%customer_password%%<br /><br />如果您对我们的在线服务有其他的请求，请通过邮件与店主: %%store_ower_email_address%%联系.<br /><br />注意: 如果您没有通过密码忘记页面的请求，请尽快与店主取得联系。'),
+(3, 6, '您的朋友%%from_name%% 从 %%store_name%% 给您推荐这个伟大的产品', '您好 %%to_name%%!<br /><br />您的朋友, %%from_name%%, 认为您可能对 %%product_name%% 感兴趣，该产品来至于 %%store_name%%.<br /><br />%%message%%<br /><br />点击查看产品链接或将该链接地址复制到浏览器地址栏:<br /><br />%%product_link%%<br /><br />问候,<br /><br />%%store_name%% <br />%%store_address%%'),
+(4, 6, '订单处理', 'TomatoCart<br/>------------------------------------------------------<br/>订单编号: %%order_number%%<br/>详细发票: %%invoice_link%%<br/>订单日期: %%date_ordered%%<br/><br/>%%order_details%%<br/><br/>送货地址<br/>------------------------------------------------------<br/>%%delivery_address%%<br/><br/>账单地址<br/>------------------------------------------------------<br/>%%billing_address%%<br/><br/>订单状态: %%order_status%%<br/>------------------------------------------------------<br/>%%order_comments%%'),
+(5, 6, '订单更新 (%%store_name%%)', '%%store_name%%<br />------------------------------------------------------<br />订单编号: %%order_number%%<br />详细发票: %%invoice_link%%<br />订单日期: %%date_ordered%%<br /><br />订单评论<br />------------------------------------------------------<br />%%order_comment%%<br /><br />订单状态<br />------------------------------------------------------<br />新状态: %%new_order_status%%<br /><br />如果您对于这个订单有什么问题，请回复此邮件地址。'),
+(6, 6, '欢迎来到 %%store_name%%', '%%greeting_text%%<br /><br />我们欢迎您来到 %%store_name%%.<br /><br />现在您可以参加我们为您提供的各种服务的一部分。其中一些服务包括：:<br /><br />* 永久购物车 - 任何添加到您的购物车的产品都将留在您的购物车里，直到您购买或删除它们。<br />* 地址簿 - 您可以在您的地址簿中添加任何地址的产品 ，这个可以作为一份完美的礼物发送给您的客户。<br />* 订单历史 - 以前定制的订单可以在线浏览。<br />* 产品评价 -  和其他客户一起分享产品评论。<br /><br />对于我们的在线服务有任何疑问，请发邮件至: %%store_ower_email_address%%<br />请注意: 店主已经为您创建了此账户， <br /><br />请使用您的E-Mail地址和以下密码: %%password%%登录网店系统。'),
+(7, 6, '来自 %%store_name%% 的调查', '%%greeting_text%%<br /><br />我们注意到，您在我们网店中参观并放入您的购物车中的下列项目，没有完成交易。<br /><br />Shopping Cart Contents:<br /><br />%%shopping_cart_contents%%<br />  <br />我们想知道，在那时发生了什么事情或者有什么原因使您决定不完成该交易过程。 如果您对我们的网店有什么问题或疑虑，请让我们知道，我们将不胜感激。 <br /><br />我们谢谢您宝贵的反馈意见，并且我们能帮助您在 %%store_name%% 获得更好的经验。<br /><br />请注意如下信息：<br /><br />如果您确信您完成了您的交易并想要知道为什么没有支付，这封电子邮件是您的订单没有完成的标志，并且您并没有 支付! 请返回网店，以便完成您的订单。<br /><br />如果您确实完成了您的订单，对此我们表示歉意。在这种情况下我们将避免发送这些信息给您，个别情况下我们也很难决定。<br /><br />再次感谢您，花费您宝贵的时间和意见来帮助我们改善 %%store_name%%。<br /><br />%%addtional_message%%<br /><br />真诚的,<br />%%store_name%%'),
+(8, 6, '您收到了来自 %%store_name%% 的优惠券', '%%greeting_text%%<br /><br />您收到了一个来自 %%store_name%% 的优惠券。您可以在结算时兑换该优惠券。 您只需要将代码输入提供的的输入框中，并单击兑换按钮即可。<br /><br />优惠券代码是： %%coupon_code%%<br /><br />请不要丢失该优惠券代码，确保优惠券代码的安全，这样你可以从这些特价产品中获得优惠。<br /><br />%%addtional_message%%'),
+(9, 6, '您已经收到商店管理员的信用积分', '%%greeting_text%% <p> 管理员更新了您的信用积分。现在您已经拥有 %%customer_credits%% 积分在您的账户里</p>'),
+(10, 6, '您的朋友 %%from_name%% 想要分享他的来自 %%store_name%% 的收藏夹', '嗨!<br /><br />您的朋友 %%from_name%% 想要分享他的来自 %%store_name%% 的收藏夹。<br /><br />%%message%%<br /><br />要想展示该收藏夹，请单击如下连接，或复制该连接地址粘贴到您的网页浏览器中：<br /><br />%%wishlist_url%%<br /><br />问候,<br /><br />%%store_name%% <br />%%store_address%%'),
+(11, 6, '您受到了一个来自 %%recipient_name%% 的礼券', '亲爱的 %%recipient_name%%,<br /><br />您接收到了来自 %%sender_name%% 的一个礼券。 您可以在结账时兑换该礼券。 您只要在提供的输入框中输入礼券代码，并单击兑换按钮即可。<br /><br />礼券金额是： %%gift_certificate_amount%% 礼券代码是： %%gift_certificate_code%%<br /><br />请不要丢失礼券代码，一定要保证礼券代码的安全。<br /><br /><b>%%gift_certificate_message%%</b><br /><br />致此,<br /><br />%%store_name%% <br />%%store_owner_email_address%%'),
+(12, 6, '下载链接 %%downloadable_products%% 已经被激活', '亲爱的%%customer_name%%,<br /><br />您从 %%store_name%%购买的产品: <br /><br />%%downloadable_products%%<br /><br />的下载链接已经被激活。<br /><br />请去订单模块的“我的账户”页面，并下载产品。<br /><br />%%download_link%%<br /><br />问候,<br /><br />%%store_name%% <br />%%store_owner_email_address%%'),
+(13, 6, '一个新的用于退货的退款单被创建了', '亲爱的 %%customer_name%%,<br /><br />一个新的包含以下退货产品：<br /><br /> %%returned_products%% <br /><br />来自于订单 %%order_number%%的退款单被创建了。 退货单编号是： %%slip_number%% ，总金额是： %%total_amount%%。您可以在“我的账号”区域打印出该退货单。 <br /><br />问候,<br /><br />%%store_name%% <br />%%store_owner_email_address%%'),
+(14, 6, '一个关于退货的新的网店信用积分被创建了', '亲爱的%%customer_name%%,<br /><br />关于以下回收产品：<br /><br /> %%returned_products%% <br /><br />来自订单 %%order_number%%的网店积分被创建了。 总金额是 %%total_amount%% 网店积分可以用于您的付费帐户，方便您未来进行的采购。 <br /><br />问候，<br /><br />%%store_name%% <br />%%store_owner_email_address%%'),
+(15, 6, 'TomatoCart 管理员密码提示信', '一个新的密码被请求来自于%%admin_ip_address%%。<br /><br />您的新密码是：<br /><br />%%admin_password%%<br /><br />问候，<br /><br />%%store_name%% <br />%%store_owner_email_address%%');
+
+
+INSERT INTO toc_articles_categories_description (articles_categories_id, language_id, articles_categories_name) VALUES (1, 2, '信息');
+
+INSERT INTO toc_articles_description (articles_id, language_id, articles_name, articles_description, articles_head_desc_tag, articles_head_keywords_tag) VALUES
+(1, 2, '关于我们', '请输入有关信息', '', ''),
+(2, 2, '运输 & 退货', '请输入有关信息。', '', ''),
+(3, 2, '隐私声明', '请输入有关信息。', '', ''),
+(4, 2, '使用条件', '请输入有关信息。', '', ''),
+(5, 2, '版本说明', '请输入有关信息。', '', '');

@@ -45,7 +45,7 @@
   ?>
       <tr>
         <td class="label"><?php echo $osC_Language->get('field_sku'); ?></td>
-        <td><?php echo $osC_Product->getModel(); ?>&nbsp;</td>
+        <td><?php echo $osC_Product->getSKU(); ?>&nbsp;</td>
       </tr>
   <?php
     }

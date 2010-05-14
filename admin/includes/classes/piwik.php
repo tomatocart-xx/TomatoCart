@@ -46,6 +46,8 @@
       define('PIWIK_ENABLE_SESSION_START', 0);
       define('PIWIK_DISPLAY_ERRORS', 0);
       
+      require_once PIWIK_INCLUDE_PATH . "/libs/PEAR.php";
+      
       require_once PIWIK_INCLUDE_PATH . "/index.php";
       require_once PIWIK_INCLUDE_PATH . "/core/API/Request.php";
       Piwik_FrontController::getInstance()->init();

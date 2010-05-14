@@ -270,9 +270,9 @@
         $available = $product['quantity'] > $product['return_quantity'];
         
         $allow_return = true;
-        if (($product['type'] == PRODUCT_TYPE_DOWNLOADABLE) && (ALLOW_GIFT_CERTIFICATE_RETURN == '0')) {
+        if (($product['type'] == PRODUCT_TYPE_DOWNLOADABLE) && (ALLOW_GIFT_CERTIFICATE_RETURN == '-1')) {
           $allow_return = false;
-        } else if (($product['type'] == PRODUCT_TYPE_GIFT_CERTIFICATE) && (ALLOW_DOWNLOADABLE_RETURN == '0')) {
+        } else if (($product['type'] == PRODUCT_TYPE_GIFT_CERTIFICATE) && (ALLOW_DOWNLOADABLE_RETURN == '-1')) {
           $allow_return = false;
         }
         

@@ -40,12 +40,12 @@ Ext.override(TocDesktop.EmailTemplatesWindow, {
     win.show();
   },
   
-  createEmailTemplatesDialog: function() {
+  createEmailTemplatesDialog: function(title) {
     var desktop = this.app.getDesktop();
     var dlg = desktop.getWindow('email_templatesDialog-win');
     
     if (!dlg) {
-      dlg = desktop.createWindow({}, Toc.email_templates.EmailTemplatesDialog);
+      dlg = desktop.createWindow({title: title}, Toc.email_templates.EmailTemplatesDialog);
       
       dlg.on('saveSuccess', function(feedback) {
         this.app.showNotification({title: TocLanguage.msgSuccessTitle, html: feedback});

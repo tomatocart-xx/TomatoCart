@@ -72,7 +72,7 @@ Ext.extend(Toc.invoices.InvoicesStoreCreditsDialog, Ext.Window, {
         }, [
           'orders_products_id',
           'products_name',
-          {name: 'products_price', type: 'int'},
+          {name: 'products_price', type: 'float'},
           'products_format_price',
           'quantity_available',
           'return_quantity'

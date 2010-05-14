@@ -210,6 +210,14 @@
         $this->reset();
       }
     }
+    
+    function synchronizeCustomerDataWithSession() {
+      if (sizeof($this->_data) > 0) {
+        $_SESSION['osC_Customer_data'] = $this->_data;
+      } elseif (isset($_SESSION['osC_Customer_data'])) {
+        $this->reset();
+      }
+    }
 
     function setIsLoggedOn($state) {
       if ($state === true) {

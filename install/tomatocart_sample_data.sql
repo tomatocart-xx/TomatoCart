@@ -23,11 +23,17 @@
 
 #Slide show
 INSERT INTO toc_slide_images (image_id, language_id, description, image, image_url, sort_order, status) VALUES
-(1, 1, 'Put here the required information.', 'dell_xps630.png', 'products.php?1', 0, 1),
-(2, 1, 'Put here the required information.', 'apple_23_cinema.png', 'products.php?18', 0, 1),
-(3, 1, 'Put here the required information.', 'thinkcentre_m57p.png', 'products.php?3', 0, 1),
-(4, 1, 'Put here the required information.', 'apple_iphone_3g.png', 'products.php?17', 0, 1),
-(5, 1, 'Put here the required information.', 'hp_tx2510us.png', 'products.php?13', 0, 1);
+(1, 1, 'Put here the required information.', 'dell_xps630_en.png', 'products.php?1', 0, 1),
+(2, 1, 'Put here the required information.', 'apple_23_cinema_en.png', 'products.php?18', 0, 1),
+(3, 1, 'Put here the required information.', 'thinkcentre_m57p_en.png', 'products.php?3', 0, 1),
+(4, 1, 'Put here the required information.', 'apple_iphone_3g_en.png', 'products.php?17', 0, 1),
+(5, 1, 'Put here the required information.', 'hp_tx2510us_en.png', 'products.php?13', 0, 1),
+(1, 2, '请在此输入所需信息。', 'dell_xps630_cn.png', 'products.php?1', 0, 1),
+(2, 2, '请在此输入所需信息。', 'apple_23_cinema_cn.png', 'products.php?18', 0, 1),
+(3, 2, '请在此输入所需信息。', 'thinkcentre_m57p_cn.png', 'products.php?3', 0, 1),
+(4, 2, '请在此输入所需信息。', 'apple_iphone_3g_cn.png', 'products.php?17', 0, 1),
+(5, 2, '请在此输入所需信息。', 'hp_tx2510us_cn.png', 'products.php?13', 0, 1);
+
 
 INSERT INTO toc_configuration ( configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES
 ('Interval (ms)', 'MODULE_CONTENT_SLIDE_SHOW_INTERVAL', '3000', 'slide show interval', 6, 0, NULL, now(), NULL, NULL),
@@ -46,14 +52,19 @@ INSERT INTO toc_templates_boxes_to_pages (templates_boxes_id, templates_id, cont
 # Articles Categories
 INSERT INTO toc_articles_categories (articles_categories_id, articles_categories_status, articles_categories_order) VALUES (2, 1, 0);
 INSERT INTO toc_articles_categories_description (articles_categories_id, language_id, articles_categories_name) VALUES (2, 1, 'Latest News');
+INSERT INTO toc_articles_categories_description (articles_categories_id, language_id, articles_categories_name) VALUES (2, 2, '最新消息');
 INSERT INTO toc_articles_categories (articles_categories_id, articles_categories_status, articles_categories_order) VALUES (3, 1, 0);
 INSERT INTO toc_articles_categories_description (articles_categories_id, language_id, articles_categories_name) VALUES (3, 1, 'Categories 1');
+INSERT INTO toc_articles_categories_description (articles_categories_id, language_id, articles_categories_name) VALUES (3, 2, '类别 1');
 INSERT INTO toc_articles_categories (articles_categories_id, articles_categories_status, articles_categories_order) VALUES (4, 1, 0);
 INSERT INTO toc_articles_categories_description (articles_categories_id, language_id, articles_categories_name) VALUES (4, 1, 'Categories 2');
+INSERT INTO toc_articles_categories_description (articles_categories_id, language_id, articles_categories_name) VALUES (4, 2, '类别 2');
 INSERT INTO toc_articles_categories (articles_categories_id, articles_categories_status, articles_categories_order) VALUES (5, 1, 0);
 INSERT INTO toc_articles_categories_description (articles_categories_id, language_id, articles_categories_name) VALUES (5, 1, 'Categories 3');
+INSERT INTO toc_articles_categories_description (articles_categories_id, language_id, articles_categories_name) VALUES (5, 2, '类别 3');
 INSERT INTO toc_articles_categories (articles_categories_id, articles_categories_status, articles_categories_order) VALUES (6, 1, 0);
 INSERT INTO toc_articles_categories_description (articles_categories_id, language_id, articles_categories_name) VALUES (6, 1, 'Categories 4');
+INSERT INTO toc_articles_categories_description (articles_categories_id, language_id, articles_categories_name) VALUES (6, 2, '类别 4');
 
 INSERT INTO toc_configuration (configuration_title, configuration_key, configuration_value, configuration_description, configuration_group_id, sort_order, last_modified, date_added, use_function, set_function) VALUES
 ('Maximum List Size', 'BOX_ARTICLES_CATEGORIES_MAX_LIST', '10', 'Maximum amount of article categories to show in the listing', 6, 0, NULL, now(), NULL, NULL);
@@ -83,7 +94,12 @@ INSERT INTO toc_manufacturers_info (manufacturers_id, languages_id, manufacturer
 (2, 1, 'http://www.dell.com', '0', NULL),
 (3, 1, 'http://www.hp.com', '0', NULL),
 (4, 1, 'http://www.lenovo.com', '0', NULL),
-(5, 1, 'http://www.sony.com', '0', NULL);
+(5, 1, 'http://www.sony.com', '0', NULL),
+(1, 2, 'http://www.apple.com', '0', NULL),
+(2, 2, 'http://www.dell.com', '0', NULL),
+(3, 2, 'http://www.hp.com', '0', NULL),
+(4, 2, 'http://www.lenovo.com', '0', NULL),
+(5, 2, 'http://www.sony.com', '0', NULL);
 
 #product categories
 INSERT INTO toc_categories (categories_id, categories_image, parent_id, sort_order, date_added, last_modified) VALUES
@@ -98,7 +114,13 @@ INSERT INTO toc_categories_description (categories_id, language_id, categories_n
 (2, 1, 'Desktops'),
 (3, 1, 'Monitors'),
 (4, 1, 'Printers & Scanners'),
-(5, 1, 'iPod & Camera');
+(5, 1, 'iPod & Camera'),
+(1, 2, '笔记本电脑'),
+(2, 2, '台式电脑'),
+(3, 2, '显示器'),
+(4, 2, '打印机 & 扫描仪'),
+(5, 2, '音乐播放器 & 照相机');
+
 
 #products
 INSERT INTO toc_products (products_id, products_quantity, products_price, products_date_added, products_last_modified, products_date_available, products_weight, products_weight_class, products_status, products_tax_class_id, manufacturers_id, products_ordered, quantity_discount_groups_id, quantity_unit_class) VALUES
@@ -142,7 +164,26 @@ INSERT INTO toc_products_description (products_id, language_id, products_name, p
 (16, 1, 'Apple iPod touch 8 GB', '<h2>Features</h2><ul><li>Size of Display&nbsp;&nbsp;&nbsp; 3.5 inch</li><li>Display Features&nbsp;&nbsp;&nbsp; Battery Level</li><li>Digital Storage Media&nbsp;&nbsp;&nbsp; 8 GB (Built-in Memory)</li><li>PC Interface Supported&nbsp;&nbsp;&nbsp; USB, Wi-Fi</li><li>Battery Run Time&nbsp;&nbsp;&nbsp; Up to 22 hrs.</li><li>Battery Type&nbsp;&nbsp;&nbsp; Internal Battery</li><li>Dimensions (W X D X H)&nbsp;&nbsp;&nbsp; 2.4 in. x 0.31 in. x 4.3 in.</li><li>Weight&nbsp;&nbsp;&nbsp; 4.2 oz.</li><li>MPN&nbsp;&nbsp;&nbsp; MA623ZO/B</li></ul><p><br>&nbsp;</p>', NULL, '', '', 1),
 (17, 1, 'Apple iPhone 3G', 'Features<br><br><ul><li>APPLE 3G 8GB</li><li>APPLE 3.5" TOUCHSCREEN</li><li>QUAD-BAND GSM &amp; EDGE</li><li>WI-FI (802.11b/g)</li><li>BLUETOOTH 2.0 EDR</li><li>8GB BUILT-IN STORAGE </li></ul>', NULL, '', '', 1),
 (18, 1, 'APPLE 23" HD CINEMA COLOR DISPLAY', '<h2>Features</h2><br><ul><li>Compatibility: Mac</li><li>Panel type: Thin film transistor (TFT) active matrix LCD</li><li>Display size: 23 inches</li><li>Diagonal viewable screen size: 23 inches</li><li>Dot pitch: 1920 x 1200 pixels (optimum)</li><li>Contrast ratio: 350:1</li><li>Glass surface: Anti-glare hardcoat screen treatment</li><li>Horizontal viewing angle: 170 degrees</li><li>Vertical viewing angle: 170 degrees</li><li>Brightness: 200 cd/m2</li><li>Input signals: Digital</li><li>Input connector/cable: Apple Display Connector (ADC) carries power, USB, and digital graphics; two-port self-powered USB hub connects peripherals</li><li>Maximum noninterlaced resolution: 1920 x 1200 dpi</li><li>Power on/off: Yes, system power on/sleep/wake</li><li>Brightness: Yes</li><li>Swivel: Yes, user adjustable</li><li>System requirements: One of the following systems (a,b, or c): (a) Power Mac G4 with NVIDIA GeForce2 MX, GeForce3, GeForce4 MX, or GeForce4 Ti graphics card, or ATI Radeon 7500 graphics card; and Mac OS X v10.1.3 or Mac OS 9.2.2, (b) Power Mac G4 with DVI port (via an NVIDIA GeForce4 Ti graphics card) and Apple DVI to ADC Adapter, (c) PowerBook G4 with DVI port and Apple DVI to ADC Adapter</li><li>Width: 24.2 inches</li><li>Height: 19.2 inches</li><li>Depth: 7.3 inches</li><li>Weight: 25.3 pounds</li></ul><br>', NULL, '', '', 0),
-(19, 1, 'SONY DSC-T700(g) DIGITAL VIDEO CAMERA', '<h2>Features</h2><ul><li>Slim, beautiful design.</li><li>10.1 effective megapixels</li><li>4GB internal memory, stores up to 40,000 photos</li><li>Powerful album functions to store, organize and share your photos</li><li>Smile Shutter automatically captures smiling faces</li><li>Beautiful portraits with Face Detection and Anti-blink technology</li><li>Enjoy your images on the Extra-large 3.5a€? touchscreen LCD</li><li>Easy web upload for sharing images on social networking sites</li><li>Double Anti-blur Solution</li><li>Portable Photo Album</li><li>Face Detection</li><li>Intelligent Scene Recognition</li><li>In Camera Retouch</li><li>Share HD-Quality Images </li></ul>', NULL, '', '', 2);
+(19, 1, 'SONY DSC-T700(g) DIGITAL VIDEO CAMERA', '<h2>Features</h2><ul><li>Slim, beautiful design.</li><li>10.1 effective megapixels</li><li>4GB internal memory, stores up to 40,000 photos</li><li>Powerful album functions to store, organize and share your photos</li><li>Smile Shutter automatically captures smiling faces</li><li>Beautiful portraits with Face Detection and Anti-blink technology</li><li>Enjoy your images on the Extra-large 3.5a€? touchscreen LCD</li><li>Easy web upload for sharing images on social networking sites</li><li>Double Anti-blur Solution</li><li>Portable Photo Album</li><li>Face Detection</li><li>Intelligent Scene Recognition</li><li>In Camera Retouch</li><li>Share HD-Quality Images </li></ul>', NULL, '', '', 2),
+(1, 2, '戴尔 XPS 630', '<h2>产品特征 </h2><ul><li>XPS630采用了最先进的技术和创新设计：线条流畅，性能优越，是一款顶级的游戏台式机 </li><li>一场超音速游戏盛宴：XPS630通过BIOS或NVIDIA ® nTune9800GT以及 英特尔®Q9300四核处理器，以及750w电源支持，提供超频体验。 </li><li>前：Usb2.0(2), 1394a,耳机插孔，话筒，可选的19合1读卡器 </li><li>后（声卡）：S/PDIF光纤，输入线，输出线，麦克风，环绕，中心/LFE，集成HDA7.1声卡 </li><li>后（其他）：USB2.0(4),1394A, PS / 2鼠标和键盘, Gigabit Ethernet8网卡驱动</li><li>Vista的SP1的64位高级<br></li></ul><p><br></p>', NULL, '', '', 4),
+(2, 2, '惠普 Pavilion a6433w-b', '<h2>产品特征\r\n\r\n</h2><ul><li>惠普w2207h 22“宽屏液晶显示器，内置扬声器 </li><li>1680 x 1050分辨率，5毫秒 响应时间和1000:1的对比度&nbsp; </li><li>2 GHz的英特尔奔腾双核台式机处理器E2180 </li><li>提供了真正 的多任务处理能力和多媒体要求&nbsp; </li><li>3 GB的DDR2系统内存 </li><li>为满足当今用户需求，提供了改进的性能：扩大到8 GB&nbsp; </li><li>500 GB硬盘，7200rpm </li><li>提供了存储大量的文件，游戏，音乐，照片和视频的空间&nbsp; </li><li>SuperMulti DVD + / - RW驱动器与双层能力 </li><li>支持刻录和播放DVD和CD&nbsp; </li><li>10/100/1000 Base - T网络接口和56K调制解调器 </li><li>通过DSL，电缆或拨号上网服务连接到互联网&nbsp; </li><li>15合1数字多媒体读卡器 </li><li>识别几乎所有的记忆卡 格式，所以你可 以随心所欲欣赏照片，音乐和其他文件&nbsp; </li><li>Vista家庭高级版的Windows媒体中心和Service Pack 1 </li></ul><p>&nbsp;</p>', NULL, '', '', 2),
+(3, 2, '联想ThinkCentre M57p', '<h2>产品特征</h2><ul><li>2.66GHz英特尔酷睿 E8200处理器</li><li>正版Windows Vista商业版</li><li>超小外形</li><li>内存：1GB DDR2（667MHz）</li><li>硬盘：160GB</li><li>光驱：CD-RW/DVD-ROM Combo 48X/32X/48X/16X Max </li></ul>', NULL, '', '', 0),
+(4, 2, '15.4英寸 Macbook Pro MB134LL/A', '<h2>产品特征</h2><p><br></p><ul><li>2.5 GHz Intel 双核处理器，6 MB 单片二级缓存,预装 Mac OS X v10.5 Leopard</li><li>2 GB RAM (two SO-DIMM)，677 MHz DDR2 SD-RAM (PC2-5300)显存, 250 GB 5400 rpm Serial ATA 硬盘驱动</li><li>1个 FireWire 400, 1个 FireWire 800, 2个 USB 2.0 接口, ExpressCard/34 slot</li><li>内置 10/100/1000BASE-T (Gigabit); 内置 54 Mbps AirPort Extreme (802.11n); 内置Bluetooth 2.0+EDR</li><li>15.4英寸, 1440 x 900 分辨率, TFT LED 宽频显示器，带NVIDIA GeForce 8600M GT 和 512 MB GDDR3 SDRAM和双路 DVI', NULL, '', '', 5),
+(5, 2, '17英寸 MACBOOK PRO MB166LL/A', '<h2>产品特征</h2><br><ul><li>2.5GHz Core2 Duo处理器, L2 cache 6MB &nbsp;</li><li>250 GB硬盘驱动 </li><li>另外可以选择8X DVD+-RW/CD-RW驱动 </li><li>RAM 标准的 2GB DDR2 SDRAM显存 </li><li>支持4GB RAM &nbsp;</li><li>17 寸显示器, 支持分辨率 1680 x 1050 &nbsp;</li><li>支持NIC Gigabit 以太网 &nbsp;</li><li>内置无线 NIC &nbsp;</li><li>支持蓝牙 &nbsp;</li><li>安装OS Mac OS X v10.5 Leopard 软件 </li></ul><br>', NULL, '', '', 1),
+(6, 2, '13.3寸苹果 MACBOOK AIR超薄电脑Z0FS0LL/A', '<h2>产品特征</h2><br><ul><li>1.8GHz Core2 Duo 处理器 , 6MB 片上共享二级缓存 </li><li>64GB 固态驱动</li><li>另外可以单独选择苹果 MacBook Air超级驱动 </li><li>与主内存共享的2GB 667MHz DDR2 SDRAM 显存 </li><li>支持NIC Gigabit 以太网 &nbsp;</li><li>内置无线 NIC &nbsp;</li><li>支持蓝牙 &nbsp;</li><li>安装软件包括Mac OS X v10.5 Leopard; iLife (includes iTunes, iPhoto, iMovie, iDVD, iWeb, GarageBand)</li></ul>', NULL, '', '', 3),
+(7, 2, '联想ThinkPad X301, SU9400 1.4GHZ CPU', '<h2>产品特征</h2><br><ul><li>1.4GHz 酷睿2 SU900处理器</li><li>操作系统：正版 Windows XP Professional – 32位 </li><li>LED显示屏：13.3" WXGA + TFT宽屏（1440 x 900像素&nbsp; &nbsp;</li><li>内存：: 3GB PC3-8500 DDR3 SDRAM 1067MHz 内存 </li><li>WWAN: 可升级</li><li>硬盘驱动：128GB Solid State Drive</li><li>定点设备：UltraNav TrackPoint(指点杆)/触摸板，指纹识别</li><li>显卡：Intel GMA4500MHD 显卡</li><li>光驱：DVD/RW 双层刻录（CD& DVD）</li><li>内置网卡：Intel Pro 无线 WiFi 链接 5100 (AGN)</li></ul>', NULL, '', '', 6),
+(8, 2, '联想ThinkPad X200', '<h2>产品特征</h2><br><ul><li>2.8GHz英特尔酷睿双核处理器 P8600</li><li>3MB二级缓存，1066MHz总线速度 </li><li>2048MB内存（PC2-8500）-最大4MB</li><li>160GB（5400转）SATA硬盘</li><li>6芯锂电池，AC电源适配器，电源适配器延长线</li><li>软件包 – Windows XP Professional, Microsoft Office 2007 60天试用版，McAfee VirusScan Plus 30天使用</li></ul><br>', NULL, '', '', 3),
+(9, 2, '联想ThinkPad T400 2767', '<h2>产品特征</h2><br><ul><li>2.53GHz酷睿双核处理器 T9400/– 迅驰2博锐技术</li><li>2G内存 </li><li>160G硬盘 </li><li>DVD刻录机</li><li>显卡Mobility Radeon HD3470/GMA 4500MHD</li><li>细胞的MDM /女士（CDMA 2000 1X服务的EV - DO版本A的WCDMA，HSPA网络</li><li>通讯</li><li>千兆以太网</li><li>无线通讯：802.11 a/b/g/n (draft), 蓝牙2.0 –</li><li>TPM安全芯片</li><li>指纹识别</li><li>Vista商务版</li><li> 14.1寸宽屏    TFT，1440 x 900（WXGA）</li></ul><br>', NULL, '', '', 1),
+(10, 2, '惠普 Pavilion DV7-1240US 17.0英寸笔记本电脑', '<h2>产品特征</h2><br><ul><li>以娱乐为中心的笔记本电脑：铜铬材料构成的流畅现代的线条设计;宽屏17英寸液晶显示器 </li><li>2.1千兆赫的AMD Turion X2的RM - 72双核心处理器，320 GB硬盘，4 GB内存（最大8 GB ），LightScribe的双层DVD驱动器 </li><li>Draft - N Wi – Fi （的802.11a/b/g/n），千兆以太网; ATI Radeon HD 3200显卡（高达1918 MB ） </li><li>连接：4个USB ，1个HDMI，1个VGA，54/34的ExpressCard，5合1存储卡读卡器 </li><li>预先安装了Windows Vista家庭高级版与SP1（64位版本）;包括远程控制</li></ul>', NULL, '', '', 0),
+(11, 2, '东芝Satellite A355-S6921', '<h2>产品特征</h2><br><ul><li>可携带多媒体笔记本，16英寸屏幕，16:9显示尺寸，720p高清画面</li><li>2.0GHz AMD Turion2 双核处理器， 250GB 硬盘，3G内存（最大4GB），光雕技术双层DVD驱动</li><li>无线网络协议（802.11b/g/n），以太网，ATI Radeon 3100图形（最高可达1919MB显存）</li><li>端口：4个USB接口（有一个共享eSata）,火线接口，VGA接口，ExpressCard 54/53, 五合一读卡器 </li><li>预装Windows Vista 家庭高级版和补丁包（64位）, </li></ul><br>', NULL, '', '', 2),
+(12, 2, '惠普 Compaq 6735s KS117UT 15.4英寸笔记本', '产品特征<br><br>AMD的M780G芯片组 <br>处理器：AMD公司的Turion X2双核移动处理器的RM – 70（2.0 GHz, 2 x 512 KB，二级缓存） <br>内存标准：667 MHz or 800 MHz DDR2内存，支持双通道内存1024MB或2048MB的双插槽 <br>最大：可升级至8192MB,两插槽内分别放置4096MB SODIMM<br>ADM Sempron处理器，最大内存4096MB<br>双通道：最大化的双通道性能要求两个内存插槽内具有相同规模和速度的SODIMMS <br>图形集成的UMA 显卡ATI的Mobility Radeon高清3200共享系统内存：微软DirectX 10 <br>内部显示：15.4英寸对角线  WXGA防眩光（1280 × 800分辨率）15.4英寸的BrightView) 对角线 WXGA（1280 × 800分辨率） <br>外部：颜色深度多达32位每个像素 VGA端口位支持分辨率高达2048 × 1536， 75赫兹， 较低的分辨率高达100赫兹。<br>', NULL, '', '', 0),
+(13, 2, '惠普 Pavilion TX2510US', '<h2>产品特征</h2><br><ul><li>12.1英寸宽屏，触摸屏，可变换显示屏最大分辨率1280 x 800, 面板可180度翻转 </li><li>2.10 GHz AMD Turion X2 ZM-80超双核移动处理器，带2 MB L2缓存 </li><li>3072 MB DDR2 系统内寸(2 Dimm), 250 GB (5400RPM) 硬盘驱动 (SATA), ATI Radeon HD 3200 Graphics RS780M ，带 64 MB DDR2 (外置显存)， 支持 1470 MB 总图形内存 </li><li>LightScribe Super Multi 8X DVD，支持双极层，无线LAN 802.11a/b/g/n，带蓝牙</li><li>Windows Vista 家庭高级版， dims in inches: 约8.82 (W) x 12.05 (L) x 1.52 (H)., 4.56 lbs.</li></ul><br>', NULL, '', '', 0),
+(14, 2, '东芝Satellite L305D-S5904 15.4寸笔记本', '<h2>产品特征</h2><br><ul><li>15.4寸宽屏TruBrite TFT LCD显示屏，1280 x 800分辨率</li><li>2.0GHz AMB Turion64 X2 双核移动技术，1MB二级缓存</li><li>3072MB DDR2内存，250GB（5400转）SATA硬盘，ATI Radeon X1250图形，128-831 MB的动态分配共享显存 </li><li>DVD DL支持LabelFlash, Atheros 802.11 b/g无线协议</li><li>Windows Vista家庭高级版，规格4.75 (W) x 14.3 (L) x 1.33 (H)，5.49磅</li></ul><br>', NULL, '', '', 0),
+(15, 2, '苹果 IPOD NANO 4GB SILVER 3RD GEN', '拥有抛光阳极铝制外壳，搭配5种绚丽色彩。更大更亮的显示屏，让你获得愉悦的视觉体验。<br><br>可连续5小时播放视频或24小时音频文件。<br><br><b>Cover Flow</b><br>可预览音频文件夹封面，并浏览所有音频文件。<br><br><b>Music</b><br>在iTunes Store可以购买电影，并同步到你的iPod nano，随时随地观看。<br><br><b>Movies</b><br>Buy movies from the iTunes Store and you can sync them to your iPod nano to watch anywhere, anytime. Up to 5 hours of video playback means you can watch two movies back to back. And for your viewing pleasure, the 320-by-240-pixel display--with a whopping 204 pixels per inch--is 65 percent brighter than before. <br>', NULL, '', '', 2),
+(16, 2, '苹果 iPod touch 8 GB', '<h2>产品特征</h2><ul><li>显示屏大小：3.5英寸</li><li>显示特点：电池电量提示</li><li>数字存储媒体：8G（内置存储器）</li><li>PC 接口支持：USB，无线网络</li><li>电池工作时间：将近22个小时</li><li>电池型号：内置电池</li><li>尺寸（宽度*厚度*高度）：2.4英寸*0.31英寸*4.3英寸</li><li>重量：4.2盎司</li><li>制造方编号：MA623ZO/B</li></ul><p><br>&nbsp;</p>', NULL, '', '', 1),
+(17, 2, '苹果 iphone 3G', '产品特征<br><br><ul><li>APPLE 3G 8GB</li><li>3.5英寸触摸屏</li><li>手机制式：QUAD-BAND GSM &amp; EDGE</li><li> WI-FI上网 (支持802.11b/g)</li><li>支持蓝牙2.0 EDR</li><li>8GB 内存 </li></ul>', NULL, '', '', 1),
+(18, 2, '苹果23英寸 HD CINEMA COLOR DISPLAY', '<h2>产品特征</h2><br><ul><li>兼容: Mac</li><li>面板类型: TFT主动式矩阵液晶显示器</li><li>显示器: 23英寸</li><li>最大可视屏宽: 23 英寸</li><li>分辨率: 1920 x 1200 pixels (optimum)</li><li>对比度: 350:1</li><li>表面光泽度: 反光硬模</li><li>水平视角: 170度</li><li>垂直视角: 170 度</li><li>亮度: 200 cd/m2</li><li>视频信号: 数字</li><li>输入接口: 电源, USB,数位图形接口，双接口自供电USB集线器</li><li>最大逐行扫描分辨率: 1920 x 1200</li><li> Power on/off: 支持系统power on/sleep/wake</li><li>亮度: 可调</li><li>Swivel: 用户可调</li><li>系统要求（以下选其一）: (a) Power Mac G4，带NVIDIA GeForce2 MX, GeForce3, GeForce4 MX, 或 GeForce4 Ti 显卡, 或 ATI Radeon 7500 显卡; 以及 Mac OS X v10.1.3 或 Mac OS 9.2.2, (b) Power Mac G4 ，带 DVI 接口 (通过NVIDIA GeForce4 Ti 显卡) 和 苹果DVI 至 ADC 转换器, (c) PowerBook G4，带DVI 接口和苹果DVI至ADC转换器</li><li>宽度: 24.2 英寸</li><li>高度: 19.2 英寸</li><li>厚度: 7.3 英寸</li><li>重量: 25.3 磅</li></ul><br>', NULL, '', '', 0),
+(19, 2, '索尼 DSC-T700数码像机', '<h2>产品特征</h2><ul><li>轻便美观的外形设计</li><li>1010万有效像素</li><li>4GB内存，能够储存多达4万张照片</li><li>强大的相册功能来存储，管理和分享你的照片</li><li>一笑即拍功能自动捕捉每张笑脸</li><li>人脸检测功能和红眼消除技术</li><li>在宽大的3.5寸触摸LCD屏上享受你的图片</li><li>快捷的网络上传功能助你在网络上分享图片</li><li>双重防抖技术</li><li>可携带相册</li><li>人脸检测</li><li>智能场景识别模式</li><li>相机内部编辑图片</li><li>分享HD高清图片 </li></ul>', NULL, '', '', 2);
 
 INSERT INTO toc_products_images (id, products_id, image, default_flag, sort_order, date_added) VALUES
 (1, 1, '4589430859034895043.jpg', 1, 0, '2009-01-26 17:32:02'),

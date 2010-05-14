@@ -94,7 +94,7 @@ Toc.settings.ModulePanel = function(app) {
 	          } else {
 	        	  var ids = this.items.launchers.contextmenu;
 	              id = record.data['id'];
-	            if (ids.length > 1 ){
+	            if (ids.length > 0 ){
 	              this.items.desktop.removeContextMenu(record.data['id'], true);
 	            } else {
 	              record.set(this.dataIndex, true);
@@ -102,6 +102,7 @@ Toc.settings.ModulePanel = function(app) {
 	          }
 	          break;
 	      }
+	      record.commit();
 	    }
 	  },
 	  

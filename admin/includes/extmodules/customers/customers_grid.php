@@ -223,7 +223,9 @@ Ext.extend(Toc.customers.CustomersGrid, Ext.grid.GridPanel, {
     var action = false;
     
     if (row !== false) {
-      if (col > 0) {
+      var expander = e.getTarget(".x-grid3-row-body");
+
+      if (col > 0 || (col == false && expander != null)) {
         var record = this.getStore().getAt(row);
         this.fireEvent('selectchange', record);
       }

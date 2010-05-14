@@ -47,6 +47,10 @@ div#ux-sidebar div.sidebar-top-bar {
   border: none;
 }
 
+#ux-sidebar .sidebar {
+  background: url(../images/default/sidebar/sidebar_right_side.png) no-repeat left top !important;
+}
+
 #ux-sidebar .x-layout-mini {
 	left: 4px;
 }

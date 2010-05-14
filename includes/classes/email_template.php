@@ -63,6 +63,10 @@
     	$this->_attachments[] = array($file, $is_uploaded);
     }
     
+    function resetRecipients() {
+      $this->_recipients = array();
+    }
+    
     function hasAttachment() {
     	if (count($this->_attachments) != 0) {
     		return true;

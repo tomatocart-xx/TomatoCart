@@ -82,12 +82,12 @@ Ext.override(TocDesktop.CouponsWindow, {
     return dlg;    
   },
   
-  createSendEmailsDialog: function() {
+  createSendEmailsDialog: function(title) {
     var desktop = this.app.getDesktop();
     var dlg = desktop.getWindow('coupons-send-emails-dialog-win');
     
     if (!dlg) {
-      dlg = desktop.createWindow({owner: this}, Toc.coupons.SendEmailsDialog);
+      dlg = desktop.createWindow({title:title,owner: this}, Toc.coupons.SendEmailsDialog);
       
       dlg.on('sendSuccess', function(feedback){
         this.app.showNotification({title: TocLanguage.msgSuccessTitle, html: feedback});

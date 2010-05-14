@@ -63,7 +63,7 @@
        <li>
         <?php echo osc_link_object(osc_href_link(FILENAME_ACCOUNT, 'create', 'SSL'), $osC_Language->get('create_account')); ?>
       </li>
-    <?php if ((MAINTENANCE_MODE == true) && isset($_SESSION['admin'])) { ?>
+    <?php if ((MAINTENANCE_MODE == 1) && isset($_SESSION['admin'])) { ?>
       <li id="admin_logout">
         <?php echo osc_link_object(osc_href_link(FILENAME_DEFAULT, 'maintenance=logoff', 'SSL'), $osC_Language->get('admin_logout')); ?>
       </li>
@@ -374,6 +374,9 @@
   </div>
   
 <?php 
+    if ($osC_Services->isStarted('banner') && $osC_Banner->exists('468x60')) {
+      echo '<p align="center">' . $osC_Banner->display() . '</p>';
+    }
   }
 ?>
 

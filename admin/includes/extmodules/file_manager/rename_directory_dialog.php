@@ -68,7 +68,7 @@ Ext.extend(Toc.file_manager.RenameDirectoryDialog, Ext.Window, {
         labelSeparator: ''
       },
       items: [
-        {xtype: 'textfield', fieldLabel: '<?echo $osC_Language->get('field_new_directory_name');?>', name:'new_directory', width: 300},
+        {xtype: 'textfield', fieldLabel: '<?php echo $osC_Language->get('field_new_directory_name');?>', name:'new_directory', width: 300},
       ]
     });
     

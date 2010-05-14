@@ -18,7 +18,7 @@
 
 <div class="moduleBox">
 
-  <?if ($Qspecials->numberOfRows() > 0) { ?>
+  <?php if ($Qspecials->numberOfRows() > 0) { ?>
     <div class="content">
   
       <?php
@@ -46,5 +46,5 @@
     
       <?php echo $Qspecials->getBatchTotalPages($osC_Language->get('result_set_number_of_products')); ?>
     </div>
-  <? } ?>
+  <?php } ?>
 </div>

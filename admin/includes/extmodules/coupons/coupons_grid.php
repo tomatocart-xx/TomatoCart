@@ -245,8 +245,8 @@ Ext.extend(Toc.coupons.CouponsGrid, Ext.grid.GridPanel, {
   onSendEmails: function(record) {
     var couponsId = record.get('coupons_id');
     var couponsName = record.get('coupons_name');
-    var dlg = this.owner.createSendEmailsDialog();
-     
+    var dlg = this.owner.createSendEmailsDialog(couponsName);
+
     dlg.show(couponsId, couponsName);      
   },
   

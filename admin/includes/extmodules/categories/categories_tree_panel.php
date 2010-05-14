@@ -21,7 +21,7 @@ Toc.categories.CategoriesTreePanel = function(config) {
   config.autoScroll = true;
   config.containerScroll = true;
   config.split = true;
-  config.width = 200;
+  config.width = 170;
   config.enableDD = true;
   config.rootVisible = true;
   

@@ -101,8 +101,8 @@
             }
           }
         
-          //deutsch
-          foreach ($osC_Language->extractDefinitions('de_DE.xml') as $def) {
+          //chinese
+          foreach ($osC_Language->extractDefinitions('zh_CN.xml') as $def) {
             $Qdef = $osC_Database->query('insert into :table_languages_definitions (languages_id, content_group, definition_key, definition_value) values (:languages_id, :content_group, :definition_key, :definition_value)');
             $Qdef->bindTable(':table_languages_definitions', $db['DB_TABLE_PREFIX'] . 'languages_definitions');
             $Qdef->bindInt(':languages_id', 2);
@@ -112,14 +112,14 @@
             $Qdef->execute();
           }
   
-          $osC_DirectoryListing = new osC_DirectoryListing('../includes/languages/de_DE');
+          $osC_DirectoryListing = new osC_DirectoryListing('../includes/languages/zh_CN');
           $osC_DirectoryListing->setRecursive(true);
           $osC_DirectoryListing->setIncludeDirectories(false);
           $osC_DirectoryListing->setAddDirectoryToFilename(true);
           $osC_DirectoryListing->setCheckExtension('xml');
   
           foreach ($osC_DirectoryListing->getFiles() as $files) {
-            foreach ($osC_Language->extractDefinitions('de_DE/' . $files['name']) as $def) {
+            foreach ($osC_Language->extractDefinitions('zh_CN/' . $files['name']) as $def) {
               $Qdef = $osC_Database->query('insert into :table_languages_definitions (languages_id, content_group, definition_key, definition_value) values (:languages_id, :content_group, :definition_key, :definition_value)');
               $Qdef->bindTable(':table_languages_definitions', $db['DB_TABLE_PREFIX'] . 'languages_definitions');
               $Qdef->bindInt(':languages_id', 2);
@@ -154,7 +154,7 @@
           $services = array('output_compression',
                             'session',
                             'language',
-                            'debug',
+//                            'debug',
                             'currencies',
                             'core',
                             'simple_counter',

@@ -50,6 +50,15 @@ Ext.Desktop = function(app){
     win.minimized = true;
     win.hide();
   }
+  
+  function maximizeWin(win) {
+    win.maximized = true;
+    if (!Ext.isEmpty(win.footer)) {
+      win.setHeight(Ext.lib.Dom.getViewHeight() - taskbarEl.getHeight() - win.footer.getHeight());
+    }else {
+      win.setHeight(Ext.lib.Dom.getViewHeight() - taskbarEl.getHeight());
+    }
+  }
 
   function markActive(win) {
     if(activeWindow && activeWindow != win){
@@ -91,11 +100,16 @@ Ext.Desktop = function(app){
     desktopEl.setHeight(Ext.lib.Dom.getViewHeight() - taskbarEl.getHeight());
     
     if (app.sidebaropened) {
-      desktopEl.setWidth(Ext.lib.Dom.getViewWidth() - sidebarEl.getWidth());
+      if (app.sidebarcollapsed == false) {
+        desktopEl.setWidth(Ext.lib.Dom.getViewWidth() - sidebarEl.getWidth());
+      }else {
+       desktopEl.setWidth(Ext.lib.Dom.getViewWidth() - thisObj.sidebar.splitWidth);
+      }
     } else {
       desktopEl.setWidth(Ext.lib.Dom.getViewWidth());
     }
   }
+  
   Ext.EventManager.onWindowResize(layout);
 
   this.layout = layout;
@@ -158,6 +172,9 @@ Ext.Desktop = function(app){
       },
       'minimize': {
         fn: minimizeWin
+      },
+      'maximize': {
+        fn: maximizeWin
       },
       'close': {
         fn: removeWin
@@ -358,12 +375,14 @@ Ext.Desktop = function(app){
     
   this.removeContextMenu = function(id, updateConfig) {
     var m = app.getModule(id);
-    
+
     if (m) {
-      if (typeof(Ext.getCmp(id)) != "undefined") {
-        this.cmenu.remove(Ext.getCmp(id));
+      var items = this.cmenu.items.items;
+      for(var i = 0; i< items.length; i++) {
+        if(items[i].iconCls == m.launcher.iconCls) {
+          this.cmenu.remove(items[i]);
+        }
       }
-     
       
       if(updateConfig){
         var dc = app.launchers.contextmenu;

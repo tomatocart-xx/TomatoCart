@@ -100,7 +100,7 @@
          '        <td align="right" valign="top" width="30">' . $product['qty'] . '&nbsp;x</td>' . "\n" .
          '        <td valign="top">' . $product['name'];
 
-    if (isset($product['type']) && ($product['type'] == PRODUCT_TYPE_DOWNLOADABLE) && ($order->info['downloads_flag'] == 1)) {
+    if (isset($product['type']) && ($product['type'] == PRODUCT_TYPE_DOWNLOADABLE) && (isset($product['downloads_status']) && ($product['downloads_status'] == 1))) {
       echo osc_link_object(osc_href_link(FILENAME_DOWNLOAD, 'id=' . $product['orders_products_download_id'] . '&order=' . $_GET['orders']), '&nbsp;<b>(' . $osC_Language->get('download_file') . ')</b>');
     }
     

@@ -57,7 +57,7 @@ Ext.override(TocDesktop.ReportsWebWindow, {
         id: this.id,
         title: this.title,
         width: pnl.width,
-        autoHeight: true,
+        height: pnl.height,
         iconCls: this.iconCls,
         layout: 'fit',
         items: pnl

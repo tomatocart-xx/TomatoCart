@@ -15,7 +15,6 @@ Toc.unit_classes.UnitClassesDialog = function (config) {
   config = config || {};
   
   config.id = 'unit_classes-dialog-win';
-  config.title = '<?php echo $osC_Language->get("action_heading_new_quantity_unit_class"); ?>';
   config.layout = 'fit';
   config.width = 400;
   config.height = 200;

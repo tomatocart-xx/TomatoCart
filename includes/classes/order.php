@@ -546,7 +546,7 @@
     function &getListing($limit = null, $page_keyword = 'page') {
       global $osC_Database, $osC_Customer, $osC_Language;
 
-      $Qorders = $osC_Database->query('select o.orders_id, o.date_purchased, o.delivery_name, o.delivery_country, o.billing_name, o.billing_country, ot.text as order_total, o.orders_status, s.orders_status_name from :table_orders o, :table_orders_total ot, :table_orders_status s where o.customers_id = :customers_id and o.orders_id = ot.orders_id and ot.class = "total" and o.orders_status = s.orders_status_id and s.language_id = :language_id order by orders_id desc');
+      $Qorders = $osC_Database->query('select o.orders_id, o.date_purchased, o.delivery_name, o.delivery_country, o.billing_name, o.billing_country, ot.text as order_total, o.orders_status, s.orders_status_name, s.returns_flag from :table_orders o, :table_orders_total ot, :table_orders_status s where o.customers_id = :customers_id and o.orders_id = ot.orders_id and ot.class = "total" and o.orders_status = s.orders_status_id and s.language_id = :language_id order by orders_id desc');
       $Qorders->bindTable(':table_orders', TABLE_ORDERS);
       $Qorders->bindTable(':table_orders_total', TABLE_ORDERS_TOTAL);
       $Qorders->bindTable(':table_orders_status', TABLE_ORDERS_STATUS);
@@ -569,7 +569,7 @@
         $orders_id = $this->_id;
       }
 
-      $Qstatus = $osC_Database->query('select os.orders_status_name from :table_orders_status os, :table_orders_status_history osh where osh.orders_id = :orders_id and osh.orders_status_id = os.orders_status_id and os.language_id = :language_id and os.public_flag = 1 order by osh.date_added desc limit 1');
+      $Qstatus = $osC_Database->query('select os.orders_status_name from :table_orders_status os, :table_orders_status_history osh where osh.orders_id = :orders_id and osh.orders_status_id = os.orders_status_id and os.language_id = :language_id and os.public_flag = 1 order by osh.orders_status_history_id desc limit 1');
       $Qstatus->bindTable(':table_orders_status', TABLE_ORDERS_STATUS);
       $Qstatus->bindTable(':table_orders_status_history', TABLE_ORDERS_STATUS_HISTORY);
       $Qstatus->bindInt(':orders_id', $orders_id);
@@ -660,6 +660,20 @@
       $Qorder->execute();
 
       return ($Qorder->numberOfRows() === 1);
+    }
+    
+    function hasNotReturnedProduct() {
+      $quantity = 0;
+      
+      foreach ($this->products as $product) {
+        $quantity += $product['qty'] - $this->getProductReturnedQuantity($product['orders_products_id']);
+      }
+      
+      if ($quantity > 0) {
+        return true;
+      }
+      
+      return false;
     }
     
     function getProductReturnedQuantity($orders_products_id) {
@@ -811,6 +825,7 @@
           $Qdownloadable->execute();
           
           if ($Qdownloadable->numberOfRows() > 0) {
+            $this->products[$index]['downloads_status'] = $Qdownloadable->valueInt('status');
             if ($Qdownloadable->valueInt('status') == 1) {
               $this->products[$index]['orders_products_download_id'] = $Qdownloadable->valueInt('orders_products_download_id');
               $this->products[$index]['products_filename'] = $Qdownloadable->value('orders_products_filename');

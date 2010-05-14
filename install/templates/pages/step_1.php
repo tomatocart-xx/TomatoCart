@@ -18,7 +18,7 @@
     if(document.getElementById('license').checked){
       return true;
     } else {
-      alert("<? echo $osC_Language->get('error_agree_to_license'); ?>");
+      alert("<?php echo $osC_Language->get('error_agree_to_license'); ?>");
       return false;
     }
   }

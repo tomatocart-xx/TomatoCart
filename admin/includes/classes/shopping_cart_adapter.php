@@ -4,7 +4,7 @@
   TomatoCart Open Source Shopping Cart Solutions
   http://www.tomatocart.com
 
-  Copyright (c) 2009 Wuxi Elootec Technology Co., Ltd;  Copyright (c) 2007 osCommerce
+  Copyright (c) 2009 Wuxi Elootec Technology Co., Ltd
 
   This program is free software; you can redistribute it and/or modify
   it under the terms of the GNU General Public License v2 (1991)
@@ -14,14 +14,29 @@
 
   class toC_ShoppingCart_Adapter extends osC_Order {
 
-    function osC_ShoppingCart($order_id) {
+// class constructor
+    function toC_ShoppingCart_Adapter($order_id) {
       parent::osC_Order($order_id);
     }
 
     function hasContents() {
       return !empty($this->_contents);
     }
+      
+    function numberOfPhysicalItems() {
+      $total = 0;
 
+      if ($this->hasContents()) {
+        foreach ($this->_contents as $product) {
+          if(($product['type'] == PRODUCT_TYPE_SIMPLE) || ( ($product['type'] == PRODUCT_TYPE_GIFT_CERTIFICATE) && ($product['gc_data']['type'] == GIFT_CERTIFICATE_TYPE_PHYSICAL) )) {
+            $total += $product['quantity'];
+          }
+        }
+      }
+
+      return $total;
+    }
+    
     function numberOfItems() {
       $total = 0;
 
@@ -58,6 +73,10 @@
       return $this->_total;
     }
 
+    function isTotalZero() {
+      return ($this->_total == 0);
+    }    
+    
     function getWeight() {
       return $this->_weight;
     }
@@ -65,55 +84,33 @@
     function getContentType() {
       global $osC_Database;
 
-      $this->_content_type = 'physical';
-
-      if ( (DOWNLOAD_ENABLED == '1') && $this->hasContents() ) {
-        foreach ($this->_contents as $products_id => $data) {
-          if (isset($data['variants'])) {
-            foreach ($data['variants'] as $value) {
-              $Qcheck = $osC_Database->query('select count(*) as total from :table_products_variants pa, :table_products_variants_download pad where pa.products_id = :products_id and pa.options_values_id = :options_values_id and pa.products_variants_id = pad.products_variants_id');
-              $Qcheck->bindTable(':table_products_variants', TABLE_PRODUCTS_ATTRIBUTES);
-              $Qcheck->bindTable(':table_products_variants_download', TABLE_PRODUCTS_ATTRIBUTES_DOWNLOAD);
-              $Qcheck->bindInt(':products_id', $products_id);
-              $Qcheck->bindInt(':options_values_id', $value['options_values_id']);
-              $Qcheck->execute();
-
-              if ($Qcheck->valueInt('total') > 0) {
-                switch ($this->_content_type) {
-                  case 'physical':
-                    $this->_content_type = 'mixed';
-
-                    return $this->_content_type;
-                    break;
-                  default:
-                    $this->_content_type = 'virtual';
-                    break;
-                }
-              } else {
-                switch ($this->_content_type) {
-                  case 'virtual':
-                    $this->_content_type = 'mixed';
-
-                    return $this->_content_type;
-                    break;
-                  default:
-                    $this->_content_type = 'physical';
-                    break;
-                }
-              }
-            }
-          } else {
+      if ( $this->hasContents() ) {
+        $products = array_values($this->_contents);
+        
+        foreach ($products as $product) {
+          if (($product['type'] == PRODUCT_TYPE_SIMPLE) || ( ($product['type'] == PRODUCT_TYPE_GIFT_CERTIFICATE) && ($product['gc_data']['type'] == GIFT_CERTIFICATE_TYPE_PHYSICAL) )) {
             switch ($this->_content_type) {
               case 'virtual':
                 $this->_content_type = 'mixed';
-
+          
                 return $this->_content_type;
                 break;
               default:
                 $this->_content_type = 'physical';
                 break;
             }
-          }
+          } else {
+            switch ($this->_content_type) {
+              case 'physical':
+                $this->_content_type = 'mixed';
+          
+                return $this->_content_type;
+                break;
+              default:
+                $this->_content_type = 'virtual';
+                break;
+            }
+          }        
         }
       }
 
@@ -133,12 +130,8 @@
     function isInStock($products_id) {
       global $osC_Database;
 
-      $Qstock = $osC_Database->query('select products_quantity from :table_products where products_id = :products_id');
-      $Qstock->bindTable(':table_products', TABLE_PRODUCTS);
-      $Qstock->bindInt(':products_id', osc_get_product_id($products_id));
-      $Qstock->execute();
-
-      if (($Qstock->valueInt('products_quantity') - $this->_contents[$products_id]['quantity']) > 0) {
+      $osC_Product = new osC_Product(osc_get_product_id($products_id));
+      if (($osC_Product->getQuantity($products_id) - $this->_contents[$products_id]['quantity']) >= 0) {
         return true;
       } elseif ($this->_products_in_stock === true) {
         $this->_products_in_stock = false;
@@ -231,7 +224,9 @@
 
     function resetShippingMethod() {
       $this->_shipping_method = array();
+      
       unset($_SESSION['osC_ShoppingCart_data']['shipping_quotes']);
+      
       $this->_calculate();
     }
 
@@ -508,15 +503,16 @@
 
       $modules = $this->getOrderTotals();
       foreach ($modules as $module) {
-        $Qtotals = $osC_Database->query('insert into :table_orders_total (orders_id, title, text, value, class, sort_order) values (:orders_id, :title, :text, :value, :class, :sort_order)');
-        $Qtotals->bindTable(':table_orders_total', TABLE_ORDERS_TOTAL);
-        $Qtotals->bindInt(':orders_id', $this->_order_id);
-        $Qtotals->bindValue(':title', $module['title']);
-        $Qtotals->bindValue(':text', $module['text']);
-        $Qtotals->bindValue(':value', $module['value']);
-        $Qtotals->bindValue(':class', $module['code']);
-        $Qtotals->bindInt(':sort_order', $module['sort_order']);
-        $Qtotals->execute();
+        $Qinsert = $osC_Database->query('insert into :table_orders_total (orders_id, title, text, value, class, sort_order) values (:orders_id, :title, :text, :value, :class, :sort_order)');
+        $Qinsert->bindTable(':table_orders_total', TABLE_ORDERS_TOTAL);
+        $Qinsert->bindInt(':orders_id', $this->_order_id);
+        $Qinsert->bindValue(':title', $module['title']);
+        $Qinsert->bindValue(':text', $module['text']);
+        $Qinsert->bindValue(':value', $module['value']);
+        $Qinsert->bindValue(':class', $module['code']);
+        $Qinsert->bindInt(':sort_order', $module['sort_order']);
+        $Qinsert->setLogging($_SESSION['module'], $this->getOrderID());
+        $Qinsert->execute();
       }
     }
 
@@ -533,6 +529,7 @@
       $Qcoupon->bindInt(':orders_id', $this->getOrderID());
       $Qcoupon->bindValue(':redeem_amount', $this->_coupon_amount);
       $Qcoupon->bindValue(':redeem_ip_address', osc_get_ip_address());
+      $Qcoupon->setLogging($_SESSION['module'], $this->getOrderID());
       $Qcoupon->execute();
       
       if (!$osC_Database->isError()) {
@@ -548,11 +545,12 @@
       include_once('../includes/classes/coupon.php');
       $toC_Coupon = new toC_Coupon($this->_coupon_code);
 
-      $Qcoupon = $osC_Database->query('delete from :table_coupons_redeem_history where coupons_id = :coupons_id and orders_id = :orders_id');
-      $Qcoupon->bindTable(':table_coupons_redeem_history', TABLE_COUPONS_REDEEM_HISTORY);
-      $Qcoupon->bindInt(':coupons_id', $toC_Coupon->getID());
-      $Qcoupon->bindInt(':orders_id', $this->_order_id);
-      $Qcoupon->execute();
+      $Qdelete = $osC_Database->query('delete from :table_coupons_redeem_history where coupons_id = :coupons_id and orders_id = :orders_id');
+      $Qdelete->bindTable(':table_coupons_redeem_history', TABLE_COUPONS_REDEEM_HISTORY);
+      $Qdelete->bindInt(':coupons_id', $toC_Coupon->getID());
+      $Qdelete->bindInt(':orders_id', $this->getOrderID());
+      $Qdelete->setLogging($_SESSION['module'], $this->getOrderID());
+      $Qdelete->execute();
       
       if (!$osC_Database->isError()) {
         return true;
@@ -564,6 +562,7 @@
     function _insertGiftCertificateRedeemHistory($gift_certificate_code) {
       global $osC_Database;
       
+      //get gift certificate id
       $Qcertificate = $osC_Database->query('select gift_certificates_id from :table_gift_certificates where gift_certificates_code = :gift_certificates_code');
       $Qcertificate->bindTable(':table_gift_certificates', TABLE_GIFT_CERTIFICATES);
       $Qcertificate->bindValue(':gift_certificates_code', $gift_certificate_code);
@@ -576,6 +575,7 @@
       $Qinsert->bindInt(':orders_id', $this->getOrderID());
       $Qinsert->bindValue(':redeem_amount', $this->_gift_certificate_redeem_amount[$gift_certificate_code]);
       $Qinsert->bindValue(':redeem_ip_address', osc_get_ip_address());
+      $Qinsert->setLogging($_SESSION['module'], $this->getOrderID());
       $Qinsert->execute();
       
       if (!$osC_Database->isError()) {
@@ -588,19 +588,18 @@
     function _deleteGiftCertificateRedeemHistory($gift_certificate_code) {
       global $osC_Database;
         
-      $Qcertificate = $osC_Database->query('select gift_certificates_id from :table_gift_certificates where gift_certificates_code = :gift_certificates_code');
-      $Qcertificate->bindTable(':table_gift_certificates', TABLE_GIFT_CERTIFICATES);
-      $Qcertificate->bindValue(':gift_certificates_code', $gift_certificate_code);
-      $Qcertificate->execute();
+      $Qdelete = $osC_Database->query('delete from :table_gift_certificates_redeem_history where orders_id = :orders_id and gift_certificates_id = (select gift_certificates_id from :table_gift_certificates where gift_certificates_code = :gift_certificates_code)');
+      $Qdelete->bindTable(':table_gift_certificates_redeem_history', TABLE_GIFT_CERTIFICATES_REDEEM_HISTORY);
+      $Qdelete->bindInt(':orders_id', $this->getOrderID());
+      $Qdelete->bindValue(':gift_certificates_code', $gift_certificate_code);
+      $Qdelete->setLogging($_SESSION['module'], $this->getOrderID());
+      $Qdelete->execute();
       
-      $Qinsert = $osC_Database->query('delete from :table_gift_certificates_redeem_history where gift_certificates_id = :gift_certificates_id');
-      $Qinsert->bindTable(':table_gift_certificates_redeem_history', TABLE_GIFT_CERTIFICATES_REDEEM_HISTORY);
-      $Qinsert->bindInt(':gift_certificates_id', $Qcertificate->valueInt(gift_certificates_id));
-      $Qinsert->bindInt(':customers_id', $this->_customer['customers_id']);
-      $Qinsert->bindInt(':orders_id', $this->getOrderID());
-      $Qinsert->bindValue(':redeem_amount', $amount);
-      $Qinsert->bindValue(':redeem_ip_address', osc_get_ip_address());
-      $Qinsert->execute();
+      if (!$osC_Database->isError()) {
+        return true;
+      }
+      
+      return false;
     }
 
     function _calculate($set_shipping = true) {
@@ -712,12 +711,12 @@
     function _updateProductTax($orders_products_id, $tax) {
       global $osC_Database;
       
-      $Qtax = $osC_Database->query('update :table_orders_products set products_tax = :products_tax where orders_id = :orders_id and orders_products_id = :orders_products_id');
-      $Qtax ->bindTable(':table_orders_products', TABLE_ORDERS_PRODUCTS);
-      $Qtax->bindInt(':orders_id', $this->_order_id);
-      $Qtax->bindInt(':orders_products_id', $orders_products_id);
-      $Qtax->bindValue(':products_tax', $tax);
-      $Qtax->execute();
+      $Qupdate = $osC_Database->query('update :table_orders_products set products_tax = :products_tax where orders_id = :orders_id and orders_products_id = :orders_products_id');
+      $Qupdate->bindTable(':table_orders_products', TABLE_ORDERS_PRODUCTS);
+      $Qupdate->bindInt(':orders_id', $this->_order_id);
+      $Qupdate->bindInt(':orders_products_id', $orders_products_id);
+      $Qupdate->bindValue(':products_tax', $tax);
+      $Qupdate->execute();
       
       if (!$osC_Database->isError()) {
         return true;
@@ -731,13 +730,13 @@
       
       $price = $price / $this->getCurrencyValue();
       
-      $Qprice = $osC_Database->query('update :table_orders_products set products_price = :products_price, final_price = :final_price where orders_id = :orders_id and orders_products_id = :orders_products_id');
-      $Qprice ->bindTable(':table_orders_products', TABLE_ORDERS_PRODUCTS);
-      $Qprice->bindInt(':orders_id', $this->_order_id);
-      $Qprice->bindInt(':orders_products_id', $orders_products_id);
-      $Qprice->bindValue(':products_price', $price);
-      $Qprice->bindValue(':final_price', $price);
-      $Qprice->execute();
+      $Qupdate = $osC_Database->query('update :table_orders_products set products_price = :products_price, final_price = :final_price where orders_id = :orders_id and orders_products_id = :orders_products_id');
+      $Qupdate ->bindTable(':table_orders_products', TABLE_ORDERS_PRODUCTS);
+      $Qupdate->bindInt(':orders_id', $this->_order_id);
+      $Qupdate->bindInt(':orders_products_id', $orders_products_id);
+      $Qupdate->bindValue(':products_price', $price);
+      $Qupdate->bindValue(':final_price', $price);
+      $Qupdate->execute();
       
       if (!$osC_Database->isError()) {
         $this->_calculate();
@@ -886,6 +885,7 @@
             $Qopd = $osC_Database->query('delete from :table_orders_products_download where orders_products_id = :orders_products_id');
             $Qopd->bindTable(':table_orders_products_download', TABLE_ORDERS_PRODUCTS_DOWNLOAD);
             $Qopd->bindInt(':orders_products_id', $orders_products_id);
+            $Qopd->setLogging($_SESSION['module'], $this->_order_id);
             $Qopd->execute();
           }
   
@@ -893,6 +893,7 @@
             $Qgc = $osC_Database->query('delete from :table_gift_certificates where orders_products_id = :orders_products_id');
             $Qgc->bindTable(':table_gift_certificates', TABLE_GIFT_CERTIFICATES);
             $Qgc->bindInt(':orders_products_id', $orders_products_id);
+            $Qgc->setLogging($_SESSION['module'], $this->_order_id);
             $Qgc->execute();
           }
 
@@ -944,6 +945,7 @@
         $Qupdate->bindValue(':final_price', $osC_Product->getPrice($variants, $new_quantity));
         $Qupdate->bindInt(':orders_products_id', $orders_products_id);
         $Qupdate->bindInt(':products_type', $osC_Product->getProductType());
+        $Qupdate->setLogging($_SESSION['module'], $this->_order_id);
         $Qupdate->execute();
 
         if ($osC_Database->isError()) {
@@ -960,18 +962,18 @@
           $products_price = $gift_certificate_data['price'];
         }
         
-        $Qproduct = $osC_Database->query('insert into :table_orders_products (orders_id, products_id, products_sku, products_name, products_price, final_price, products_tax, products_quantity, products_type) values (:orders_id, :products_id, :products_sku, :products_name, :products_price, :final_price, :products_tax, :products_quantity, :products_type) ');
-        $Qproduct->bindTable(':table_orders_products', TABLE_ORDERS_PRODUCTS);
-        $Qproduct->bindInt(':orders_id', $this->_order_id);
-        $Qproduct->bindInt(':products_id', $osC_Product->getID());
-        $Qproduct->bindValue(':products_sku', $osC_Product->getSKU());
-        $Qproduct->bindValue(':products_name', $osC_Product->getTitle());
-        $Qproduct->bindValue(':products_price', $product_price);
-        $Qproduct->bindValue(':final_price', $products_price);
-        $Qproduct->bindValue(':products_tax', $osC_Tax->getTaxRate($osC_Product->getTaxClassID(), $this->_shipping_address['country_id'], $this->_shipping_address['zone_id']));
-        $Qproduct->bindInt(':products_quantity', $quantity);
-        $Qproduct->bindInt(':products_type', $osC_Product->getProductType());
-        $Qproduct->execute();
+        $Qinsert = $osC_Database->query('insert into :table_orders_products (orders_id, products_id, products_sku, products_name, products_price, final_price, products_tax, products_quantity, products_type) values (:orders_id, :products_id, :products_sku, :products_name, :products_price, :final_price, :products_tax, :products_quantity, :products_type) ');
+        $Qinsert->bindTable(':table_orders_products', TABLE_ORDERS_PRODUCTS);
+        $Qinsert->bindInt(':orders_id', $this->_order_id);
+        $Qinsert->bindInt(':products_id', $osC_Product->getID());
+        $Qinsert->bindValue(':products_sku', $osC_Product->getSKU());
+        $Qinsert->bindValue(':products_name', $osC_Product->getTitle());
+        $Qinsert->bindValue(':products_price', $products_price);
+        $Qinsert->bindValue(':final_price', $products_price);
+        $Qinsert->bindValue(':products_tax', $osC_Tax->getTaxRate($osC_Product->getTaxClassID(), $this->_shipping_address['country_id'], $this->_shipping_address['zone_id']));
+        $Qinsert->bindInt(':products_quantity', $quantity);
+        $Qinsert->bindInt(':products_type', $osC_Product->getProductType());
+        $Qinsert->execute();
         
         if ($osC_Database->isError()){
           $error = true;
@@ -992,15 +994,16 @@
               $Qvariants->bindInt(':language_id', $osC_Language->getID());
               $Qvariants->execute();
 
-              $Qproduct = $osC_Database->query('insert into :table_orders_products_variants (orders_id, orders_products_id, products_variants_groups_id, products_variants_groups, products_variants_values_id, products_variants_values) values (:orders_id, :orders_products_id, :products_variants_groups_id, :products_variants_groups, :products_variants_values_id, :products_variants_values) ');
-              $Qproduct->bindTable(':table_orders_products_variants', TABLE_ORDERS_PRODUCTS_VARIANTS);
-              $Qproduct->bindInt(':orders_id', $this->_order_id);
-              $Qproduct->bindInt(':orders_products_id', $orders_products_id);
-              $Qproduct->bindInt(':products_variants_groups_id', $groups_id);
-              $Qproduct->bindValue(':products_variants_groups', $Qvariants->value('products_variants_groups_name'));
-              $Qproduct->bindInt(':products_variants_values_id', $values_id);
-              $Qproduct->bindValue(':products_variants_values', $Qvariants->value('products_variants_values_name'));
-              $Qproduct->execute();
+              $Qinsert = $osC_Database->query('insert into :table_orders_products_variants (orders_id, orders_products_id, products_variants_groups_id, products_variants_groups, products_variants_values_id, products_variants_values) values (:orders_id, :orders_products_id, :products_variants_groups_id, :products_variants_groups, :products_variants_values_id, :products_variants_values) ');
+              $Qinsert->bindTable(':table_orders_products_variants', TABLE_ORDERS_PRODUCTS_VARIANTS);
+              $Qinsert->bindInt(':orders_id', $this->_order_id);
+              $Qinsert->bindInt(':orders_products_id', $orders_products_id);
+              $Qinsert->bindInt(':products_variants_groups_id', $groups_id);
+              $Qinsert->bindValue(':products_variants_groups', $Qvariants->value('products_variants_groups_name'));
+              $Qinsert->bindInt(':products_variants_values_id', $values_id);
+              $Qinsert->bindValue(':products_variants_values', $Qvariants->value('products_variants_values_name'));
+              $Qinsert->setLogging($_SESSION['module'], $this->_order_id);
+              $Qinsert->execute();
 
               if ($osC_Database->isError()){
                 $error = true;
@@ -1024,6 +1027,7 @@
               $Qopd->bindValue(':orders_products_cache_filename', $Qdownloadable->value('cache_filename'));
               $Qopd->bindValue(':download_maxdays', $Qdownloadable->valueInt('number_of_accessible_days'));
               $Qopd->bindValue(':download_count', $Qdownloadable->valueInt('number_of_downloads'));
+              $Qopd->setLogging($_SESSION['module'], $this->_order_id);
               $Qopd->execute();
               
               if ($osC_Database->isError()){
@@ -1048,6 +1052,7 @@
               $Qgc->bindValue(':senders_name', $gift_certificate_data['senders_name']);
               $Qgc->bindValue(':senders_email', $gift_certificate_data['senders_email']);
               $Qgc->bindValue(':messages', $gift_certificate_data['message']);
+              $Qgc->setLogging($_SESSION['module'], $this->_order_id);
               $Qgc->execute();
               
               if ($osC_Database->isError()){
@@ -1057,24 +1062,18 @@
           }
         }
 
-        if ($osC_Database->isError()){
-          $error = true;
-        } else {
-
-
-          if($error === false){
-            $this->_contents[$products_id_string] = array('id' => $products_id,
-                                                          'orders_products_id' => $orders_products_id,
-                                                          'quantity' => $quantity,
-                                                          'name' => $osC_Product->getTitle(),
-                                                          'model' => $osC_Product->getModel(),
-                                                          'tax' => $osC_Tax->getTaxRate($osC_Product->getTaxClassID(), $this->_shipping_address['country_id'], $this->_shipping_address['zone_id']),
-                                                          'price' => $product_price,
-                                                          'final_price' => $products_price,
-                                                          'weight' => $osC_Product->getWeight(),
-                                                          'tax_class_id' => $osC_Product->getTaxClassID(),
-                                                          'weight_class_id' => $osC_Product->getWeightClass());
-          }
+        if($error === false){
+          $this->_contents[$products_id_string] = array('id' => $products_id,
+                                                        'orders_products_id' => $orders_products_id,
+                                                        'quantity' => $quantity,
+                                                        'name' => $osC_Product->getTitle(),
+                                                        'sku' => $osC_Product->getSKU($variants_array),
+                                                        'tax' => $osC_Tax->getTaxRate($osC_Product->getTaxClassID(), $this->_shipping_address['country_id'], $this->_shipping_address['zone_id']),
+                                                        'price' => $product_price,
+                                                        'final_price' => $products_price,
+                                                        'weight' => $osC_Product->getWeight($variants),
+                                                        'tax_class_id' => $osC_Product->getTaxClassID(),
+                                                        'weight_class_id' => $osC_Product->getWeightClass());
         }
       }
 
@@ -1193,19 +1192,20 @@
       
       $error = false;
       
-      $Qcredit = $osC_Database->query('select amount from :table_customers_credits_history where orders_id = :orders_id');
-      $Qcredit->bindTable(':table_customers_credits_history', TABLE_CUSTOMERS_CREDITS_HISTORY);
-      $Qcredit->bindInt(':orders_id', $this->_order_id);
-      $Qcredit->execute();
+      $Qcheck = $osC_Database->query('select amount from :table_customers_credits_history where orders_id = :orders_id');
+      $Qcheck->bindTable(':table_customers_credits_history', TABLE_CUSTOMERS_CREDITS_HISTORY);
+      $Qcheck->bindInt(':orders_id', $this->_order_id);
+      $Qcheck->execute();
       
-      if ($Qcredit->numberOfRows() > 0) {
-        $amount = $Qcredit->value('amount');
+      if ($Qcheck->numberOfRows() > 0) {
+        $amount = $Qcheck->value('amount');
         
-        $Qcustomer = $osC_Database->query('update :table_customers set customers_credits = (customers_credits + :customers_credits) where customers_id = :customers_id');
-        $Qcustomer->bindTable(':table_customers', TABLE_CUSTOMERS);
-        $Qcustomer->bindRaw(':customers_credits', $amount * (-1));
-        $Qcustomer->bindInt(':customers_id', $this->getCustomersID());
-        $Qcustomer->execute();
+        $Qcredit = $osC_Database->query('update :table_customers set customers_credits = (customers_credits + :customers_credits) where customers_id = :customers_id');
+        $Qcredit->bindTable(':table_customers', TABLE_CUSTOMERS);
+        $Qcredit->bindRaw(':customers_credits', $amount * (-1));
+        $Qcredit->bindInt(':customers_id', $this->getCustomersID());
+        $Qcredit->setLogging($_SESSION['module'], $this->_order_id);
+        $Qcredit->execute();
         
         if ($osC_Database->isError()) {
           $error = true;
@@ -1215,6 +1215,7 @@
           $Qdelete = $osC_Database->query('delete from :table_customers_credits_history where orders_id = :orders_id');
           $Qdelete->bindTable(':table_customers_credits_history', TABLE_CUSTOMERS_CREDITS_HISTORY);
           $Qdelete->bindInt(':orders_id', $this->_order_id);
+          $Qdelete->setLogging($_SESSION['module'], $this->_order_id);
           $Qdelete->execute();
           
           if ($osC_Database->isError()) {
@@ -1242,6 +1243,7 @@
       $Qinsert->bindInt(':action_type', STORE_CREDIT_ACTION_TYPE_ORDER_PURCHASE);
       $Qinsert->bindValue(':amount', $this->getStoreCredit() * (-1));
       $Qinsert->bindValue(':comments', '');
+      $Qinsert->setLogging($_SESSION['module'], $this->_order_id);
       $Qinsert->execute();
         
       if ($osC_Database->isError()) {
@@ -1249,11 +1251,12 @@
       }
       
       if ($error === false) {
-        $Qcustomer = $osC_Database->query('update :table_customers set customers_credits = (customers_credits - :customers_credits) where customers_id = :customers_id');
-        $Qcustomer->bindTable(':table_customers', TABLE_CUSTOMERS);
-        $Qcustomer->bindRaw(':customers_credits', $this->getStoreCredit());
-        $Qcustomer->bindInt(':customers_id', $this->getCustomersID());
-        $Qcustomer->execute();
+        $Qcredit = $osC_Database->query('update :table_customers set customers_credits = (customers_credits - :customers_credits) where customers_id = :customers_id');
+        $Qcredit->bindTable(':table_customers', TABLE_CUSTOMERS);
+        $Qcredit->bindRaw(':customers_credits', $this->getStoreCredit());
+        $Qcredit->bindInt(':customers_id', $this->getCustomersID());
+        $Qcredit->setLogging($_SESSION['module'], $this->_order_id);
+        $Qcredit->execute();
         
         if ($osC_Database->isError()) {
           $error = true;
@@ -1286,6 +1289,7 @@
       $Qupdate->bindValue(':payment_method', implode(',', $this->getCartBillingMethods()));
       $Qupdate->bindValue(':payment_module', implode(',', $this->getCartBillingModules()));
       $Qupdate->bindInt(':orders_id', $this->_order_id);
+      $Qupdate->setLogging($_SESSION['module'], $this->_order_id);
       $Qupdate->execute();
 
       if (!$osC_Database->isError()) {

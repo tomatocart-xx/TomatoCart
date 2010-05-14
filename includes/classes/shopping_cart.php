@@ -428,7 +428,7 @@
                                                         'price' => $price,
                                                         'final_price' => $price,
                                                         'quantity' => $quantity,
-                                                        'weight' => $osC_Product->getWeight(),
+                                                        'weight' => $osC_Product->getWeight($variants),
                                                         'tax_class_id' => $osC_Product->getTaxClassID(),
                                                         'date_added' => osC_DateTime::getShort(osC_DateTime::getNow()),
                                                         'weight_class_id' => $osC_Product->getWeightClass(),
@@ -1173,15 +1173,21 @@
             include('includes/classes/shipping.php');
           }
 
-          if (!$this->hasShippingMethod() || ($this->getShippingMethod('is_cheapest') === true)) {
-            $osC_Shipping = new osC_Shipping();
-            $this->setShippingMethod($osC_Shipping->getCheapestQuote(), false);
+          if (!$this->isVirtualCart()) {
+            if (!$this->hasShippingMethod() || ($this->getShippingMethod('is_cheapest') === true)) {
+              $osC_Shipping = new osC_Shipping();
+              $this->setShippingMethod($osC_Shipping->getCheapestQuote(), false);
+            } else {
+              $osC_Shipping = new osC_Shipping($this->getShippingMethod('id'));
+              $this->setShippingMethod($osC_Shipping->getQuote(), false);
+            }
           } else {
-            $osC_Shipping = new osC_Shipping($this->getShippingMethod('id'));
-            $this->setShippingMethod($osC_Shipping->getQuote(), false);
+            //reset shipping address and shipping method
+            $this->_shipping_address = array();
+            $this->_shipping_method = array();
           }
         }
-
+        
         if (!class_exists('osC_OrderTotal')) {
           include('includes/classes/order_total.php');
         }

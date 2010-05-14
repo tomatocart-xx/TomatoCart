@@ -16,46 +16,46 @@ $step = 1;
 <h1><?php echo $osC_Language->get('checkout')?></h1>
   
 <ul id="checkoutForm"> 
-  <? if ($osC_Customer->isLoggedOn() === false) { ?>
+  <?php if ($osC_Customer->isLoggedOn() === false) { ?>
     <li id="checkoutMethodForm">
       <h3 class="formHeader">
          <?php echo $step++ . '<a onclick="javascript:void(0);">' . $osC_Language->get('checkout_method') . '</a>';?><span> </span>
       </h3>
       <div class="formBody"></div>
     </li>
-  <? } ?>
+  <?php } ?>
   
   <li id="billingInformationForm">
     <h3 class="formHeader">
-       <?php echo $step++ . '<a onclick="javascript:void(0);">' . $osC_Language->get('checkout_billing_information') . '</a>'; ?> <span><?php echo osc_draw_image_button('button_checkout_up.png'); ?></span>
+       <?php echo $step++ . '<a onclick="javascript:void(0);">' . $osC_Language->get('checkout_billing_information') . '</a>'; ?> <span><?php echo osc_image('templates/' . $osC_Template->getCode() . '/images/checkout_up.png'); ?></span>
     </h3>
     <div class="formBody"></div>
   </li>  
   
   <li id="shippingInformationForm">
     <h3 class="formHeader">
-       <?php echo $step++ . '<a onclick="javascript:void(0);">' . $osC_Language->get('checkout_shipping_information') . '</a>';?> <span><?php echo osc_draw_image_button('button_checkout_up.png'); ?></span>
+       <?php echo $step++ . '<a onclick="javascript:void(0);">' . $osC_Language->get('checkout_shipping_information') . '</a>';?> <span><?php echo osc_image('templates/' . $osC_Template->getCode() . '/images/checkout_up.png'); ?></span>
     </h3>
     <div class="formBody"></div>
   </li>
   
   <li id="shippingMethodForm">
     <h3 class="formHeader">
-       <?php echo $step++ . '<a onclick="javascript:void(0);">' . $osC_Language->get('checkout_shipping_method') . '</a>'; ?> <span><?php echo osc_draw_image_button('button_checkout_up.png'); ?></span>
+       <?php echo $step++ . '<a onclick="javascript:void(0);">' . $osC_Language->get('checkout_shipping_method') . '</a>'; ?> <span><?php echo osc_image('templates/' . $osC_Template->getCode() . '/images/checkout_up.png'); ?></span>
     </h3>
     <div class="formBody"></div>
   </li>
   
   <li id="paymentInformationForm">
     <h3 class="formHeader">
-       <?php echo $step++ . '<a onclick="javascript:void(0);">' . $osC_Language->get('checkout_payment_information') . '</a>'; ?> <span><?php echo osc_draw_image_button('button_checkout_up.png'); ?></span>
+       <?php echo $step++ . '<a onclick="javascript:void(0);">' . $osC_Language->get('checkout_payment_information') . '</a>'; ?> <span><?php echo osc_image('templates/' . $osC_Template->getCode() . '/images/checkout_up.png'); ?></span>
     </h3>
     <div class="formBody"></div>
   </li>
   
   <li id="orderConfirmationForm">
     <h3 class="formHeader">
-       <?php echo $step++ . '<a onclick="javascript:void(0);">' . $osC_Language->get('checkout_order_review') . '</a>'; ?> <span><?php echo osc_draw_image_button('button_checkout_up.png'); ?></span>
+       <?php echo $step++ . '<a onclick="javascript:void(0);">' . $osC_Language->get('checkout_order_review') . '</a>'; ?> <span><?php echo osc_image('templates/' . $osC_Template->getCode() . '/images/checkout_up.png'); ?></span>
     </h3>
     <div class="formBody"></div>
   </li>
@@ -104,7 +104,7 @@ $step = 1;
           formHeader.getNext().setStyle('display', 'none');
         } else {
           this.openedForm = formHeader.getParent().id;
-          formHeader.getElement('span').set('html', '<?php echo osc_image('templates/' . $osC_Template->getCode() . '/images/button_checkout_down.png'); ?>');
+          formHeader.getElement('span').set('html', '<?php echo osc_image('templates/' . $osC_Template->getCode() . '/images/checkout_down.png'); ?>');
         }
       }.bind(this));  
     },
@@ -123,14 +123,14 @@ $step = 1;
           }
           
           form_body.setStyle('display', 'none');
-          span.set('html', '<?php echo osc_image('templates/' . $osC_Template->getCode() . '/images/button_checkout_up.png'); ?>');
+          span.set('html', '<?php echo osc_image('templates/' . $osC_Template->getCode() . '/images/checkout_up.png'); ?>');
         } else {
           if (formHeader.getParent().hasClass('collapse')) {
             formHeader.getParent().removeClass('collapse');
           }
           
           form_body.setStyle('display', 'block');
-          span.set('html', '<?php echo osc_image('templates/' . $osC_Template->getCode() . '/images/button_checkout_down.png'); ?>');
+          span.set('html', '<?php echo osc_image('templates/' . $osC_Template->getCode() . '/images/checkout_down.png'); ?>');
         }
       });
     }
@@ -138,6 +138,7 @@ $step = 1;
   
   window.addEvent('domready', function() {
     checkout = new tocCheckout({
+      remoteUrl: '<?php echo osc_href_link('json.php', null, 'SSL', false, false, true); ?>',
       isLoggedOn: <?php echo ($osC_Customer->isLoggedOn() === true) ? 'true' : 'false';?>,
       sessionName: '<?php echo $osC_Session->getName(); ?>',
       sessionId: '<?php echo $osC_Session->getID(); ?>',

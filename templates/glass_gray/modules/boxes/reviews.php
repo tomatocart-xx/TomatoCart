@@ -17,7 +17,7 @@
 <div class="boxNew">
   <div class="boxTitle"><?php echo osc_link_object($osC_Box->getTitleLink(), $osC_Box->getTitle()); ?></div>
 
-  <div class="boxContents"><?php echo $osC_Box->getContent(); ?></div>
+  <div class="boxContents boxReview"><?php echo $osC_Box->getContent(); ?></div>
 </div>
 
 <!-- box reviews end //-->

@@ -22,6 +22,8 @@ Toc.products.DataPanel = function(config) {
   config.items = this.buildForm();
   
   Toc.products.DataPanel.superclass.constructor.call(this, config);
+  
+  this.addEvents({'producttypechange': true});
 };
 
 Ext.extend(Toc.products.DataPanel, Ext.TabPanel, {
@@ -289,11 +291,11 @@ Ext.extend(Toc.products.DataPanel, Ext.TabPanel, {
     this.fsPrice = new Ext.form.FieldSet({
       title: '<?php echo $osC_Language->get('subsection_price'); ?>', 
       layout: 'form', 
-      width: 360,
-      height: 202,
+      columnWidth: 0.49,
+      height: 205,
       labelSeparator: ' ',
       defaults: {
-        anchor: '97%'
+        anchor: '95%'
       },
       items:[this.cboTaxClass, this.txtPriceNet, this.txtPriceGross, this.cboPriceDiscountGroups] 
     });
@@ -330,12 +332,12 @@ Ext.extend(Toc.products.DataPanel, Ext.TabPanel, {
     this.fsInformation = new Ext.form.FieldSet({
       title: '<?php echo $osC_Language->get('subsection_information'); ?>', 
       layout: 'form', 
-      width: 370,
-      height: 202,
+      height: 205,
       labelSeparator: ' ',
-      style: 'margin-left:20px',
+      columnWidth: 0.51,
+      style: 'margin-left: 10px',
       defaults: {
-        anchor: '97%'
+        anchor: '95%'
       },
       items:[
         this.txtQuantity = new Ext.form.NumberField({fieldLabel: '<?php echo $osC_Language->get('field_quantity'); ?>', name: 'products_quantity', allowDecimals: false, value: 0}) , 
@@ -362,8 +364,9 @@ Ext.extend(Toc.products.DataPanel, Ext.TabPanel, {
       items: [
         this.fsStatus,
         {
-          layout: 'table',
+          layout: 'column',
           border: false,
+          width: 750,
           items: [
             this.fsPrice,
             this.fsInformation
@@ -429,22 +432,36 @@ Ext.extend(Toc.products.DataPanel, Ext.TabPanel, {
     var type = record.get('id');
     
     if (this.productsType != type) {
-      if ( (this.productsType != '<? echo PRODUCT_TYPE_SIMPLE; ?>') && (this.productsType != '<? echo PRODUCT_TYPE_VIRTUAL; ?>') ) {
+      if ( (this.productsType != '<?php echo PRODUCT_TYPE_SIMPLE; ?>') && (this.productsType != '<?php echo PRODUCT_TYPE_VIRTUAL; ?>') ) {
         this.remove(this.tabExtraOptions);
       }
       
       this.productsType = type;
-      if(this.productsType == '<? echo PRODUCT_TYPE_DOWNLOADABLE; ?>') {
+      if(this.productsType == '<?php echo PRODUCT_TYPE_DOWNLOADABLE; ?>') {
         this.tabExtraOptions = new Toc.products.DownloadablesPanel();
         this.add(this.tabExtraOptions);
         this.setActiveTab(this.tabExtraOptions);
-      } else if (this.productsType == '<? echo PRODUCT_TYPE_GIFT_CERTIFICATE; ?>') {
-        this.tabExtraOptions = new Toc.products.GiftCertificatesPanel();
+      } else if (this.productsType == '<?php echo PRODUCT_TYPE_GIFT_CERTIFICATE; ?>') {
+        this.tabExtraOptions = new Toc.products.GiftCertificatesPanel({owner: this});
         this.add(this.tabExtraOptions);
-        this.setActiveTab(this.tabExtraOptions);        
-      }      
+        this.setActiveTab(this.tabExtraOptions);   
+      }
+      
+      //tax class
+      this.updateCboTaxClass(type);
+      
+      this.fireEvent('producttypechange', type);
     }
   },  
+  
+  updateCboTaxClass: function (type) {
+    if (type == '<? echo PRODUCT_TYPE_GIFT_CERTIFICATE; ?>') {
+      this.cboTaxClass.setValue('0');
+      this.cboTaxClass.disable();
+    } else {
+      this.cboTaxClass.enable();
+    }
+  },
 
   onVariantsChange: function(hasVariant, quantity) {
     if(hasVariant) {
@@ -469,14 +486,14 @@ Ext.extend(Toc.products.DataPanel, Ext.TabPanel, {
   loadExtraOptionTab: function(data) {
     var type = data.products_type;
     
-    if (type == '<? echo PRODUCT_TYPE_DOWNLOADABLE; ?>') {
+    if (type == '<?php echo PRODUCT_TYPE_DOWNLOADABLE; ?>') {
       this.tabExtraOptions = new Toc.products.DownloadablesPanel();
       this.add(this.tabExtraOptions);
       this.setActiveTab(this.tabExtraOptions);
       this.setActiveTab(0);
       this.tabExtraOptions.loadForm(data);
-    } else if (type == '<? echo PRODUCT_TYPE_GIFT_CERTIFICATE; ?>') {
-      this.tabExtraOptions = new Toc.products.GiftCertificatesPanel();
+    } else if (type == '<?php echo PRODUCT_TYPE_GIFT_CERTIFICATE; ?>') {
+      this.tabExtraOptions = new Toc.products.GiftCertificatesPanel({owner: this});
       this.add(this.tabExtraOptions);
       this.setActiveTab(this.tabExtraOptions);
       this.setActiveTab(0);

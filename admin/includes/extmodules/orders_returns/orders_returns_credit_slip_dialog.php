@@ -68,9 +68,9 @@ Ext.extend(Toc.orders_returns.OrdersReturnsCreditSlipDialog, Ext.Window, {
       labelWidth: 180,
       items: [
         {border: false, html: '<p class="form-info"><?php echo $osC_Language->get("field_credit_slip_title"); ?></p>'},
-        this.txtSubTotal = new Ext.form.NumberField({xtype: 'numberfield', fieldLabel: '<?php echo $osC_Language->get("field_sub_total"); ?>', name: 'sub_total', allowNegative: false, allowBlank: false, value: 0}),
-        {xtype: 'numberfield', fieldLabel: '<?php echo $osC_Language->get("field_shipping_fee"); ?>', name: 'shipping_fee', allowNegative: false, allowBlank: false, value: 0},
-        {xtype: 'numberfield', fieldLabel: '<?php echo $osC_Language->get("field_handling"); ?>', name: 'handling', allowNegative: false, allowBlank: false, value: 0},
+        this.txtSubTotal = new Ext.form.NumberField({xtype: 'numberfield', fieldLabel: '<?php echo $osC_Language->get("field_sub_total"); ?>', name: 'sub_total', allowNegative: false, allowBlank: false, allowDecimals: true, value: 0}),
+        {xtype: 'numberfield', fieldLabel: '<?php echo $osC_Language->get("field_shipping_fee"); ?>', name: 'shipping_fee', allowNegative: false, allowBlank: false, allowDecimals: true, value: 0},
+        {xtype: 'numberfield', fieldLabel: '<?php echo $osC_Language->get("field_handling"); ?>', name: 'handling', allowNegative: false, allowBlank: false, allowDecimals: true, value: 0},
         {xtype: 'checkbox', fieldLabel: '<?php echo $osC_Language->get("field_restock_product_quantity"); ?>', name: 'restock_quantity', anchor: ''},
         {xtype: 'textarea',fieldLabel: '<?php echo $osC_Language->get("field_comment"); ?>', name: 'admin_comment'}
       ]

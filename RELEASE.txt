@@ -1,3 +1,68 @@
+2010/5/15 VERSION 1.0
+ * Forgot Password for Administrators
+ * SSL support for Frontend and Admin Panel
+ * Admin directory customizable for better security
+ * Feature products in front page
+ * Migration tool for osCommerce Online Merchant v2.2 Release Candidate 2a
+ * Enable adding and deleting articles in the Information module
+ * Improve the Shop by Price module, applying price range for categories and search result
+ * Display correct category or manufacturer path for products in Breadcrumb
+ * Separate customer comment and administrator comment on orders
+ * New installation layout
+ * New configuration to control whether to allow customers to return products or not
+ * Who's online: display traffic source, identify administrators
+ * Shipping module: self pickup
+ * Payment module: bank transfer, check
+ * Front page Meta keyword & Meta description
+ * Integrate Piwik web analytics report:
+   - - Visits overview
+   - - Visits location
+   - - Referring Sites
+   - - Search engines
+ * Upgrade Piwik to the newest version (0.55)
+ * Order in PDF and invoice print in the My Account area at front end
+ * UTF8 support for Database tables
+ * UTF8 support for PDF documents (Invoice, Order)
+ * Allow multiple image upload for new products
+ * New configuration to place websites offline for maintenance
+ * Allow customers to set a maximum order quantity for each product
+ * Add published/unpublished column in the Products grid list at backend
+ * Add batch move and publish/unpublished features to the Products list
+ * Short Description of products
+ * Use transparent background rather than white-color background when resizing images
+ * Replace Product Model by SKU
+ * Automatically assign the default SKU to product variants SKU
+ * Use combo box for product variants instead of complete variant combination list
+ * Allow users to change the page size for grid view in the admin panel
+ * Allow administrators to activate/deactivate publicity, gift certificate, downloadable product, and return flag in order status
+ * Add translation in the Languages module
+ * Allow to upload several images when creating a new product
+ * Remove PHP4 compatibility functions
+ * Add ~E_DEPRECATED to error_reporting function to hide the deprecate information (the deprecate function will be removed later)
+ * Disable variants when the product type is downloadable product or gift certificate
+ * Disable tax class combo box when product type is gift certificate
+ * Apply weight to each variant combination
+ 
+Security issue
+ * Backup vulnerability; disable anonymous access to the admin/backup directory
+
+The stable release fixes the following bugs:
+ * [BO] Order editor: fail to change SKU, product quantity and price in the Products grid
+ * [Install] Fail to change the database table prefix
+ * [FO] Skip shipping method if there are all non-physical products in the shopping cart
+ * [FO] Save billing address and shipping address; set billing address to primary address when there is no primary address.
+ * [BO] When a decimal price is input, it is changed into an integer. 
+ * [FO] Return request is disabled when the product is already returned.
+ * [FO] Wrong Go Back link in the return request page
+ * [FO] Shipping address remains when physical products are removed from the shopping cart
+ * [BO] Fix the window title for product unit class
+ * [BO] Fix the window title for coupon send email window
+ * [BO] When dialog window is maximized, the bottom button bar is missing.
+ * [BO] When sidebar is collapsed, dialog window is maximized and the bottom button bar missing.
+ * [BO] When web analytics report is maximized, it does not fill in the whole desktop area
+ * [BO] Coupon type Free Shipping does not work
+
+
 2010/3/19 VERSION 1.0 alpha5
 This release adds several new features including:
   * Account approval

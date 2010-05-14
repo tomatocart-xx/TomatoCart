@@ -57,6 +57,10 @@
 ?>
 
       <li><?php echo osc_draw_label($osC_Language->get('field_customer_email_address'), 'email_address', null, true) . ' ' . osc_draw_input_field('email_address', $Qaccount->value('customers_email_address')); ?></li>
+      
+      <li><?php echo osc_draw_label($osC_Language->get('field_customer_group'), 'group', null, true) . ' ' . $Qaccount->value('customers_groups_name'); ?></li>
+      
+      <li><?php echo osc_draw_label($osC_Language->get('field_customer_store_credit'), 'store_credit', null, true) . ' ' . $osC_Currencies->format($Qaccount->value('customers_credits')); ?></li>
     </ol>
   </div>
 </div>

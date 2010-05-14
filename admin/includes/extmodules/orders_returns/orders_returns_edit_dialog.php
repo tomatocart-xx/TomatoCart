@@ -58,7 +58,8 @@ Ext.extend(Toc.orders_returns.OrdersReturnsEditDialog, Ext.Window, {
     this.stxCustomer.setValue(record.get('orders_returns_customer'));
     this.stxDateAdded.setValue(record.get('date_added'));
     this.stxComments.setValue(record.get('customers_comments'));
-
+    this.txtComment.setValue(record.get('admin_comments'));
+    
   	this.dsStatus.on('load', function() {
   	  this.cboStatus.setValue(record.get('status_id'));
   	}, this);
@@ -116,12 +117,12 @@ Ext.extend(Toc.orders_returns.OrdersReturnsEditDialog, Ext.Window, {
         this.stxDateAdded = new Ext.ux.form.StaticTextField({fieldLabel: '<?php echo $osC_Language->get("field_date"); ?>', name: 'date_added'}),
         this.stxComments = new Ext.ux.form.StaticTextField({fieldLabel: '<?php echo $osC_Language->get("field_customer_comment"); ?>', name: 'comments'}),
         this.cboStatus,
-        {
+        this.txtComment = new Ext.form.TextArea({
           xtype: 'textarea',
           fieldLabel: '<?php echo $osC_Language->get("field_comment"); ?>',
           name: 'admin_comment',
           anchor: '97%'
-        }
+        })
       ]    	
     });
     

@@ -53,7 +53,7 @@ Ext.ux.Sidebar = function(config){
 Ext.extend(Ext.ux.Sidebar, Ext.util.Observable, {
   buildSidebar: function() {
     this.pnlSidebar = new Ext.Panel({
-      width: 175,
+      width: 180,
       minSize: 175,
       maxSize: 175,
       border: false,
@@ -166,7 +166,7 @@ Ext.extend(Ext.ux.Sidebar, Ext.util.Observable, {
     this.logoEl.setVisible(collapsed);
 
     if (collapsed == true) {
-      this.desktopEl.setWidth(Ext.lib.Dom.getViewWidth() - this.splitWidth);   
+      this.desktopEl.setWidth(Ext.lib.Dom.getViewWidth() - this.splitWidth);
     } else {
       this.desktopEl.setWidth(Ext.lib.Dom.getViewWidth() - this.pnlSidebar.getInnerWidth() - this.splitWidth);
     }
@@ -219,10 +219,13 @@ Ext.extend(Ext.ux.Sidebar, Ext.util.Observable, {
   },
 
   configure: function() {
-    var desktopSettingWindow = this.app.getDesktopSettingWindow();
-
-		desktopSettingWindow.show();
-    desktopSettingWindow.activeSidebarPanel();
+   if ( Ext.isEmpty(Ext.get('desktop-setting-win')) ) {
+      var desktopSettingWindow = this.app.getDesktopSettingWindow();
+      desktopSettingWindow.show();
+      desktopSettingWindow.activeSidebarPanel();
+   }else {
+    return false;
+   }
   },
 
   onSidebarRender: function() {

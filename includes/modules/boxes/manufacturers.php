@@ -27,11 +27,13 @@
     function initialize() {
       global $osC_Database, $osC_Language;
 
-      $Qmanufacturers = $osC_Database->query('select manufacturers_id as id, manufacturers_name as text, manufacturers_image as image from :table_manufacturers order by manufacturers_name');
+      $Qmanufacturers = $osC_Database->query('select m.manufacturers_id as id, m.manufacturers_name as text, m.manufacturers_image as image from :table_manufacturers m, :table_manufacturers_info mi where m.manufacturers_id = mi.manufacturers_id and mi.languages_id = :languages_id order by manufacturers_name');
       $Qmanufacturers->bindTable(':table_manufacturers', TABLE_MANUFACTURERS);
+      $Qmanufacturers->bindTable(':table_manufacturers_info', TABLE_MANUFACTURERS_INFO);
+      $Qmanufacturers->bindInt(':languages_id', $osC_Language->getID());
       $Qmanufacturers->setCache('manufacturers');
       $Qmanufacturers->execute();
-      
+
       if (BOX_MANUFACTURERS_LIST_TYPE == 'ComboBox') {
         $manufacturers_array = array(array('id' => '', 'text' => $osC_Language->get('pull_down_default')));
   
@@ -46,7 +48,10 @@
         $this->_content = '<ul>';
         
         while ($Qmanufacturers->next()) {
-          $this->_content .= '<li>' . osc_link_object(osc_href_link(FILENAME_DEFAULT, 'manufacturers=' . $Qmanufacturers->valueInt('id')), osc_image("images/manufacturers/" . $Qmanufacturers->value('image'), $Qmanufacturers->value('text'))) . '</li>';
+          $manufacturers_image = $Qmanufacturers->value('image');
+          if (!empty($manufacturers_image) && file_exists(DIR_WS_IMAGES . 'manufacturers/' . $Qmanufacturers->value('image'))) {
+            $this->_content .= '<li>' . osc_link_object(osc_href_link(FILENAME_DEFAULT, 'manufacturers=' . $Qmanufacturers->valueInt('id')), osc_image("images/manufacturers/" . $Qmanufacturers->value('image'), $Qmanufacturers->value('text'))) . '</li>';
+          }
         }
         
         $this->_content .= '</ul>';

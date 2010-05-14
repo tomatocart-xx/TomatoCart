@@ -91,10 +91,10 @@
     function &execute() {
       global $osC_Database, $osC_Language, $osC_CategoryTree, $osC_Image;
 
-      $Qlisting = $osC_Database->query('select distinct p.*, pd.*, m.*, if(s.status, s.specials_new_products_price, null) as specials_new_products_price, if(s.status, s.specials_new_products_price, p.products_price) as final_price, i.image from :table_products p left join :table_manufacturers m using(manufacturers_id) left join :table_specials s on (p.products_id = s.products_id) left join :table_products_images i on (p.products_id = i.products_id and i.default_flag = :default_flag), :table_products_description pd, :table_categories c, :table_products_to_categories p2c where p.products_status = 1 and p.products_id = pd.products_id and pd.language_id = :language_id and p.products_id = p2c.products_id and p2c.categories_id = c.categories_id');
-
+      $Qlisting = $osC_Database->query('select distinct p.*, pd.*, m.*, if(s.status, s.specials_new_products_price, null) as specials_new_products_price, if(s.status, s.specials_new_products_price, p.products_price) as final_price, i.image from :table_products p left join :table_manufacturers m using(manufacturers_id) left join :table_specials s on (p.products_id = s.products_id) left join :table_manufacturers_info mi on (m.manufacturers_id = mi.manufacturers_id and mi.languages_id = :languages_id) left join :table_products_images i on (p.products_id = i.products_id and i.default_flag = :default_flag), :table_products_description pd, :table_categories c, :table_products_to_categories p2c where p.products_status = 1 and p.products_id = pd.products_id and pd.language_id = :language_id and p.products_id = p2c.products_id and p2c.categories_id = c.categories_id');
       $Qlisting->bindTable(':table_products', TABLE_PRODUCTS);
       $Qlisting->bindTable(':table_manufacturers', TABLE_MANUFACTURERS);
+      $Qlisting->bindTable(':table_manufacturers_info', TABLE_MANUFACTURERS_INFO);
       $Qlisting->bindTable(':table_specials', TABLE_SPECIALS);
       $Qlisting->bindTable(':table_products_images', TABLE_PRODUCTS_IMAGES);
       $Qlisting->bindTable(':table_products_description', TABLE_PRODUCTS_DESCRIPTION);
@@ -102,6 +102,7 @@
       $Qlisting->bindTable(':table_products_to_categories', TABLE_PRODUCTS_TO_CATEGORIES);
       $Qlisting->bindInt(':default_flag', 1);
       $Qlisting->bindInt(':language_id', $osC_Language->getID());
+      $Qlisting->bindInt(':languages_id', $osC_Language->getID());
 
       if ($this->hasCategory()) {
         if ($this->isRecursive()) {

@@ -115,13 +115,19 @@ Ext.extend(Toc.products.GiftCertificatesPanel, Ext.Panel, {
       this.txtMinValue.setValue('');
       this.txtMaxValue.setValue('');  
       this.txtMinValue.disable();
-      this.txtMaxValue.disable();    
+      this.txtMaxValue.disable();  
+      
+      this.owner.txtPriceNet.enable();
+      this.owner.txtPriceGross.enable();        
     } else {
       this.rdoOpenAmount.setValue(true);
       this.rdoFixAmount.setValue(false);
           
       this.txtMinValue.enable();
       this.txtMaxValue.enable();
+      
+      this.owner.txtPriceNet.disable();
+      this.owner.txtPriceGross.disable();
     }
   },
   

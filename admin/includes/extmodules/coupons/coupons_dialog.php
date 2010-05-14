@@ -272,7 +272,7 @@ Ext.extend(Toc.coupons.CouponsDialog, Ext.Window, {
                   name: 'coupons_type',
                   hideLabel: true,
                   boxLabel: '<?php echo $osC_Language->get('coupon_type_freeship'); ?>',
-                  inputValue: '3',
+                  inputValue: '2',
                   listeners: {
                     check: {
                       fn: this.onRdbTypeFreeShippingChecked,

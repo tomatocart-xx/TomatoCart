@@ -40,9 +40,9 @@
     if (ALLOW_RETURN_REQUEST == '1') {
       $allow_return = true;
       
-      if (($product['type'] == PRODUCT_TYPE_DOWNLOADABLE) && (ALLOW_DOWNLOADABLE_RETURN == '0')) {
+      if (($product['type'] == PRODUCT_TYPE_DOWNLOADABLE) && (ALLOW_DOWNLOADABLE_RETURN == '-1')) {
         $allow_return = false;
-      } else if (($product['type'] == PRODUCT_TYPE_GIFT_CERTIFICATE) && (ALLOW_GIFT_CERTIFICATE_RETURN == '0')) {
+      } else if (($product['type'] == PRODUCT_TYPE_GIFT_CERTIFICATE) && (ALLOW_GIFT_CERTIFICATE_RETURN == '-1')) {
         $allow_return = false;
       }
     } else {
@@ -112,7 +112,7 @@
 </div>
 
 <div class="submitFormButtons" style="float: right">
-  <?php echo osc_draw_image_submit_button('button_continue.gif', $osC_Language->get('button_continue')) . '&nbsp;' . osc_link_object(osc_href_link('javascript:window.history.go(-1);'), osc_draw_image_button('button_back.gif', $osC_Language->get('button_back'))); ?>
+  <?php echo osc_draw_image_submit_button('button_continue.gif', $osC_Language->get('button_continue')) . '&nbsp;' . osc_link_object('javascript:window.history.go(-1);', osc_draw_image_button('button_back.gif', $osC_Language->get('button_back'))); ?>
 </div>
 
 </form>

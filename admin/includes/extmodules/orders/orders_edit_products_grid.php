@@ -166,7 +166,7 @@ Ext.extend(Toc.orders.OrdersEditProductsGrid, Ext.grid.EditorGridPanel, {
       orders_products_id: e.record.get('orders_products_id'),
       orders_id: this.ordersId};
   
-    var action = null;
+//    var action = null;
     var verified = true;
     
     if (e.column == 1) {
@@ -187,7 +187,7 @@ Ext.extend(Toc.orders.OrdersEditProductsGrid, Ext.grid.EditorGridPanel, {
       params.price = e.value;
     }
     
-    if ((action != null) && (verified == true)) {
+    if ((params.action != null) && (verified == true)) {
       Ext.Ajax.request({
         waitMsg: TocLanguage.formSubmitWaitMsg,
         url: Toc.CONF.CONN_URL,

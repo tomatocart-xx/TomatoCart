@@ -11,9 +11,8 @@
   as published by the Free Software Foundation.
 */
   require_once('../includes/classes/product.php');
-  require_once('../includes/classes/shopping_cart.php');
 
-  class osC_Order extends osC_ShoppingCart {
+  class osC_Order {
   
 // private variables
     var $_valid_order = false,
@@ -104,12 +103,12 @@
                                  'postcode' => $Qorder->valueProtected('delivery_postcode'),
                                  'state' => $Qorder->valueProtected('delivery_state'),
                                  'zone_id' => $Qorder->valueProtected('delivery_zone_id'),
-                                 'zone_code' => $Qorder->value('delivery_state_code'),
-                                 'country_id' => $Qorder->value('delivery_country_id'),
-                                 'country_title' => $Qorder->value('delivery_country'),
-                                 'country_iso_code_2' => $Qorder->value('delivery_country_iso2'),
-                                 'country_iso_code_3' => $Qorder->value('delivery_country_iso3'),
-                                 'format' => $Qorder->value('delivery_address_format'));
+                                 'zone_code' => $Qorder->valueProtected('delivery_state_code'),
+                                 'country_id' => $Qorder->valueProtected('delivery_country_id'),
+                                 'country_title' => $Qorder->valueProtected('delivery_country'),
+                                 'country_iso_code_2' => $Qorder->valueProtected('delivery_country_iso2'),
+                                 'country_iso_code_3' => $Qorder->valueProtected('delivery_country_iso3'),
+                                 'format' => $Qorder->valueProtected('delivery_address_format'));
 
         $billing_name = explode(' ', $Qorder->valueProtected('billing_name'));
         $first_name = ( isset($billing_name[0]) ? $billing_name[0] : '');
@@ -126,16 +125,16 @@
                                 'postcode' => $Qorder->valueProtected('billing_postcode'),
                                 'state' => $Qorder->valueProtected('billing_state'),
                                 'zone_id' => $Qorder->valueProtected('billing_zone_id'),
-                                'zone_code' => $Qorder->value('billing_state_code'),
-                                'country_id' => $Qorder->value('billing_country_id'),
-                                'country_title' => $Qorder->value('billing_country'),
-                                'country_iso_code_2' => $Qorder->value('billing_country_iso2'),
-                                'country_iso_code_3' => $Qorder->value('billing_country_iso3'),
-                                'format' => $Qorder->value('billing_address_format'));
+                                'zone_code' => $Qorder->valueProtected('billing_state_code'),
+                                'country_id' => $Qorder->valueProtected('billing_country_id'),
+                                'country_title' => $Qorder->valueProtected('billing_country'),
+                                'country_iso_code_2' => $Qorder->valueProtected('billing_country_iso2'),
+                                'country_iso_code_3' => $Qorder->valueProtected('billing_country_iso3'),
+                                'format' => $Qorder->valueProtected('billing_address_format'));
         
         
-        $payment_methods = $Qorder->value('payment_method');
-        $payment_modules = $Qorder->value('payment_module');
+        $payment_methods = $Qorder->valueProtected('payment_method');
+        $payment_modules = $Qorder->valueProtected('payment_module');
         
         $payment_methods = explode(',', $payment_methods);
         $payment_modules = explode(',', $payment_modules);
@@ -148,6 +147,7 @@
             $this->_payment_module = next($payment_modules);
           } else {
             $this->_has_payment_method = false;
+            $this->_payment_method = $Qorder->value('payment_method');
           }
         } else {
           $this->_payment_method = current($payment_methods);
@@ -157,8 +157,8 @@
         $this->_date_purchased = $Qorder->value('date_purchased');
         $this->_last_modified = $Qorder->value('last_modified');
         $this->_status_id = $Qorder->value('orders_status');
-        $this->_customers_comment = ($Qorder->value('customers_comment') == null) ? '' : $Qorder->value('customers_comment');
-        $this->_admin_comment = ($Qorder->value('admin_comment') == null) ? '' : $Qorder->value('admin_comment');
+        $this->_customers_comment = ($Qorder->valueProtected('customers_comment') == null) ? '' : $Qorder->value('customers_comment');
+        $this->_admin_comment = ($Qorder->valueProtected('admin_comment') == null) ? '' : $Qorder->value('admin_comment');
         
         $this->_currency = array('code' => $Qorder->value('currency'),
                                  'value' => $Qorder->value('currency_value'));
@@ -699,6 +699,7 @@
           $Qupdate->bindTable(':table_orders_products_download', TABLE_ORDERS_PRODUCTS_DOWNLOAD);
           $Qupdate->bindInt(':status', 1);
           $Qupdate->bindInt(':orders_products_download_id', $Qproducts->valueInt('orders_products_download_id'));
+          $Qupdate->setLogging($_SESSION['module'], $orders_id);
           $Qupdate->execute();      
             
           //send notification email
@@ -732,10 +733,12 @@
           $Qupdate->bindTable(':table_gift_certificates', TABLE_GIFT_CERTIFICATES);
           $Qupdate->bindInt(':status', 1);
           $Qupdate->bindInt(':gift_certificates_id', $Qcertificates->valueInt('gift_certificates_id'));
+          $Qupdate->setLogging($_SESSION['module'], $orders_id);
           $Qupdate->execute();  
           
           //send notification email
           if ($Qcertificates->valueInt('type') == GIFT_CERTIFICATE_TYPE_EMAIL) {
+            $email->resetRecipients();
             $email->setData($Qcertificates->value('senders_name'), $Qcertificates->value('senders_email'), $Qcertificates->value('recipients_name'), $Qcertificates->value('recipients_email'), $osC_Currencies->format($Qcertificates->value('amount')), $Qcertificates->value('gift_certificates_code'), $Qcertificates->value('messages'));
             $email->buildMessage();
             $email->sendEmail();
@@ -751,6 +754,7 @@
       $Qupdate->bindTable(':table_orders', TABLE_ORDERS);
       $Qupdate->bindValue(':admin_comment', $_REQUEST['admin_comment']);
       $Qupdate->bindInt(':orders_id', $_REQUEST['orders_id']);
+      $Qupdate->setLogging($_SESSION['module'], $orders_id);
       $Qupdate->execute();
 
       if ( !$osC_Database->isError() ) {
@@ -768,6 +772,7 @@
       $Qupdate->bindInt(':orders_id', $orders_id);
       $Qupdate->bindValue(':currency', $currency);
       $Qupdate->bindValue(':currency_value', $currency_value);
+      $Qupdate->setLogging($_SESSION['module'], $orders_id);
       $Qupdate->execute();
       
       if (!$osC_Database->isError()) {
@@ -785,6 +790,7 @@
       $Qsku->bindInt(':orders_id', $orders_id);
       $Qsku->bindInt(':orders_products_id', $orders_products_id);
       $Qsku->bindValue(':products_sku', $sku);
+      $Qsku->setLogging($_SESSION['module'], $orders_id);
       $Qsku->execute();
       
       if ($osC_Database->isError()) {
@@ -1010,7 +1016,7 @@
       $Qorder->bindValue(':customers_email_address', $data['customers_email_address']);
       $Qorder->bindValue(':customers_address_format', '');
       $Qorder->bindValue(':customers_ip_address', '');
-      $Qorder->bindValue(':delivery_name', $data['firstname'] . ' , ' . $data['lastname']);
+      $Qorder->bindValue(':delivery_name', $data['firstname'] . ',' . $data['lastname']);
       $Qorder->bindValue(':delivery_company', $data['company']);
       $Qorder->bindValue(':delivery_street_address', $data['street_address']);
       $Qorder->bindValue(':delivery_suburb', $data['suburb']);
@@ -1024,7 +1030,7 @@
       $Qorder->bindValue(':delivery_country_iso2', $data['country_iso2']);
       $Qorder->bindValue(':delivery_country_iso3', $data['country_iso3']);
       $Qorder->bindValue(':delivery_address_format', $data['address_format']);
-      $Qorder->bindValue(':billing_name', $data['firstname'] . ' , ' . $data['lastname']);
+      $Qorder->bindValue(':billing_name', $data['firstname'] . ',' . $data['lastname']);
       $Qorder->bindValue(':billing_company', $data['company']);
       $Qorder->bindValue(':billing_street_address', $data['street_address']);
       $Qorder->bindValue(':billing_suburb', $data['suburb']);

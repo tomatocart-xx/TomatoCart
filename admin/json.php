@@ -18,7 +18,7 @@
   header('Expires: Thu, 01 Jan 1970 01:00:00 GMT');  
   header('Cache-Control: must-revalidate, cache, public');
   header('Pragma: public');
-  header('Content-Type: application/json, charset=utf-8');
+//  header('Content-Type: application/json, charset=utf-8');
   
   $dir_fs_www_root = dirname(__FILE__);
   

@@ -65,6 +65,14 @@ Toc.products.VariantsPanel = function(config) {
 };
 
 Ext.extend(Toc.products.VariantsPanel, Ext.Panel, {
+  onProductTypeChange: function (type) {
+    if((type == '<?php echo PRODUCT_TYPE_DOWNLOADABLE; ?>') || (type == '<?php echo PRODUCT_TYPE_GIFT_CERTIFICATE; ?>')) {
+      this.disable();
+    } else {
+      this.enable();
+    }
+  },
+  
   getVariantGroupName: function(groupId) {
     root = this.pnlCheckTree.getRootNode();
     node = root.findChild('id', groupId);  

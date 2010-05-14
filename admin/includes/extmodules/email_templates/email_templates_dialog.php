@@ -18,7 +18,6 @@ Toc.email_templates.EmailTemplatesDialog = function(config) {
   config = config || {};
   
   config.id = 'email_templatesDialog-win';
-  config.title = '<?php echo $osC_Language->get('heading_title_edit_email_templates'); ?>';
   config.layout = 'fit';
   config.width = 720;
   config.height = 450;

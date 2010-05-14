@@ -18,8 +18,10 @@ class toC_Json_Auto_Completer {
     
     $products = array();
     if (isset($_POST['keywords']) && !empty($_POST['keywords'])) {
-      $Qproducts = $osC_Database->query("select distinct products_name from :table_products_description where products_name like :keywords and language_id =" . $osC_Language->getID());
+      $Qproducts = $osC_Database->query("select distinct products_name from :table_products_description pd, :table_products p where pd.products_id = p.products_id and p.products_status = :products_status and products_name like :keywords and language_id =" . $osC_Language->getID());
       $Qproducts->bindTable(':table_products_description', TABLE_PRODUCTS_DESCRIPTION);
+      $Qproducts->bindTable(':table_products', TABLE_PRODUCTS);
+      $Qproducts->bindInt(':products_status', 1);
       $Qproducts->bindValue(':keywords', '%' . $_POST['keywords'] . '%');
       $Qproducts->execute();
       

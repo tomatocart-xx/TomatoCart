@@ -17,7 +17,8 @@
 
   $file_name = null;
   $cache_file = null;
-  
+
+  //sample file
   if (isset($_GET['type']) && ($_GET['type'] == 'sample')) {
     $Qdownload = $osC_Database->query('select sample_filename, cache_sample_filename from :table_products_downloadables where products_id = :products_id');
     $Qdownload->bindTable(':table_products_downloadables', TABLE_PRODUCTS_DOWNLOADABLES);
@@ -27,6 +28,25 @@
     if ($Qdownload->numberOfRows() > 0) {
       $file_name = $Qdownload->value('sample_filename');
       $cache_file = $Qdownload->value('cache_sample_filename');
+    } else {
+      die;
+    }
+  } 
+  //admin view file
+  else if ( isset($_GET['id']) && ( isset($_GET['cache_filename']) || isset($_GET['cache_sample_filename']) ) ) {
+    $Qdownload = $osC_Database->query('select filename, cache_filename, sample_filename, cache_sample_filename from :table_products_downloadables where products_id = :products_id');
+    $Qdownload->bindTable(':table_products_downloadables', TABLE_PRODUCTS_DOWNLOADABLES);
+    $Qdownload->bindInt(':products_id', $_GET['id']);
+    $Qdownload->execute();
+
+    if ($Qdownload->numberOfRows() > 0) {
+      if (isset($_GET['cache_filename']) && ($_GET['cache_filename'] == $Qdownload->value('cache_filename')) ) {
+        $file_name = $Qdownload->value('filename');
+        $cache_file = $Qdownload->value('cache_filename');
+      } else if (isset($_GET['cache_sample_filename']) && ($_GET['cache_sample_filename'] == $Qdownload->value('cache_sample_filename')) ) {
+        $file_name = $Qdownload->value('sample_filename');
+        $cache_file = $Qdownload->value('cache_sample_filename');
+      }
     } else {
       die;
     }

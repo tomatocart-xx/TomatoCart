@@ -21,8 +21,8 @@
       $start = empty($_REQUEST['start']) ? 0 : $_REQUEST['start']; 
       $limit = empty($_REQUEST['limit']) ? MAX_DISPLAY_SEARCH_RESULTS : $_REQUEST['limit']; 
   
-      $Qcategories = $osC_Database->query('select c.articles_categories_id, c.articles_categories_status, cd.articles_categories_name, c.articles_categories_order from :table_articles_categories c, :table_articles_categories_description cd where c.articles_categories_id = cd.articles_categories_id and c.articles_categories_id > 1 and cd.language_id = :language_id ');
-      $Qcategories->appendQuery('order by c.articles_categories_order');
+      $Qcategories = $osC_Database->query('select c.articles_categories_id, c.articles_categories_status, cd.articles_categories_name, c.articles_categories_order from :table_articles_categories c, :table_articles_categories_description cd where c.articles_categories_id = cd.articles_categories_id and c.articles_categories_id > 1 and cd.language_id = :language_id');
+      $Qcategories->appendQuery('order by c.articles_categories_order, cd.articles_categories_name');
       $Qcategories->bindTable(':table_articles_categories', TABLE_ARTICLES_CATEGORIES);
       $Qcategories->bindTable(':table_articles_categories_description', TABLE_ARTICLES_CATEGORIES_DESCRIPTION);
       $Qcategories->bindInt(':language_id', $osC_Language->getID());

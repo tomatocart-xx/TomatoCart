@@ -16,8 +16,9 @@
     function &getEntry() {
       global $osC_Database, $osC_Customer;
 
-      $Qaccount = $osC_Database->query('select customers_gender, customers_firstname, customers_lastname, date_format(customers_dob, "%Y") as customers_dob_year, date_format(customers_dob, "%m") as customers_dob_month, date_format(customers_dob, "%d") as customers_dob_date, customers_email_address from :table_customers where customers_id = :customers_id');
+      $Qaccount = $osC_Database->query('select tc.customers_credits, tc.customers_gender, tc.customers_firstname, tc.customers_lastname, date_format(tc.customers_dob, "%Y") as customers_dob_year, date_format(tc.customers_dob, "%m") as customers_dob_month, date_format(tc.customers_dob, "%d") as customers_dob_date, tc.customers_email_address, tcgd.customers_groups_name from :table_customers tc left join :table_customers_groups_description tcgd on tc.customers_groups_id = tcgd.customers_groups_id where tc.customers_id = :customers_id');
       $Qaccount->bindTable(':table_customers', TABLE_CUSTOMERS);
+      $Qaccount->bindTable(':table_customers_groups_description', TABLE_CUSTOMERS_GROUPS_DESCRIPTION);
       $Qaccount->bindInt(':customers_id', $osC_Customer->getID());
       $Qaccount->execute();
 
@@ -216,7 +217,7 @@
     }
     
     function createNewAddress($customers_id, $address) {
-      global $osC_Database;
+      global $osC_Database, $osC_Customer;
      
       $Qab = $osC_Database->query('insert into :table_address_book (customers_id, entry_gender, entry_company, entry_firstname, entry_lastname, entry_street_address, entry_suburb, entry_postcode, entry_city, entry_state, entry_country_id, entry_zone_id, entry_telephone, entry_fax) values (:customers_id, :entry_gender, :entry_company, :entry_firstname, :entry_lastname, :entry_street_address, :entry_suburb, :entry_postcode, :entry_city, :entry_state, :entry_country_id, :entry_zone_id, :entry_telephone, :entry_fax)');
       $Qab->bindTable(':table_address_book', TABLE_ADDRESS_BOOK);
@@ -236,20 +237,31 @@
       $Qab->bindValue(':entry_fax', $address['fax']);
       $Qab->execute();
       
-      if ($Qab->affectedRows() === 1) {
+      if (!$osC_Database->isError()) {
         $address_book_id = $osC_Database->nextID();
-        
+
         $Qcheck = $osC_Database->query('select customers_default_address_id from :table_customers where customers_id = :customers_id');
         $Qcheck->bindTable(':table_customers', TABLE_CUSTOMERS);
         $Qcheck->bindInt(':customers_id', $customers_id);
-        
+        $Qcheck->execute();
+
         if ($Qcheck->valueInt('customers_default_address_id') == 0) {
-          $Qupdate = $osC_Database->query('update :table_customers set customers_default_address_id = :customers_default_address_id where customers_id = :customers_id');
-          $Qupdate->bindTable(':table_customers', TABLE_CUSTOMERS);
-          $Qupdate->bindInt(':customers_default_address_id', $address_book_id);
-          $Qupdate->bindInt(':customers_id', $customers_id);
+          require_once('includes/classes/address_book.php');
+          
+          if (osC_AddressBook::setPrimaryAddress($address_book_id)) {
+            $osC_Customer->setCountryID($address['country_id']);
+            $osC_Customer->setZoneID(($address['zone_id'] > 0) ? (int)$address['zone_id'] : '0');
+            $osC_Customer->setDefaultAddressID($address_book_id);
+  
+            $osC_Customer->synchronizeCustomerDataWithSession();
+            return true;
+          } else {
+            return false;
+          }
         }
         
+        
+
         return true;
       }
 

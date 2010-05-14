@@ -82,9 +82,10 @@ Ext.extend(Toc.products.ImagesPanel, Ext.Panel, {
     return new Ext.Panel({
       layout: 'column',
       border: false,
+      width: 750,
       items: [
         {
-          width: 630 ,
+          columnWidth: 0.8,
           layout: 'form',
           labelSeparator: ' ',
           labelWidth: 120,
@@ -94,13 +95,13 @@ Ext.extend(Toc.products.ImagesPanel, Ext.Panel, {
               fieldLabel: '<?php echo $osC_Language->get('subsection_new_image'); ?>', 
               xtype: 'fileuploadfield',
               name: 'products_image[]',
-              anchor: '97%'
+              anchor: '95%'
             }
           ]
         },
         {
-          width: 75,
-          style: 'padding: 2px',
+          columnWidth: 0.19,
+          style: 'margin: 2px',
           labelSeparator: ' ',
           border: false,
           items: [

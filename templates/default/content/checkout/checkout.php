@@ -16,14 +16,14 @@ $step = 1;
 <h1><?php echo $osC_Language->get('checkout')?></h1>
   
 <ul id="checkoutForm"> 
-  <? if ($osC_Customer->isLoggedOn() === false) { ?>
+  <?php if ($osC_Customer->isLoggedOn() === false) { ?>
     <li id="checkoutMethodForm">
       <h3 class="formHeader">
          <?php echo $step++ . '.&nbsp;&nbsp;' . $osC_Language->get('checkout_method') ?>  <span>+</span>
       </h3>
       <div class="formBody"></div>
     </li>
-  <? } ?>
+  <?php } ?>
   
   <li id="billingInformationForm">
     <h3 class="formHeader">

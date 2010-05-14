@@ -97,7 +97,7 @@
             }
             
             $products[] = $product_info;
-            $total += $return_products_qty[$product['orders_products_id']]  * $product['final_price'];
+            $total += $return_products_qty[$product['orders_products_id']]  * $product['final_price'] * (1 + $product['tax'] / 100);
             $quantity += $return_products_qty[$product['orders_products_id']];
             $return_quantity[] = $product['orders_products_id'] . ':' . $return_products_qty[$product['orders_products_id']];
           }
@@ -128,7 +128,7 @@
                            'billing_address' => osC_Address::format($osC_Order->getBilling(), '<br />'),
                            'customers_comments' => $Qreturns->value('customers_comments'),
                            'admin_comments' => $Qreturns->value('admin_comments'),
-                           'total' => $total,
+                           'total' => number_format($total, 2, '.', ''),
                            'action' => $action);
       }
       

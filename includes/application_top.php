@@ -15,7 +15,11 @@
   define('PAGE_PARSE_START_TIME', microtime());
 
 // set the level of error reporting to E_ALL except E_NOTICE
-  error_reporting(E_ALL & ~E_NOTICE);
+  if (version_compare(PHP_VERSION, '5.3.0') >= 0) {
+    error_reporting(E_ALL & ~E_NOTICE & ~E_DEPRECATED);
+  } else {
+    error_reporting(E_ALL & ~E_NOTICE);
+  }
 
 // set the local configuration parameters - mainly for developers
   if ( file_exists('includes/local/configure.php') ) {
@@ -36,7 +40,7 @@
   }
 
 // define the project version
-  define('PROJECT_VERSION', 'TomatoCart v1.0 Alpha5');
+  define('PROJECT_VERSION', 'TomatoCart v1.0');
 
 // set the type of request (secure or not)
   $request_type = (isset($_SERVER['HTTPS']) && (strtolower($_SERVER['HTTPS']) == 'on')) ? 'SSL' : 'NONSSL';
@@ -96,7 +100,7 @@
   $osC_Services->startServices();
 
 // Maintenance Mode
-  if(MAINTENANCE_MODE == true) {
+  if(MAINTENANCE_MODE == 1) {
     //login maintenance mode
     if (isset($_GET['maintenance']) && ($_GET['maintenance'] == 'login')) {
       require('includes/classes/administrators.php');

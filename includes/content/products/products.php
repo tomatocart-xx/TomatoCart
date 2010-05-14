@@ -43,7 +43,7 @@
           $osC_Product->incrementCounter();
 
           $this->addPageTags('keywords', $osC_Product->getTitle());
-          $this->addPageTags('keywords', $osC_Product->getModel());
+          $this->addPageTags('keywords', $osC_Product->getSKU());
 
           if ($osC_Product->hasTags()) {
             $this->addPageTags('keywords', $osC_Product->getTags());

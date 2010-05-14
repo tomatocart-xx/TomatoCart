@@ -63,7 +63,7 @@ Toc.configuration_wizard.EmailOptionsCard = function (config) {
   });
   
   config.items = [
-    {name: 'STORE_OWNER_EMAIL_ADDRESS', fieldLabel: '<?php echo $osC_Language->get('field_email_adress'); ?>', regex: /^[a-z0-9A-Z]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*$/, allowBlank: false},
+    {name: 'STORE_OWNER_EMAIL_ADDRESS', fieldLabel: '<?php echo $osC_Language->get('field_email_adress'); ?>', regex: /\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*/, allowBlank: false},
     {name: 'EMAIL_FROM', fieldLabel: '<?php echo $osC_Language->get('field_email_from'); ?>', allowBlank: false},
     {name: 'SEND_EXTRA_ORDER_EMAILS_TO', fieldLabel: '<?php echo $osC_Language->get('field_order_email_to'); ?>', allowBlank: true},
     config.cboEmailTansportMethod,
